@@ -11,10 +11,6 @@
   </url>
   
   <url>
-    <loc>/posts/jamstack/</loc>
-  </url>
-  
-  <url>
     <loc>/</loc>
   </url>
   
@@ -24,6 +20,10 @@
   
   <url>
     <loc>/tags/</loc>
+  </url>
+  
+  <url>
+    <loc>/posts/what-is-jamstack-and-why-use-it/</loc>
   </url>
   
 </urlset>

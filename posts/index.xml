@@ -12,14 +12,14 @@
     
     
     <item>
-      <title>JAMStack</title>
-      <link>/posts/jamstack/</link>
+      <title>What is JAMStack and why use it?</title>
+      <link>/posts/what-is-jamstack-and-why-use-it/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/posts/jamstack/</guid>
-      <description>I am a big proponent of JAMStack. With JAMStack, small teams can build interactive, performant, scalable and secure websites with low operating costs.
-What is it? JAMstack stands for JavaScript, APIs, and Markup. The term was coined by Mathias Biilmann to describe &amp;ldquo;a modern web development architecture based on client-side JavaScript, reusable APIs, and prebuilt Markup&amp;rdquo;.
-Why? My proclivity to turn to this particular stack for many projects we undertake does us no harm in water cooler conversations with other developers that follow industry trends, however, our choice of JAMstack is not out of vanity.</description>
+      <guid>/posts/what-is-jamstack-and-why-use-it/</guid>
+      <description>I am a big proponent of JAMStack. With JAMStack, small teams can build interactive, performant, scalable and secure websites at low operating cost.
+What is JAMStack? JAMstack stands for JavaScript, APIs, and Markup. The term was coined by Mathias Biilmann to describe &amp;ldquo;a modern web development architecture based on client-side JavaScript, reusable APIs, and prebuilt Markup&amp;rdquo;.
+Where can static sites be hosted? The stack name itself was coined by the founders of netlify.</description>
     </item>
     
   </channel>
