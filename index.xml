@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mirza Pandzo</title>
+    <link>/</link>
+    <description>Recent content on Mirza Pandzo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>mirzapandzo.com</copyright>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About</title>
+      <link>/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/about/</guid>
+      <description>Hi there My name is Mirza. I have been writing code since 1999. I post stuff that interests me on here from time to time.
+This site is hosted on github and runs on:
+ Hugo static site generator Terminal theme for Hugo  Enjoy!</description>
+    </item>
+    
+    <item>
+      <title>JAMStack</title>
+      <link>/posts/jamstack/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/jamstack/</guid>
+      <description>I am a big proponent of JAMStack. With JAMStack, small teams can build interactive, performant, scalable and secure websites with low operating costs.
+What is it? JAMstack stands for JavaScript, APIs, and Markup. The term was coined by Mathias Biilmann to describe &amp;ldquo;a modern web development architecture based on client-side JavaScript, reusable APIs, and prebuilt Markup&amp;rdquo;.
+Why? My proclivity to turn to this particular stack for many projects we undertake does us no harm in water cooler conversations with other developers that follow industry trends, however, our choice of JAMstack is not out of vanity.</description>
+    </item>
+    
+  </channel>
+</rss>
