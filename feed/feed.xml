@@ -5,7 +5,7 @@
 	
 	<link href="https://mirzapandzo.com/feed/feed.xml" rel="self"/>
 	<link href="https://mirzapandzo.com/"/>
-	<updated>2018-09-30T00:00:00Z</updated>
+	<updated>2022-07-24T00:00:00Z</updated>
 	<id>https://mirzapandzo.com/</id>
 	<author>
 		<name>Mirza Pandzo</name>
@@ -13,54 +13,61 @@
 	</author>
 	
 	<entry>
-		<title>This is my fourth post.</title>
-		<link href="https://mirzapandzo.com/posts/fourthpost/"/>
-		<updated>2018-09-30T00:00:00Z</updated>
-		<id>https://mirzapandzo.com/posts/fourthpost/</id>
-		<content type="html">&lt;p&gt;Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.&lt;/p&gt;
-&lt;p&gt;Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.&lt;/p&gt;
-&lt;h2 id=&quot;section-header&quot; tabindex=&quot;-1&quot;&gt;Section Header &lt;a class=&quot;direct-link&quot; href=&quot;https://mirzapandzo.com/posts/fourthpost/#section-header&quot; aria-hidden=&quot;true&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.&lt;/p&gt;
-</content>
-	</entry>
-	
-	<entry>
-		<title>This is my third post.</title>
-		<link href="https://mirzapandzo.com/posts/thirdpost/"/>
-		<updated>2018-08-24T00:00:00Z</updated>
-		<id>https://mirzapandzo.com/posts/thirdpost/</id>
-		<content type="html">&lt;p&gt;Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.&lt;/p&gt;
-&lt;pre class=&quot;language-diff-js&quot;&gt;&lt;code class=&quot;language-diff-js&quot;&gt;// this is a command&lt;br /&gt;function myCommand() {&lt;br /&gt;&lt;span class=&quot;token inserted-sign inserted language-js&quot;&gt;&lt;span class=&quot;token prefix inserted&quot;&gt;+&lt;/span&gt;	&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; counter &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token deleted-sign deleted language-js&quot;&gt;&lt;span class=&quot;token prefix deleted&quot;&gt;-&lt;/span&gt;	counter&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;&lt;/span&gt;&lt;br /&gt;}&lt;br /&gt;&lt;br /&gt;// Test with a line break above this line.&lt;br /&gt;console.log(&#39;Test&#39;);&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.&lt;/p&gt;
-&lt;h2 id=&quot;section-header&quot; tabindex=&quot;-1&quot;&gt;Section Header &lt;a class=&quot;direct-link&quot; href=&quot;https://mirzapandzo.com/posts/thirdpost/#section-header&quot; aria-hidden=&quot;true&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.&lt;/p&gt;
-</content>
-	</entry>
-	
-	<entry>
-		<title>This is my second post.</title>
-		<link href="https://mirzapandzo.com/posts/secondpost/"/>
-		<updated>2018-07-04T00:00:00Z</updated>
-		<id>https://mirzapandzo.com/posts/secondpost/</id>
-		<content type="html">&lt;p&gt;Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.&lt;/p&gt;
-&lt;h2 id=&quot;section-header&quot; tabindex=&quot;-1&quot;&gt;Section Header &lt;a class=&quot;direct-link&quot; href=&quot;https://mirzapandzo.com/posts/secondpost/#section-header&quot; aria-hidden=&quot;true&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://mirzapandzo.com/posts/firstpost/&quot;&gt;First post&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://mirzapandzo.com/posts/thirdpost/&quot;&gt;Third post&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.&lt;/p&gt;
-&lt;p&gt;Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.&lt;/p&gt;
-</content>
-	</entry>
-	
-	<entry>
-		<title>This is my first post.</title>
-		<link href="https://mirzapandzo.com/posts/firstpost/"/>
-		<updated>2018-05-01T00:00:00Z</updated>
-		<id>https://mirzapandzo.com/posts/firstpost/</id>
-		<content type="html">&lt;p&gt;Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.&lt;/p&gt;
-&lt;p&gt;Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.&lt;/p&gt;
-&lt;h2 id=&quot;section-header&quot; tabindex=&quot;-1&quot;&gt;Section Header &lt;a class=&quot;direct-link&quot; href=&quot;https://mirzapandzo.com/posts/firstpost/#section-header&quot; aria-hidden=&quot;true&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.&lt;/p&gt;
-&lt;pre class=&quot;language-diff-js&quot;&gt;&lt;code class=&quot;language-diff-js&quot;&gt;// this is a command&lt;br /&gt;function myCommand() {&lt;br /&gt;&lt;span class=&quot;token inserted-sign inserted language-js&quot;&gt;&lt;span class=&quot;token prefix inserted&quot;&gt;+&lt;/span&gt;	&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; counter &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token prefix inserted&quot;&gt;+&lt;/span&gt;	counter&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;&lt;/span&gt;}&lt;br /&gt;&lt;br /&gt;// Test with a line break above this line.&lt;br /&gt;console.log(&#39;Test&#39;);&lt;/code&gt;&lt;/pre&gt;
+		<title>SST - Cannot use GraphQLScalarType &quot;Boolean&quot; from another module or realm.</title>
+		<link href="https://mirzapandzo.com/posts/sst-cannot-use-graphqlscalartype-boolean-from-another-module-or-realm/"/>
+		<updated>2022-07-24T00:00:00Z</updated>
+		<id>https://mirzapandzo.com/posts/sst-cannot-use-graphqlscalartype-boolean-from-another-module-or-realm/</id>
+		<content type="html">&lt;p&gt;I&#39;ve been playing around with &lt;a href=&quot;https://sst.dev/&quot;&gt;SST&lt;/a&gt; over the last few days. SST is a &amp;quot;framework that makes it easy to build serverless apps&amp;quot;. It builds on top of the AWS CDK (Amazon&#39;s cloud development kit) and comes with a set of impressive features including a live lambda dev environment, a management dashboard, debugging with breakpoints in VS Code as well as out-of-the-box support for JS and TS (using esbuild), Go, Python, C#, and F#.&lt;/p&gt;
+&lt;p&gt;SST is infrastructure-as-code on steroids. It comes with higher-level constructs designed specifically for serverless apps resulting in code that looks mighty impressive:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import * as sst from &#39;@serverless-stack/resources&#39;;
+
+import { StorageStack } from &#39;./StorageStack&#39;;
+import { ApiStack } from &#39;./ApiStack&#39;;
+import { AuthStack } from &#39;./AuthStack&#39;;
+import { WebStack } from &#39;./WebStack&#39;;
+import { CronStack } from &#39;./CronStack&#39;;
+
+export default function main(app: sst.App): void {
+  // Set default runtime for all functions
+  app.setDefaultFunctionProps({
+    runtime: &#39;nodejs16.x&#39;,
+    srcPath: &#39;services&#39;,
+    bundle: {
+      format: &#39;esm&#39;,
+    },
+  });
+
+  app
+    .stack(StorageStack).stack(ApiStack).stack(AuthStack).stack(CronStack).stack(WebStack);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;cannot-use-graphqlscalartype-&amp;quot;boolean&amp;quot;-from-another-module-or-realm.&quot; tabindex=&quot;-1&quot;&gt;Cannot use GraphQLScalarType &amp;quot;Boolean&amp;quot; from another module or realm. &lt;a class=&quot;direct-link&quot; href=&quot;https://mirzapandzo.com/posts/sst-cannot-use-graphqlscalartype-boolean-from-another-module-or-realm/#cannot-use-graphqlscalartype-%22boolean%22-from-another-module-or-realm.&quot; aria-hidden=&quot;true&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;But I digress. While learning and ins-and-outs of the framework (I am nowhere near done), I used the &lt;code&gt;create sst&lt;/code&gt; command to set up an app and followed the SST guide to add different stack constructs. I chose Vue.js for my web stack and managed to query the GraphQL endpoint without issue. I was playing with the Cron construct when I suddenly noticed the following error in my console:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Failed to extract schema from pothos
+Error: Cannot use GraphQLScalarType &amp;quot;Boolean&amp;quot; from another module or realm.
+
+Ensure that there is only one instance of &amp;quot;graphql&amp;quot; in the node_modules
+directory. If different versions of &amp;quot;graphql&amp;quot; are the dependencies of other
+relied on modules, use &amp;quot;resolutions&amp;quot; to ensure only one version is installed.
+
+https://yarnpkg.com/en/docs/selective-version-resolutions
+
+Duplicate &amp;quot;graphql&amp;quot; modules cannot be used at the same time since different
+versions may have different capabilities and behavior. The data from one
+version used in the function from another could produce confusing and
+spurious results.
+    at instanceOf (/Users/mirzapandzo/Projects/nonstopfootball/node_modules/graphql/jsutils/instanceOf.js:44:19)
+    at isScalarType (/Users/mirzapandzo/Projects/nonstopfootball/node_modules/graphql/type/definition.js:117:37)
+    at sortNamedType (/Users/mirzapandzo/Projects/nonstopfootball/node_modules/graphql/utilities/lexicographicSortSchema.js:99:36)
+    at keyValMap (/Users/mirzapandzo/Projects/nonstopfootball/node_modules/graphql/jsutils/keyValMap.js:29:27)
+    at lexicographicSortSchema (/Users/mirzapandzo/Projects/nonstopfootball/node_modules/graphql/utilities/lexicographicSortSchema.js:31:44)
+    at Module.generate (file:///Users/mirzapandzo/Projects/nonstopfootball/node_modules/@serverless-stack/core/dist/pothos/generate.js:149:40)
+    at build (file:///Users/mirzapandzo/Projects/nonstopfootball/node_modules/@serverless-stack/core/dist/cli/PothosBuilder.js:12:28)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I tried to revert code, Command+Z etc, but no luck. I was commenting things left, right and center but the error would not go away.&lt;/p&gt;
+&lt;p&gt;Dax from the [SST discord] (&lt;a href=&quot;https://discord.com/channels/983865673656705025/985224097342582865/997233904698277898&quot;&gt;https://discord.com/channels/983865673656705025/985224097342582865/997233904698277898&lt;/a&gt;) mentioned this might be a node_modules conflict when asked about the issue a few days ago, however, I was intrigued why this problem was suddenly occurring for me when I was able to run GraphQL without issue only a few moments ago.&lt;/p&gt;
+&lt;p&gt;Then it struck me! SST is configued with yarn workspaces to hoist modules into the root node_modules folder. I had used yarn to install sst initially, but, while playing around with the Cron construct I went and used npm to install rss-parser (force of habit). As a result, this mixing of yarn and npm commands caused a conflict within my node_modules resulting in the above errors.&lt;/p&gt;
+&lt;p&gt;To fix the issue, I removed all node_modules folders with &lt;code&gt;rm -Rf node_modules&lt;/code&gt; and used yarn to install. I was able to continue working and the conflict was resolved.&lt;/p&gt;
 </content>
 	</entry>
 </feed>

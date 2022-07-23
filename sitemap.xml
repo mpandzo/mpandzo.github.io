@@ -2,67 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://mirzapandzo.com/posts/firstpost/</loc>
-    <lastmod>2018-05-01</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://mirzapandzo.com/posts/secondpost/</loc>
-    <lastmod>2018-07-04</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://mirzapandzo.com/posts/thirdpost/</loc>
-    <lastmod>2018-08-24</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://mirzapandzo.com/posts/fourthpost/</loc>
-    <lastmod>2018-09-30</lastmod>
-  </url>
-  
-  <url>
     <loc>https://mirzapandzo.com/about/</loc>
-    <lastmod>2022-06-05</lastmod>
+    <lastmod>2022-07-23</lastmod>
   </url>
   
   <url>
     <loc>https://mirzapandzo.com/</loc>
-    <lastmod>2022-06-05</lastmod>
+    <lastmod>2022-07-23</lastmod>
   </url>
   
   <url>
     <loc>https://mirzapandzo.com/page-list/</loc>
-    <lastmod>2022-06-05</lastmod>
+    <lastmod>2022-07-23</lastmod>
   </url>
   
   <url>
     <loc>https://mirzapandzo.com/posts/</loc>
-    <lastmod>2022-06-05</lastmod>
+    <lastmod>2022-07-23</lastmod>
   </url>
   
   <url>
     <loc>https://mirzapandzo.com/tags/</loc>
-    <lastmod>2022-06-05</lastmod>
+    <lastmod>2022-07-23</lastmod>
   </url>
   
   <url>
-    <loc>https://mirzapandzo.com/tags/another-tag/</loc>
-    <lastmod>2022-06-05</lastmod>
+    <loc>https://mirzapandzo.com/tags/pothos-graphql-sst/</loc>
+    <lastmod>2022-07-23</lastmod>
   </url>
   
   <url>
-    <loc>https://mirzapandzo.com/tags/second-tag/</loc>
-    <lastmod>2022-06-05</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://mirzapandzo.com/tags/number-2/</loc>
-    <lastmod>2022-06-05</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://mirzapandzo.com/tags/posts-with-two-tags/</loc>
-    <lastmod>2022-06-05</lastmod>
+    <loc>https://mirzapandzo.com/posts/sst-cannot-use-graphqlscalartype-boolean-from-another-module-or-realm/</loc>
+    <lastmod>2022-07-24</lastmod>
   </url>
 </urlset>

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SST - Cannot use GraphQLScalarType &quot;Boolean&quot; from another module or realm.</title>
+    <meta name="description" content="Weird console error when using pothos as a GraphQL schema builder for Typescript in SST">
+    <meta name="generator" content="Eleventy v1.0.1">
+
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/prism-base16-monokai.dark.css">
+    <link rel="stylesheet" href="/css/prism-diff.css">
+    <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Mirza Pandzo">
+    <link rel="alternate" href="/feed/feed.json" type="application/json" title="Mirza Pandzo">
+  </head>
+  <body>
+    <header>
+      <h1 class="home"><a href="/">Mirza Pandzo</a></h1>
+      <ul class="nav">
+        <li class="nav-item"><a href="/">Home</a></li>
+        <li class="nav-item"><a href="/posts/">Posts</a></li>
+        <li class="nav-item"><a href="/about/">About Me</a></li>
+      </ul>
+    </header>
+
+    <main class="tmpl-post">
+
+      <!-- Delete this message
+      <div class="warning">
+        <ol>
+          <li>Edit the <code>_data/metadata.json</code> with your blog’s information.</li>
+          <li>(Optional) Edit <code>.eleventy.js</code> with your <a href="https://www.11ty.dev/docs/config/">configuration preferences</a>.</li>
+          <li>Delete this message from <code>_includes/layouts/base.njk</code>.</li>
+        </ol>
+        <p><em>This is an <a href="https://www.11ty.dev/">Eleventy project</a> created from the <a href="https://github.com/11ty/eleventy-base-blog"><code>eleventy-base-blog</code> repo</a>.</em></p>
+      </div>
+      Stop deleting -->
+
+      <h1>SST - Cannot use GraphQLScalarType &quot;Boolean&quot; from another module or realm.</h1>
+
+<time datetime="2022-07-24">24 Jul 2022</time><a href="/tags/pothos-graphql-sst/" class="post-tag">pothos, graphql, sst</a>
+
+<p>I've been playing around with <a href="https://sst.dev">SST</a> over the last few days. SST is a &quot;framework that makes it easy to build serverless apps&quot;. It builds on top of the AWS CDK (Amazon's cloud development kit) and comes with a set of impressive features including a live lambda dev environment, a management dashboard, debugging with breakpoints in VS Code as well as out-of-the-box support for JS and TS (using esbuild), Go, Python, C#, and F#.</p>
+<p>SST is infrastructure-as-code on steroids. It comes with higher-level constructs designed specifically for serverless apps resulting in code that looks mighty impressive:</p>
+<pre><code>import * as sst from '@serverless-stack/resources';
+
+import { StorageStack } from './StorageStack';
+import { ApiStack } from './ApiStack';
+import { AuthStack } from './AuthStack';
+import { WebStack } from './WebStack';
+import { CronStack } from './CronStack';
+
+export default function main(app: sst.App): void {
+  // Set default runtime for all functions
+  app.setDefaultFunctionProps({
+    runtime: 'nodejs16.x',
+    srcPath: 'services',
+    bundle: {
+      format: 'esm',
+    },
+  });
+
+  app
+    .stack(StorageStack).stack(ApiStack).stack(AuthStack).stack(CronStack).stack(WebStack);
+}
+</code></pre>
+<h2 id="cannot-use-graphqlscalartype-&quot;boolean&quot;-from-another-module-or-realm." tabindex="-1">Cannot use GraphQLScalarType &quot;Boolean&quot; from another module or realm. <a class="direct-link" href="#cannot-use-graphqlscalartype-&quot;boolean&quot;-from-another-module-or-realm." aria-hidden="true">#</a></h2>
+<p>But I digress. While learning and ins-and-outs of the framework (I am nowhere near done), I used the <code>create sst</code> command to set up an app and followed the SST guide to add different stack constructs. I chose Vue.js for my web stack and managed to query the GraphQL endpoint without issue. I was playing with the Cron construct when I suddenly noticed the following error in my console:</p>
+<pre><code>Failed to extract schema from pothos
+Error: Cannot use GraphQLScalarType &quot;Boolean&quot; from another module or realm.
+
+Ensure that there is only one instance of &quot;graphql&quot; in the node_modules
+directory. If different versions of &quot;graphql&quot; are the dependencies of other
+relied on modules, use &quot;resolutions&quot; to ensure only one version is installed.
+
+https://yarnpkg.com/en/docs/selective-version-resolutions
+
+Duplicate &quot;graphql&quot; modules cannot be used at the same time since different
+versions may have different capabilities and behavior. The data from one
+version used in the function from another could produce confusing and
+spurious results.
+    at instanceOf (/Users/mirzapandzo/Projects/nonstopfootball/node_modules/graphql/jsutils/instanceOf.js:44:19)
+    at isScalarType (/Users/mirzapandzo/Projects/nonstopfootball/node_modules/graphql/type/definition.js:117:37)
+    at sortNamedType (/Users/mirzapandzo/Projects/nonstopfootball/node_modules/graphql/utilities/lexicographicSortSchema.js:99:36)
+    at keyValMap (/Users/mirzapandzo/Projects/nonstopfootball/node_modules/graphql/jsutils/keyValMap.js:29:27)
+    at lexicographicSortSchema (/Users/mirzapandzo/Projects/nonstopfootball/node_modules/graphql/utilities/lexicographicSortSchema.js:31:44)
+    at Module.generate (file:///Users/mirzapandzo/Projects/nonstopfootball/node_modules/@serverless-stack/core/dist/pothos/generate.js:149:40)
+    at build (file:///Users/mirzapandzo/Projects/nonstopfootball/node_modules/@serverless-stack/core/dist/cli/PothosBuilder.js:12:28)
+</code></pre>
+<p>I tried to revert code, Command+Z etc, but no luck. I was commenting things left, right and center but the error would not go away.</p>
+<p>Dax from the [SST discord] (<a href="https://discord.com/channels/983865673656705025/985224097342582865/997233904698277898">https://discord.com/channels/983865673656705025/985224097342582865/997233904698277898</a>) mentioned this might be a node_modules conflict when asked about the issue a few days ago, however, I was intrigued why this problem was suddenly occurring for me when I was able to run GraphQL without issue only a few moments ago.</p>
+<p>Then it struck me! SST is configued with yarn workspaces to hoist modules into the root node_modules folder. I had used yarn to install sst initially, but, while playing around with the Cron construct I went and used npm to install rss-parser (force of habit). As a result, this mixing of yarn and npm commands caused a conflict within my node_modules resulting in the above errors.</p>
+<p>To fix the issue, I removed all node_modules folders with <code>rm -Rf node_modules</code> and used yarn to install. I was able to continue working and the conflict was resolved.</p>
+
+
+    </main>
+
+    <footer></footer>
+
+    <!-- Current page: /posts/sst-cannot-use-graphqlscalartype-boolean-from-another-module-or-realm/ -->
+  </body>
+</html>
