@@ -117,7 +117,7 @@ pre {
   padding: 1em;
   margin: .5em 0;
   background-color: #f6f6f6;
-  overflow: scroll;
+  overflow-x: scroll;
 }
 code {
   word-break: break-all;
