@@ -2,37 +2,47 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://mirzapandzo.com/posts/sst-cannot-use-graphqlscalartype-boolean-from-another-module-or-realm/</loc>
+    <lastmod>2022-07-24</lastmod>
+  </url>
+  
+  <url>
     <loc>https://mirzapandzo.com/about/</loc>
-    <lastmod>2022-07-23</lastmod>
+    <lastmod>2022-07-24</lastmod>
   </url>
   
   <url>
     <loc>https://mirzapandzo.com/</loc>
-    <lastmod>2022-07-23</lastmod>
+    <lastmod>2022-07-24</lastmod>
   </url>
   
   <url>
     <loc>https://mirzapandzo.com/page-list/</loc>
-    <lastmod>2022-07-23</lastmod>
+    <lastmod>2022-07-24</lastmod>
   </url>
   
   <url>
     <loc>https://mirzapandzo.com/posts/</loc>
-    <lastmod>2022-07-23</lastmod>
+    <lastmod>2022-07-24</lastmod>
   </url>
   
   <url>
     <loc>https://mirzapandzo.com/tags/</loc>
-    <lastmod>2022-07-23</lastmod>
+    <lastmod>2022-07-24</lastmod>
   </url>
   
   <url>
-    <loc>https://mirzapandzo.com/tags/pothos-graphql-sst/</loc>
-    <lastmod>2022-07-23</lastmod>
+    <loc>https://mirzapandzo.com/tags/pothos/</loc>
+    <lastmod>2022-07-24</lastmod>
   </url>
   
   <url>
-    <loc>https://mirzapandzo.com/posts/sst-cannot-use-graphqlscalartype-boolean-from-another-module-or-realm/</loc>
+    <loc>https://mirzapandzo.com/tags/graphql/</loc>
+    <lastmod>2022-07-24</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mirzapandzo.com/tags/sst/</loc>
     <lastmod>2022-07-24</lastmod>
   </url>
 </urlset>

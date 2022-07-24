@@ -40,7 +40,8 @@ a[href]:visited {
   color: var(--navy);
 }
 main {
-  padding: 1rem;
+  padding: 2rem 0;
+  min-height: calc( 100vh - 104px);
 }
 main :first-child {
   margin-top: 0;
@@ -53,6 +54,38 @@ header:after {
   display: table;
   clear: both;
 }
+footer {
+  border-top: 1px dashed var(--lightgray);
+  width: 100%;
+}
+
+footer:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+footer .left {
+  padding: 1rem 0;
+  float: left;
+}
+
+footer .right {
+  padding: 1rem 0;
+  float: right;
+}
+
+@media only screen and (max-width: 595px) {
+  footer .container {
+    text-align: center;
+  }
+
+  footer .right {
+    float: left;
+    clear: left;
+  }
+}
+
 table {
   margin: 1em 0;
 }
@@ -84,6 +117,7 @@ pre {
   padding: 1em;
   margin: .5em 0;
   background-color: #f6f6f6;
+  overflow: scroll;
 }
 code {
   word-break: break-all;
@@ -91,7 +125,7 @@ code {
 
 /* Header */
 .home {
-  padding: 0 1rem;
+  padding-right: 2rem;
   float: left;
   margin: 1rem 0; /* 16px /16 */
   font-size: 1em; /* 16px /16 */
@@ -105,7 +139,6 @@ code {
   padding: 0;
   list-style: none;
   float: left;
-  margin-left: 1em;
 }
 .nav-item {
   display: inline-block;
@@ -128,16 +161,16 @@ code {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  counter-increment: start-from -1;
+  /* counter-increment: start-from -1; */
   line-height: 1.8;
 }
-.postlist-item:before {
+/* .postlist-item:before {
   display: inline-block;
   pointer-events: none;
   content: "" counter(start-from, decimal-leading-zero) ". ";
   line-height: 100%;
   text-align: right;
-}
+} */
 .postlist-date,
 .postlist-item:before {
   font-size: 0.8125em; /* 13px /16 */
@@ -147,7 +180,7 @@ code {
   word-spacing: -0.5px;
 }
 .postlist-link {
-  padding-left: .25em;
+  /* padding-left: .25em; */
   padding-right: .25em;
   text-underline-position: from-font;
   text-underline-offset: 0;
@@ -216,4 +249,10 @@ a[href].direct-link:focus:visited,
 :hover > a[href].direct-link,
 :hover > a[href].direct-link:visited {
   color: #aaa;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 1rem;
+  max-width: 1024px;
 }
