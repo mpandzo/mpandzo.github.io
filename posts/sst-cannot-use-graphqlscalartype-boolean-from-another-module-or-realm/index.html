@@ -82,6 +82,11 @@ spurious results.
 <p>Dax from the [SST discord] (<a href="https://discord.com/channels/983865673656705025/985224097342582865/997233904698277898">https://discord.com/channels/983865673656705025/985224097342582865/997233904698277898</a>) mentioned this might be a node_modules conflict when asked about the issue a few days ago, however, I was intrigued why this problem was suddenly occurring for me when I was able to run GraphQL without issue only a few moments ago.</p>
 <p>Then it struck me! SST is configured with workspaces to hoist modules into the root node_modules folder. I had used yarn to install sst initially, but, while playing around with the Cron construct I went and used npm to install rss-parser (force of habit). As a result, this mixing of yarn and npm commands caused a conflict within my node_modules resulting in the above errors</p>
 <p>To fix the issue, I removed all node_modules folders with <code>rm -Rf node_modules</code> and used yarn to install. I was able to continue working and the conflict was resolved.</p>
+<p>Note: If this fix does not work for you, you may have to resort to adding a resolutions section to your graphql folder's package.json file as follows to force the use of the correct graphql library.</p>
+<pre><code>&quot;resolutions&quot;: {
+  &quot;graphql&quot;: &quot;16.5.0&quot;
+}
+</code></pre>
 
 
       </div>
