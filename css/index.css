@@ -24,8 +24,7 @@ body {
 p:last-child {
   margin-bottom: 0;
 }
-p,
-.tmpl-post li,
+
 img {
   max-width: 37.5em; /* 600px /16 */
 }
@@ -255,4 +254,10 @@ a[href].direct-link:focus:visited,
   margin: 0 auto;
   padding: 0 1rem;
   max-width: 1024px;
+}
+
+.previous-posts {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--lightgray);
 }
