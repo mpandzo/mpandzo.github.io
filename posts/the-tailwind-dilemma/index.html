@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The tailwind dilemma</title>
+    <meta name="description" content="I enjoy writing about my experiences as a software developer.">
+    <meta name="generator" content="Eleventy v1.0.1">
+
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/prism-base16-monokai.dark.css">
+    <link rel="stylesheet" href="/css/prism-diff.css">
+    <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Mirza Pandzo">
+    <link rel="alternate" href="/feed/feed.json" type="application/json" title="Mirza Pandzo">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ0KLGD1CV"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NZ0KLGD1CV');
+    </script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1 class="home"><a href="/">Mirza Pandzo</a></h1>
+        <ul class="nav">
+          <li class="nav-item"><a href="/">Home</a></li>
+          <li class="nav-item"><a href="/posts/">Posts</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <main class="tmpl-post">
+      <div class="container">
+        <h1>The tailwind dilemma</h1>
+
+<time datetime="2022-10-23">23 Oct 2022</time><a href="/tags/tailwindcss/" class="post-tag">TailwindCSS</a><a href="/tags/css-frameworks/" class="post-tag">CSS Frameworks</a>
+
+<p>TailwindCSS is an interesting piece of software. It seems to mainly elicit two types of reaction. People either love it and use it every day or they really hate it. There is no sitting on the fence.</p>
+<h2 id="why-is-that" tabindex="-1">Why is that? <a class="direct-link" href="#why-is-that" aria-hidden="true">#</a></h2>
+<p>If you Google &quot;I hate TailwindCSS&quot; or &quot;I love TailwindCSS&quot; you'll find a myraid of lists of cons and pros, rants and eulogies - you'll read for hours. I won't bother trying to summarise the results, and even if I tried, I wouldn't do them justice.</p>
+<p>I will say this however, I believe the answer to the question above is in the framework's description piece found on the landing page above the fold:</p>
+<pre><code>A utility-first CSS framework packed with classes like flex, pt-4, text-center
+and rotate-90 that can be composed to build any design, directly in your markup.
+</code></pre>
+<p>&quot;Utility-first... in your markup&quot;.</p>
+<p>TailwindCSS provides an idea of abstraction over CSS that some people love passionately and others really hate.</p>
+<p>But hang on a second, you'll say, that's what CSS classes do - abstract CSS rules - TailwindCSS did not invent CSS classes!</p>
+<p>And you would be right. TailwindCSS didn't invent CSS classes. What it does is champion the idea of abstracting away CSS rules without enforcing opinionated design decisions the way other &quot;real&quot; CSS frameworks do. It also does not enforce compartmentalisation the way <a href="https://maintainablecss.com/chapters/semantics/">semantic CSS</a> does.</p>
+<p>Think about it, it's quite revolutionary.</p>
+<p>I'd still like to touch on a few points with the above in mind.</p>
+<h2 id="when-to-use-it" tabindex="-1">When to use it? <a class="direct-link" href="#when-to-use-it" aria-hidden="true">#</a></h2>
+<p>Prototypes are a given. The time it takes to 'npm install', set some rules in tailwind config and start working (on something meaningful) is so short it's simply not up for debate. Tailwind beats everything hands down.</p>
+<p>It is in complex projects however that TailwindCSS really shines.</p>
+<h3 id="skip-the-boring-stuff" tabindex="-1">Skip the boring stuff <a class="direct-link" href="#skip-the-boring-stuff" aria-hidden="true">#</a></h3>
+<p>There is no need to ever write custom CSS to convert the most complex designs into HTML. Being able to skip writing raw CSS speeds up the development process tremendously!</p>
+<p>In addition, not having to constantly weigh up the best or most in fashion naming convention (BEM, ABEM, SMACSS etc) is a God send.</p>
+<h3 id="but-what-about-maintenance" tabindex="-1">But what about maintenance? <a class="direct-link" href="#but-what-about-maintenance" aria-hidden="true">#</a></h3>
+<p>Any developer worth their salt writing code in 2022 will use some form of component design (atomic, modular, whatever) to compose their application. As such, changing an element's CSS rules sitewide requires changing the CSS classes of only that one element.</p>
+<p>Now, think about a large application with hundreds of components written over a long period of time. The code will most likely have been written by different developers of different skill level each administering their own flavour of BEM or SMACSS. With TailwindCSS there is no such problem.</p>
+<h3 id="there-is-code-bloat" tabindex="-1">There is code bloat <a class="direct-link" href="#there-is-code-bloat" aria-hidden="true">#</a></h3>
+<pre><code>&lt;a class=&quot;inline-block px-4 py-3
+    text-sm font-semibold text-center
+    text-white uppercase transition
+    duration-200 ease-in-out bg-indigo-600
+    rounded-md cursor-pointer
+    hover:bg-indigo-700&quot;&gt;Button&lt;/a&gt;
+</code></pre>
+<p>vs</p>
+<pre><code>&lt;a class=&quot;btn btn-primary&quot;&gt;Button&lt;/a&gt;
+</code></pre>
+<p>Yes, the latter is easier on the eyes than the former.</p>
+<p>However, firstly, when abstracted in a component, the code bloat does not make much difference to every day development. And secondly, if you really, really want to, you can use Tailwind's <a href="https://tailwindcss.com/docs/reusing-styles#extracting-classes-with-apply">@apply</a> feature to group sets of classes together to achieve the latter - though it's philosophically discouraged.</p>
+<p>Lastly, with the advent of http2 and faster broadly adopted web speeds, inlining a bunch of CSS classes will not affect website performance. Tailwinds performance-focused setup leads to notoriously small CSS files, even for <a href="https://tailwindcss.com/docs/optimizing-for-production">large websites</a> (&gt;10kb).</p>
+<h2 id="competion-does-it-better" tabindex="-1">Competion does it better? <a class="direct-link" href="#competion-does-it-better" aria-hidden="true">#</a></h2>
+<p>I disagree strongly. Bootstrap, Foundation and Bulma (to name a few) are not TailwindCSS's competition. They are opinionated CSS frameworks on par with DiasyUI (an opinionated CSS framework built on top of TailwindCSS).</p>
+<p>Bootstrap provides <a href="https://getbootstrap.com/docs/4.0/utilities/borders/">utility classes</a> which you could probably use on their for a utility-first development experience, however, their classes are more bloated thank Tailwind's (.d-flex vs Tailwind's .flex etc). It almost feels like these utility classes are an afterthought to Tailwind's success.</p>
+<p>You will simply not find a better utility-first CSS framework.</p>
+<h2 id="wrapping-things-up" tabindex="-1">Wrapping things up <a class="direct-link" href="#wrapping-things-up" aria-hidden="true">#</a></h2>
+<p>Finally, I strongly encourage you to try using TailwindCSS on one of your projects. I understand you may be reluctant. Coming from a Semantic CSS development background myself it was very hard to make a conscious decision to switch to utility-first instead. Having done development with TailwindCSS for the past 2 years I can say I cannot imagine doing anything else.</p>
+
+<div class="previous-posts">
+  <ul><li>Previous: <a href="/posts/the-power-of-laziness/">The power of laziness</a></li>
+  </ul>
+</div>
+
+      </div>
+    </main>
+
+    <footer role="contentinfo">
+      <div class="container">
+        <div class="left">&copy 2022 mirzapandzo.com</div>
+        <div class="right">Built with <a href="https://github.com/11ty/eleventy-base-blog">11ty</a>
+      </div>
+    </footer>
+
+    <!-- Current page: /posts/the-tailwind-dilemma/ -->
+  </body>
+</html>

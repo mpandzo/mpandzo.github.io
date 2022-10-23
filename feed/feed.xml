@@ -5,12 +5,62 @@
 	
 	<link href="https://mirzapandzo.com/feed/feed.xml" rel="self"/>
 	<link href="https://mirzapandzo.com/"/>
-	<updated>2022-07-26T00:00:00Z</updated>
+	<updated>2022-10-23T00:00:00Z</updated>
 	<id>https://mirzapandzo.com/</id>
 	<author>
 		<name>Mirza Pandzo</name>
 		<email></email>
 	</author>
+	
+	<entry>
+		<title>The tailwind dilemma</title>
+		<link href="https://mirzapandzo.com/posts/the-tailwind-dilemma/"/>
+		<updated>2022-10-23T00:00:00Z</updated>
+		<id>https://mirzapandzo.com/posts/the-tailwind-dilemma/</id>
+		<content type="html">&lt;p&gt;TailwindCSS is an interesting piece of software. It seems to mainly elicit two types of reaction. People either love it and use it every day or they really hate it. There is no sitting on the fence.&lt;/p&gt;
+&lt;h2 id=&quot;why-is-that&quot; tabindex=&quot;-1&quot;&gt;Why is that? &lt;a class=&quot;direct-link&quot; href=&quot;https://mirzapandzo.com/posts/the-tailwind-dilemma/#why-is-that&quot; aria-hidden=&quot;true&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;If you Google &amp;quot;I hate TailwindCSS&amp;quot; or &amp;quot;I love TailwindCSS&amp;quot; you&#39;ll find a myraid of lists of cons and pros, rants and eulogies - you&#39;ll read for hours. I won&#39;t bother trying to summarise the results, and even if I tried, I wouldn&#39;t do them justice.&lt;/p&gt;
+&lt;p&gt;I will say this however, I believe the answer to the question above is in the framework&#39;s description piece found on the landing page above the fold:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;A utility-first CSS framework packed with classes like flex, pt-4, text-center
+and rotate-90 that can be composed to build any design, directly in your markup.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&amp;quot;Utility-first... in your markup&amp;quot;.&lt;/p&gt;
+&lt;p&gt;TailwindCSS provides an idea of abstraction over CSS that some people love passionately and others really hate.&lt;/p&gt;
+&lt;p&gt;But hang on a second, you&#39;ll say, that&#39;s what CSS classes do - abstract CSS rules - TailwindCSS did not invent CSS classes!&lt;/p&gt;
+&lt;p&gt;And you would be right. TailwindCSS didn&#39;t invent CSS classes. What it does is champion the idea of abstracting away CSS rules without enforcing opinionated design decisions the way other &amp;quot;real&amp;quot; CSS frameworks do. It also does not enforce compartmentalisation the way &lt;a href=&quot;https://maintainablecss.com/chapters/semantics/&quot;&gt;semantic CSS&lt;/a&gt; does.&lt;/p&gt;
+&lt;p&gt;Think about it, it&#39;s quite revolutionary.&lt;/p&gt;
+&lt;p&gt;I&#39;d still like to touch on a few points with the above in mind.&lt;/p&gt;
+&lt;h2 id=&quot;when-to-use-it&quot; tabindex=&quot;-1&quot;&gt;When to use it? &lt;a class=&quot;direct-link&quot; href=&quot;https://mirzapandzo.com/posts/the-tailwind-dilemma/#when-to-use-it&quot; aria-hidden=&quot;true&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Prototypes are a given. The time it takes to &#39;npm install&#39;, set some rules in tailwind config and start working (on something meaningful) is so short it&#39;s simply not up for debate. Tailwind beats everything hands down.&lt;/p&gt;
+&lt;p&gt;It is in complex projects however that TailwindCSS really shines.&lt;/p&gt;
+&lt;h3 id=&quot;skip-the-boring-stuff&quot; tabindex=&quot;-1&quot;&gt;Skip the boring stuff &lt;a class=&quot;direct-link&quot; href=&quot;https://mirzapandzo.com/posts/the-tailwind-dilemma/#skip-the-boring-stuff&quot; aria-hidden=&quot;true&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;There is no need to ever write custom CSS to convert the most complex designs into HTML. Being able to skip writing raw CSS speeds up the development process tremendously!&lt;/p&gt;
+&lt;p&gt;In addition, not having to constantly weigh up the best or most in fashion naming convention (BEM, ABEM, SMACSS etc) is a God send.&lt;/p&gt;
+&lt;h3 id=&quot;but-what-about-maintenance&quot; tabindex=&quot;-1&quot;&gt;But what about maintenance? &lt;a class=&quot;direct-link&quot; href=&quot;https://mirzapandzo.com/posts/the-tailwind-dilemma/#but-what-about-maintenance&quot; aria-hidden=&quot;true&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Any developer worth their salt writing code in 2022 will use some form of component design (atomic, modular, whatever) to compose their application. As such, changing an element&#39;s CSS rules sitewide requires changing the CSS classes of only that one element.&lt;/p&gt;
+&lt;p&gt;Now, think about a large application with hundreds of components written over a long period of time. The code will most likely have been written by different developers of different skill level each administering their own flavour of BEM or SMACSS. With TailwindCSS there is no such problem.&lt;/p&gt;
+&lt;h3 id=&quot;there-is-code-bloat&quot; tabindex=&quot;-1&quot;&gt;There is code bloat &lt;a class=&quot;direct-link&quot; href=&quot;https://mirzapandzo.com/posts/the-tailwind-dilemma/#there-is-code-bloat&quot; aria-hidden=&quot;true&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;a class=&amp;quot;inline-block px-4 py-3
+    text-sm font-semibold text-center
+    text-white uppercase transition
+    duration-200 ease-in-out bg-indigo-600
+    rounded-md cursor-pointer
+    hover:bg-indigo-700&amp;quot;&amp;gt;Button&amp;lt;/a&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;vs&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;a class=&amp;quot;btn btn-primary&amp;quot;&amp;gt;Button&amp;lt;/a&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Yes, the latter is easier on the eyes than the former.&lt;/p&gt;
+&lt;p&gt;However, firstly, when abstracted in a component, the code bloat does not make much difference to every day development. And secondly, if you really, really want to, you can use Tailwind&#39;s &lt;a href=&quot;https://tailwindcss.com/docs/reusing-styles#extracting-classes-with-apply&quot;&gt;@apply&lt;/a&gt; feature to group sets of classes together to achieve the latter - though it&#39;s philosophically discouraged.&lt;/p&gt;
+&lt;p&gt;Lastly, with the advent of http2 and faster broadly adopted web speeds, inlining a bunch of CSS classes will not affect website performance. Tailwinds performance-focused setup leads to notoriously small CSS files, even for &lt;a href=&quot;https://tailwindcss.com/docs/optimizing-for-production&quot;&gt;large websites&lt;/a&gt; (&amp;gt;10kb).&lt;/p&gt;
+&lt;h2 id=&quot;competion-does-it-better&quot; tabindex=&quot;-1&quot;&gt;Competion does it better? &lt;a class=&quot;direct-link&quot; href=&quot;https://mirzapandzo.com/posts/the-tailwind-dilemma/#competion-does-it-better&quot; aria-hidden=&quot;true&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I disagree strongly. Bootstrap, Foundation and Bulma (to name a few) are not TailwindCSS&#39;s competition. They are opinionated CSS frameworks on par with DiasyUI (an opinionated CSS framework built on top of TailwindCSS).&lt;/p&gt;
+&lt;p&gt;Bootstrap provides &lt;a href=&quot;https://getbootstrap.com/docs/4.0/utilities/borders/&quot;&gt;utility classes&lt;/a&gt; which you could probably use on their for a utility-first development experience, however, their classes are more bloated thank Tailwind&#39;s (.d-flex vs Tailwind&#39;s .flex etc). It almost feels like these utility classes are an afterthought to Tailwind&#39;s success.&lt;/p&gt;
+&lt;p&gt;You will simply not find a better utility-first CSS framework.&lt;/p&gt;
+&lt;h2 id=&quot;wrapping-things-up&quot; tabindex=&quot;-1&quot;&gt;Wrapping things up &lt;a class=&quot;direct-link&quot; href=&quot;https://mirzapandzo.com/posts/the-tailwind-dilemma/#wrapping-things-up&quot; aria-hidden=&quot;true&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Finally, I strongly encourage you to try using TailwindCSS on one of your projects. I understand you may be reluctant. Coming from a Semantic CSS development background myself it was very hard to make a conscious decision to switch to utility-first instead. Having done development with TailwindCSS for the past 2 years I can say I cannot imagine doing anything else.&lt;/p&gt;
+</content>
+	</entry>
 	
 	<entry>
 		<title>The power of laziness</title>
