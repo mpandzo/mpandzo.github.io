@@ -279,3 +279,11 @@ a[href].direct-link:focus:visited,
 .post-nav ul li {
   margin: 0.5rem 0;
 }
+
+p code {
+  background: #eee;
+  padding: 2px 6px;
+  border-radius: 0px;
+  font-size: 90%;
+  margin-right: 2px;
+}
