@@ -5,12 +5,35 @@
 	
 	<link href="https://mirzapandzo.com/feed/feed.xml" rel="self"/>
 	<link href="https://mirzapandzo.com/"/>
-	<updated>2022-10-26T00:00:00Z</updated>
+	<updated>2022-10-31T00:00:00Z</updated>
 	<id>https://mirzapandzo.com/</id>
 	<author>
 		<name>Mirza Pandzo</name>
 		<email></email>
 	</author>
+	
+	<entry>
+		<title>Amazon Linux 2 ElasticBeanstalk and Apache HTTPD</title>
+		<link href="https://mirzapandzo.com/posts/amazon-linux-2-elasticbeanstalk-and-apache-httpd/"/>
+		<updated>2022-10-31T00:00:00Z</updated>
+		<id>https://mirzapandzo.com/posts/amazon-linux-2-elasticbeanstalk-and-apache-httpd/</id>
+		<content type="html">&lt;p&gt;I recently had to migrate a legacy website from Amazon Linux AMI to the Amazon Linux 2 platform as the former is deprecated and no longer supports managed updates on AWS.&lt;/p&gt;
+&lt;p&gt;There is no automated way to do the migration so I had to create a new environment and deploy the application there, then CNAME the domain name to the new load balancer address.&lt;/p&gt;
+&lt;p&gt;Things went along smoothly enough with pretty much all configuration settings being compatible and transferrable. However, once the new environment was created and once my deploy script was done, I got 404 errors everywhere.&lt;/p&gt;
+&lt;p&gt;Interestingly enough, I noticed the 404 errors were being thrown by Nginx:&lt;/p&gt;
+&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;404 Not Found&lt;br /&gt;nginx/1.20.0&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;A bit of digging led me to the revelation that Amazon Linux 2 uses nginx as it&#39;s default proxy server:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Elastic Beanstalk uses nginx as the default reverse proxy to map your application to your Elastic Load Balancing load balancer. [&amp;lt;a href=&amp;quot;#link-1&amp;quot;&amp;gt;1&amp;lt;/a&amp;gt;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That was no good for me as I wanted to use the existing site&#39;s .htaccess file for url rewriting and I didn&#39;t want to try and translate each .htaccess rule to an nginx.conf rule.&lt;/p&gt;
+&lt;p&gt;Luckily, AWS allows you to let Apache&#39;s HTTPD proxy server do your proxying. To do this, you have to create a config file inside your .ebextensions folder (e.g. .ebextensions/httpd-proxy.config) with the following content:&lt;/p&gt;
+&lt;pre class=&quot;language-yml&quot;&gt;&lt;code class=&quot;language-yml&quot;&gt;&lt;span class=&quot;token key atrule&quot;&gt;option_settings&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;br /&gt;  &lt;span class=&quot;token key atrule&quot;&gt;aws:elasticbeanstalk:environment:proxy&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token key atrule&quot;&gt;ProxyServer&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; apache&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Links:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;[1] &lt;a id=&quot;link-1&quot; href=&quot;https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-linux-extend.html&quot;&gt;Extending Elastic Beanstalk Linux platforms&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+	</entry>
 	
 	<entry>
 		<title>Docker compose for WordPress - Permission denied and uid 1000</title>

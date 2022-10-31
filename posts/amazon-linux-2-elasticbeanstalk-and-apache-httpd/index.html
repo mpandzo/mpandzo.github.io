@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Linux 2 ElasticBeanstalk and Apache HTTPD</title>
+    <meta name="description" content="Setting Apache HTTPD proxy server as the default proxy server on EB instances&quot;">
+    <meta name="generator" content="Eleventy v1.0.1">
+
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/prism-base16-monokai.dark.css">
+    <link rel="stylesheet" href="/css/prism-diff.css">
+    <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Mirza Pandzo">
+    <link rel="alternate" href="/feed/feed.json" type="application/json" title="Mirza Pandzo">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ0KLGD1CV"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NZ0KLGD1CV');
+    </script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="home"><a href="/">Mirza Pandzo</a></div>
+        <ul class="nav">
+          <li class="nav-item"><a href="/">Home</a></li>
+          <li class="nav-item"><a href="/posts/">Posts</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <main class="tmpl-post container">
+      <h1>Amazon Linux 2 ElasticBeanstalk and Apache HTTPD</h1>
+
+<div class="meta">
+  <div class="published">
+    Published on
+    <time datetime="2022-10-31">31 Oct 2022</time>
+  </div>
+  <span class="separator">-</span>
+  <div class="tags"><a href="/tags/wordpress/" class="post-tag">WordPress</a><a href="/tags/amazon-linux-2/" class="post-tag">Amazon Linux 2</a><a href="/tags/apache-httpd/" class="post-tag">Apache HTTPD</a>
+  </div>
+</div>
+
+<p>I recently had to migrate a legacy website from Amazon Linux AMI to the Amazon Linux 2 platform as the former is deprecated and no longer supports managed updates on AWS.</p>
+<p>There is no automated way to do the migration so I had to create a new environment and deploy the application there, then CNAME the domain name to the new load balancer address.</p>
+<p>Things went along smoothly enough with pretty much all configuration settings being compatible and transferrable. However, once the new environment was created and once my deploy script was done, I got 404 errors everywhere.</p>
+<p>Interestingly enough, I noticed the 404 errors were being thrown by Nginx:</p>
+<pre class="language-html"><code class="language-html">404 Not Found<br>nginx/1.20.0</code></pre>
+<p>A bit of digging led me to the revelation that Amazon Linux 2 uses nginx as it's default proxy server:</p>
+<pre><code>Elastic Beanstalk uses nginx as the default reverse proxy to map your application to your Elastic Load Balancing load balancer. [&lt;a href=&quot;#link-1&quot;&gt;1&lt;/a&gt;]
+</code></pre>
+<p>That was no good for me as I wanted to use the existing site's .htaccess file for url rewriting and I didn't want to try and translate each .htaccess rule to an nginx.conf rule.</p>
+<p>Luckily, AWS allows you to let Apache's HTTPD proxy server do your proxying. To do this, you have to create a config file inside your .ebextensions folder (e.g. .ebextensions/httpd-proxy.config) with the following content:</p>
+<pre class="language-yml"><code class="language-yml"><span class="token key atrule">option_settings</span><span class="token punctuation">:</span><br>  <span class="token key atrule">aws:elasticbeanstalk:environment:proxy</span><span class="token punctuation">:</span><br>    <span class="token key atrule">ProxyServer</span><span class="token punctuation">:</span> apache</code></pre>
+<p>Links:</p>
+<ul>
+<li>[1] <a id="link-1" href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-linux-extend.html">Extending Elastic Beanstalk Linux platforms</a></li>
+</ul>
+
+<div class="post-nav">
+  <ul><li><strong>Previous:</strong> <a href="/posts/docker-compose-for-wordpress-permission-denied-and-uid-1000/">Docker compose for WordPress - Permission denied and uid 1000</a></li>
+  </ul>
+</div>
+
+    </main>
+
+    <footer role="contentinfo">
+      <div class="container">
+        <div class="left">&copy 2022 mirzapandzo.com</div>
+        <div class="right">Built with <a href="https://github.com/11ty/eleventy-base-blog">11ty</a>
+      </div>
+    </footer>
+
+    <!-- Current page: /posts/amazon-linux-2-elasticbeanstalk-and-apache-httpd/ -->
+  </body>
+</html>
