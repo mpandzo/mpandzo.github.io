@@ -57,7 +57,7 @@
     content: |
       extension=mongo.so
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Am I the only one frustrated with having to bore to multiple AWS docs articles to get to the bottom of the above while articles like &lt;a href=&quot;https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/php-hawordpress-tutorial.html&quot;&gt;Deploying a high-availability WordPress website with an external Amazon RDS database to Elastic Beanstalk&lt;/a&gt; don&#39;t touch on the &lt;code&gt;eb deploy&lt;/code&gt; aspect at all?&lt;/p&gt;
+&lt;p&gt;Am I the only one frustrated with having to bore through multiple AWS docs articles to get to the bottom of the above while articles like &lt;a href=&quot;https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/php-hawordpress-tutorial.html&quot;&gt;Deploying a high-availability WordPress website with an external Amazon RDS database to Elastic Beanstalk&lt;/a&gt; don&#39;t touch on the &lt;code&gt;eb deploy&lt;/code&gt; aspect at all?&lt;/p&gt;
 &lt;p&gt;Links:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;[1] &lt;a id=&quot;link-1&quot; href=&quot;https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-linux-extend.html&quot;&gt;Extending Elastic Beanstalk Linux platforms&lt;/a&gt;&lt;/li&gt;
