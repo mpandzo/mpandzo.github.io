@@ -66,27 +66,9 @@
 <pre><code>2022-11-01 01:05:31    ERROR   Invalid option specification (Namespace: 'aws:elasticbeanstalk:container:php:phpini', OptionName: 'post_max_size'): Unknown configuration setting.
 </code></pre>
 <p>Instead, to override other php.ini settings not included in the aforementioned list, you have to use the files block of a configuration file (e.g. .ebextensions/php-ini.config) to add a .ini file to /etc/php.d/:</p>
-<pre><code>files:
-  &quot;/etc/php.d/project.ini&quot; :
-    mode: &quot;000644&quot;
-    owner: root
-    group: root
-    content: |
-      upload_max_filesize = 64M
-      post_max_size = 64M
-      max_input_time = 1000
-      html_errors = &quot;On&quot;
-      display_startup_errors = &quot;On&quot;
-</code></pre>
+<pre class="language-yml"><code class="language-yml"><span class="token key atrule">files</span><span class="token punctuation">:</span><br>  <span class="token key atrule">"/etc/php.d/project.ini"</span> <span class="token punctuation">:</span><br>    <span class="token key atrule">mode</span><span class="token punctuation">:</span> <span class="token string">"000644"</span><br>    <span class="token key atrule">owner</span><span class="token punctuation">:</span> root<br>    <span class="token key atrule">group</span><span class="token punctuation">:</span> root<br>    <span class="token key atrule">content</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string"><br>      upload_max_filesize = 64M<br>      post_max_size = 64M<br>      max_input_time = 1000<br>      html_errors = "On"<br>      display_startup_errors = "On"</span></code></pre>
 <p>Similarly, you would use the same approach to enable a PHP extension like Mongo [<a href="#link-3">3</a>]:</p>
-<pre><code>files:
-  &quot;/etc/php.d/99mongo.ini&quot;:
-    mode: &quot;000644&quot;
-    owner: root
-    group: root
-    content: |
-      extension=mongo.so
-</code></pre>
+<pre class="language-yml"><code class="language-yml"><span class="token key atrule">files</span><span class="token punctuation">:</span><br>  <span class="token key atrule">"/etc/php.d/99mongo.ini"</span><span class="token punctuation">:</span><br>    <span class="token key atrule">mode</span><span class="token punctuation">:</span> <span class="token string">"000644"</span><br>    <span class="token key atrule">owner</span><span class="token punctuation">:</span> root<br>    <span class="token key atrule">group</span><span class="token punctuation">:</span> root<br>    <span class="token key atrule">content</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string"><br>      extension=mongo.so</span></code></pre>
 <p>Am I the only one frustrated with having to bore through multiple AWS docs articles to get to the bottom of the above while articles like <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/php-hawordpress-tutorial.html">Deploying a high-availability WordPress website with an external Amazon RDS database to Elastic Beanstalk</a> don't touch on the <code>eb deploy</code> aspect at all?</p>
 <p>Links:</p>
 <ul>

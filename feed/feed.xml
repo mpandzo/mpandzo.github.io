@@ -36,27 +36,9 @@
 &lt;pre&gt;&lt;code&gt;2022-11-01 01:05:31    ERROR   Invalid option specification (Namespace: &#39;aws:elasticbeanstalk:container:php:phpini&#39;, OptionName: &#39;post_max_size&#39;): Unknown configuration setting.
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Instead, to override other php.ini settings not included in the aforementioned list, you have to use the files block of a configuration file (e.g. .ebextensions/php-ini.config) to add a .ini file to /etc/php.d/:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;files:
-  &amp;quot;/etc/php.d/project.ini&amp;quot; :
-    mode: &amp;quot;000644&amp;quot;
-    owner: root
-    group: root
-    content: |
-      upload_max_filesize = 64M
-      post_max_size = 64M
-      max_input_time = 1000
-      html_errors = &amp;quot;On&amp;quot;
-      display_startup_errors = &amp;quot;On&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&quot;language-yml&quot;&gt;&lt;code class=&quot;language-yml&quot;&gt;&lt;span class=&quot;token key atrule&quot;&gt;files&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;br /&gt;  &lt;span class=&quot;token key atrule&quot;&gt;&quot;/etc/php.d/project.ini&quot;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token key atrule&quot;&gt;mode&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;000644&quot;&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token key atrule&quot;&gt;owner&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; root&lt;br /&gt;    &lt;span class=&quot;token key atrule&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; root&lt;br /&gt;    &lt;span class=&quot;token key atrule&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;token scalar string&quot;&gt;&lt;br /&gt;      upload_max_filesize = 64M&lt;br /&gt;      post_max_size = 64M&lt;br /&gt;      max_input_time = 1000&lt;br /&gt;      html_errors = &quot;On&quot;&lt;br /&gt;      display_startup_errors = &quot;On&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Similarly, you would use the same approach to enable a PHP extension like Mongo [&lt;a href=&quot;https://mirzapandzo.com/posts/elasticbeanstalk-php-settings-and-the-frustratingly-confusing-guide-to-eb-deploy/#link-3&quot;&gt;3&lt;/a&gt;]:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;files:
-  &amp;quot;/etc/php.d/99mongo.ini&amp;quot;:
-    mode: &amp;quot;000644&amp;quot;
-    owner: root
-    group: root
-    content: |
-      extension=mongo.so
-&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&quot;language-yml&quot;&gt;&lt;code class=&quot;language-yml&quot;&gt;&lt;span class=&quot;token key atrule&quot;&gt;files&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;br /&gt;  &lt;span class=&quot;token key atrule&quot;&gt;&quot;/etc/php.d/99mongo.ini&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token key atrule&quot;&gt;mode&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;000644&quot;&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token key atrule&quot;&gt;owner&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; root&lt;br /&gt;    &lt;span class=&quot;token key atrule&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; root&lt;br /&gt;    &lt;span class=&quot;token key atrule&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;token scalar string&quot;&gt;&lt;br /&gt;      extension=mongo.so&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Am I the only one frustrated with having to bore through multiple AWS docs articles to get to the bottom of the above while articles like &lt;a href=&quot;https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/php-hawordpress-tutorial.html&quot;&gt;Deploying a high-availability WordPress website with an external Amazon RDS database to Elastic Beanstalk&lt;/a&gt; don&#39;t touch on the &lt;code&gt;eb deploy&lt;/code&gt; aspect at all?&lt;/p&gt;
 &lt;p&gt;Links:&lt;/p&gt;
 &lt;ul&gt;
