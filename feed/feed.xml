@@ -5,12 +5,67 @@
 	
 	<link href="https://mirzapandzo.com/feed/feed.xml" rel="self"/>
 	<link href="https://mirzapandzo.com/"/>
-	<updated>2022-10-31T00:00:00Z</updated>
+	<updated>2022-11-01T00:00:00Z</updated>
 	<id>https://mirzapandzo.com/</id>
 	<author>
 		<name>Mirza Pandzo</name>
 		<email></email>
 	</author>
+	
+	<entry>
+		<title>ElasticBeanstalk, PHP settings and the frustratingly confusing guide to eb deploy</title>
+		<link href="https://mirzapandzo.com/posts/elasticbeanstalk-php-settings-and-the-frustratingly-confusing-guide-to-eb-deploy/"/>
+		<updated>2022-11-01T00:00:00Z</updated>
+		<id>https://mirzapandzo.com/posts/elasticbeanstalk-php-settings-and-the-frustratingly-confusing-guide-to-eb-deploy/</id>
+		<content type="html">&lt;p&gt;I&#39;ll be honest. I love using AWS. &lt;code&gt;eb deploy&lt;/code&gt; is my go to command. The ElasticBeanstalk cloud ecosystem is amazing and I would find it hard to do my day job without it.&lt;/p&gt;
+&lt;p&gt;There is something to be said about the merry-go-round you are sent on when you need to change, upgrade, migrate (insert operative word here) a service your application relies on.&lt;/p&gt;
+&lt;p&gt;I recently &lt;a href=&quot;https://mirzapandzo.com/posts/amazon-linux-2-elasticbeanstalk-and-apache-httpd&quot;&gt;moved a website from an Amazon Linux AMI to an Amazon Linux 2 platform&lt;/a&gt;. Along the way, I found out that Apache HTTPD was no longer the default proxy server [&lt;a href=&quot;https://mirzapandzo.com/posts/elasticbeanstalk-php-settings-and-the-frustratingly-confusing-guide-to-eb-deploy/#link-1&quot;&gt;1&lt;/a&gt;] used on ElasticBeanstalk instances.&lt;/p&gt;
+&lt;p&gt;Additionally, and randomly, the following php.ini settings can be configured via the &lt;code&gt;aws:elasticbeanstalk:container:php:phpini&lt;/code&gt; option settings config namespace [&lt;a href=&quot;https://mirzapandzo.com/posts/elasticbeanstalk-php-settings-and-the-frustratingly-confusing-guide-to-eb-deploy/#link-2&quot;&gt;2&lt;/a&gt;]:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Proxy server – The proxy server to use on your environment instances. By default, nginx is used.&lt;/li&gt;
+&lt;li&gt;Document root – The folder that contains your site&#39;s default page. If your welcome page is not at the root of your source bundle, specify the folder that contains it relative to the root path. For example, /public if the welcome page is in a folder named public.&lt;/li&gt;
+&lt;li&gt;Memory limit – The maximum amount of memory that a script is allowed to allocate. For example, 512M.&lt;/li&gt;
+&lt;li&gt;Zlib output compression – Set to On to compress responses.&lt;/li&gt;
+&lt;li&gt;Allow URL fopen – Set to Off to prevent scripts from downloading files from remote locations.&lt;/li&gt;
+&lt;li&gt;Display errors – Set to On to show internal error messages for debugging.&lt;/li&gt;
+&lt;li&gt;Max execution time – The maximum time in seconds that a script is allowed to run before the environment terminates it.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;E.g. you would set max_execution_time to 1000 by adding the following to your env.config file inside your .ebextensions folder:&lt;/p&gt;
+&lt;pre class=&quot;language-yml&quot;&gt;&lt;code class=&quot;language-yml&quot;&gt;&lt;span class=&quot;token key atrule&quot;&gt;option_settings&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;br /&gt;  &lt;span class=&quot;token key atrule&quot;&gt;aws:elasticbeanstalk:container:php:phpini&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token key atrule&quot;&gt;max_execution_time&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1000&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;However, if you mistakenly assume you can also override &lt;code&gt;post_max_size&lt;/code&gt;, you will be presented with a deploy error during &lt;code&gt;eb deploy&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;2022-11-01 01:05:31    ERROR   Invalid option specification (Namespace: &#39;aws:elasticbeanstalk:container:php:phpini&#39;, OptionName: &#39;post_max_size&#39;): Unknown configuration setting.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Instead, to override other php.ini settings not included in the aforementioned list, you have to use the files block of a configuration file (e.g. .ebextensions/php-ini.config) to add a .ini file to /etc/php.d/:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;files:
+  &amp;quot;/etc/php.d/project.ini&amp;quot; :
+    mode: &amp;quot;000644&amp;quot;
+    owner: root
+    group: root
+    content: |
+      upload_max_filesize = 64M
+      post_max_size = 64M
+      max_input_time = 1000
+      html_errors = &amp;quot;On&amp;quot;
+      display_startup_errors = &amp;quot;On&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Similarly, you would use the same approach to enable a PHP extension like Mongo [&lt;a href=&quot;https://mirzapandzo.com/posts/elasticbeanstalk-php-settings-and-the-frustratingly-confusing-guide-to-eb-deploy/#link-3&quot;&gt;3&lt;/a&gt;]:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;files:
+  &amp;quot;/etc/php.d/99mongo.ini&amp;quot;:
+    mode: &amp;quot;000644&amp;quot;
+    owner: root
+    group: root
+    content: |
+      extension=mongo.so
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Am I the only one frustrated with having to bore to multiple AWS docs articles to get to the bottom of the above while articles like &lt;a href=&quot;https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/php-hawordpress-tutorial.html&quot;&gt;Deploying a high-availability WordPress website with an external Amazon RDS database to Elastic Beanstalk&lt;/a&gt; don&#39;t touch on the &lt;code&gt;eb deploy&lt;/code&gt; aspect at all?&lt;/p&gt;
+&lt;p&gt;Links:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;[1] &lt;a id=&quot;link-1&quot; href=&quot;https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-linux-extend.html&quot;&gt;Extending Elastic Beanstalk Linux platforms&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[2] &lt;a id=&quot;link-2&quot; href=&quot;https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_PHP.container.html&quot;&gt;Using the Elastic Beanstalk PHP platform&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[3] &lt;a id=&quot;link-3&quot; href=&quot;https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/php-configuration-phpini.html&quot;&gt;Extending php.ini&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+	</entry>
 	
 	<entry>
 		<title>Amazon Linux 2 ElasticBeanstalk and Apache HTTPD</title>
@@ -66,7 +121,7 @@
 	</entry>
 	
 	<entry>
-		<title>The tailwind dilemma - utility first vs semantic css</title>
+		<title>The tailwind dilemma - utility first vs semantic CSS</title>
 		<link href="https://mirzapandzo.com/posts/the-tailwind-dilemma-utility-first-vs-semantic-css/"/>
 		<updated>2022-10-23T00:00:00Z</updated>
 		<id>https://mirzapandzo.com/posts/the-tailwind-dilemma-utility-first-vs-semantic-css/</id>
@@ -101,7 +156,7 @@
 &lt;p&gt;Yes, the latter is easier on the eyes than the former.&lt;/p&gt;
 &lt;p&gt;However, firstly, when abstracted in a component, the code bloat does not make much difference to every day development.&lt;/p&gt;
 &lt;p&gt;And secondly, if you really, really want to, you can use Tailwind&#39;s &lt;a href=&quot;https://tailwindcss.com/docs/reusing-styles#extracting-classes-with-apply&quot;&gt;@apply&lt;/a&gt; feature to group sets of classes together to achieve the latter - though it&#39;s philosophically discouraged.&lt;/p&gt;
-&lt;p&gt;Thirdly, with the former approach you can immediately see what the component display intent is, without having to look in the css file.&lt;/p&gt;
+&lt;p&gt;Thirdly, with the former approach you can immediately see what the component display intent is, without having to look in the CSS file.&lt;/p&gt;
 &lt;p&gt;And lastly, with the advent of http2 and faster, broadly adopted web speeds, inlining a bunch of CSS classes will not affect website performance. Tailwind&#39;s performance-focused setup leads to notoriously small CSS files, even for &lt;a href=&quot;https://tailwindcss.com/docs/optimizing-for-production&quot;&gt;large websites&lt;/a&gt; (&amp;gt;10kb).&lt;/p&gt;
 &lt;h2 id=&quot;competion-does-it-better&quot; tabindex=&quot;-1&quot;&gt;Competion does it better? &lt;a class=&quot;direct-link&quot; href=&quot;https://mirzapandzo.com/posts/the-tailwind-dilemma-utility-first-vs-semantic-css/#competion-does-it-better&quot; aria-hidden=&quot;true&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I disagree strongly. Bootstrap, Foundation and Bulma (to name a few) are not TailwindCSS&#39;s competition. They are opinionated CSS frameworks on par with &lt;a href=&quot;https://daisyui.com/&quot;&gt;daisyUI&lt;/a&gt; (an opinionated CSS framework built on top of TailwindCSS).&lt;/p&gt;

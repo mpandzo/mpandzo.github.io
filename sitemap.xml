@@ -27,6 +27,11 @@
   </url>
   
   <url>
+    <loc>https://mirzapandzo.com/posts/elasticbeanstalk-php-settings-and-the-frustratingly-confusing-guide-to-eb-deploy/</loc>
+    <lastmod>2022-11-01</lastmod>
+  </url>
+  
+  <url>
     <loc>https://mirzapandzo.com/</loc>
     <lastmod>2022-11-01</lastmod>
   </url>
@@ -63,6 +68,11 @@
   
   <url>
     <loc>https://mirzapandzo.com/tags/docker-compose/</loc>
+    <lastmod>2022-11-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mirzapandzo.com/tags/php/</loc>
     <lastmod>2022-11-01</lastmod>
   </url>
   
