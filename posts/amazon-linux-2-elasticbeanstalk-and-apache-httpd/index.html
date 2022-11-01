@@ -48,14 +48,14 @@
 </div>
 
 <p>I recently had to migrate a legacy website from Amazon Linux AMI to the Amazon Linux 2 platform as the former is deprecated and no longer supports managed updates on AWS.</p>
-<p>There is no automated way to do the migration so I had to create a new environment and deploy the application there, then CNAME the domain name to the new load balancer address.</p>
+<p>There is no automated way to do the migration so I created a new environment and deployed the application there, then CNAMEd the domain name to the new load balancer address.</p>
 <p>Things went along smoothly enough with pretty much all configuration settings being compatible and transferrable. However, once the new environment was created and once my deploy script was done, I got 404 errors everywhere.</p>
 <p>Interestingly enough, I noticed the 404 errors were being thrown by Nginx:</p>
 <pre class="language-html"><code class="language-html">404 Not Found<br>nginx/1.20.0</code></pre>
-<p>A bit of digging led me to the revelation that Amazon Linux 2 uses nginx as it's default proxy server:</p>
-<pre><code>Elastic Beanstalk uses nginx as the default reverse proxy to map your application to your Elastic Load Balancing load balancer. [&lt;a href=&quot;#link-1&quot;&gt;1&lt;/a&gt;]
+<p>A bit of digging led me to the revelation that Amazon Linux 2 uses nginx as it's default proxy server [<a href="#link-1">1</a>]:</p>
+<pre><code>Elastic Beanstalk uses nginx as the default reverse proxy to map your application to your Elastic Load Balancing load balancer.
 </code></pre>
-<p>That was no good for me as I wanted to use the existing site's .htaccess file for url rewriting and I didn't want to try and translate each .htaccess rule to an nginx.conf rule.</p>
+<p>That was no good for me as I wanted to use the existing site's .htaccess file for url rewrite overrides and I didn't want to try and translate each .htaccess rule to an equivalent nginx.conf rule.</p>
 <p>Luckily, AWS allows you to let Apache's HTTPD proxy server do your proxying. To do this, you have to create a config file inside your .ebextensions folder (e.g. .ebextensions/httpd-proxy.config) with the following content:</p>
 <pre class="language-yml"><code class="language-yml"><span class="token key atrule">option_settings</span><span class="token punctuation">:</span><br>  <span class="token key atrule">aws:elasticbeanstalk:environment:proxy</span><span class="token punctuation">:</span><br>    <span class="token key atrule">ProxyServer</span><span class="token punctuation">:</span> apache</code></pre>
 <p>Links:</p>
