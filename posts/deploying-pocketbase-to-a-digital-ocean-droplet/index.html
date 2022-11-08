@@ -48,7 +48,7 @@
 </div>
 
 <p>PocketBase is a beautiful single-file backend featuring a realtime database (SQLite), built-in user management, nice dashboard UI, configurable S3 storage and a simple REST API.</p>
-<p>To deploy PocketBase to Digital Ocean you have to create a new droplet first <a href="#link-1">[1]</a>. When you complete the form to create your server use the Ubuntu distribution and make sure you specify your SSH keys for ssh access <a href="#link-2">[2]</a>. When the create process completes, note down the droplet's assigned IP address as you will use it later.</p>
+<p>To deploy PocketBase to Digital Ocean you have to create a new droplet first <a href="#link-1">[1]</a>. When you fill in the form to create your server use the Ubuntu distribution and make sure you specify your SSH keys for ssh access <a href="#link-2">[2]</a>. When the create process completes, note down the droplet's assigned IP address as you will use it later.</p>
 <p>Once the droplet is created, create an A record mapping the aforementioned assigned IP address to your domain name. You can do this at your domain name registrar if your DNS is managed there. Alternatively, you can point your domain name's nameservers to Digital Ocean and manage your DNS - and create your A record - there <a href="#link-3">[3]</a>.</p>
 <p>Once your droplet is ready to go, ssh to it as the root user <code>ssh root@youripaddress</code>. Replace youripaddress with the IP address assigned to your droplet.</p>
 <p>Once connected, run apt update and apt upgrade to make sure your server is up to date.</p>
