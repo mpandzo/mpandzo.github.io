@@ -53,8 +53,7 @@
 <p>Interestingly enough, I noticed the 404 errors were being thrown by Nginx:</p>
 <pre class="language-html"><code class="language-html">404 Not Found<br>nginx/1.20.0</code></pre>
 <p>A bit of digging led me to the revelation that Amazon Linux 2 uses nginx as it's default proxy server [<a href="#link-1">1</a>]:</p>
-<pre><code>Elastic Beanstalk uses nginx as the default reverse proxy to map your application to your Elastic Load Balancing load balancer.
-</code></pre>
+<pre class="language-markup"><code class="language-markup">Elastic Beanstalk uses nginx as the default reverse proxy to map your application to your Elastic Load Balancing load balancer.</code></pre>
 <p>That was no good for me as I wanted to use the existing site's .htaccess file for url rewrite overrides and I didn't want to try and translate each .htaccess rule to an equivalent nginx.conf rule.</p>
 <p>Luckily, AWS allows you to let Apache's HTTPD proxy server do your proxying. To do this, you have to create a config file inside your .ebextensions folder (e.g. .ebextensions/httpd-proxy.config) with the following content:</p>
 <pre class="language-yml"><code class="language-yml"><span class="token key atrule">option_settings</span><span class="token punctuation">:</span><br>  <span class="token key atrule">aws:elasticbeanstalk:environment:proxy</span><span class="token punctuation">:</span><br>    <span class="token key atrule">ProxyServer</span><span class="token punctuation">:</span> apache</code></pre>

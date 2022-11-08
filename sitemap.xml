@@ -12,6 +12,11 @@
   </url>
   
   <url>
+    <loc>https://mirzapandzo.com/posts/deploying-pocketbase-to-a-digital-ocean-droplet/</loc>
+    <lastmod>2022-08-11</lastmod>
+  </url>
+  
+  <url>
     <loc>https://mirzapandzo.com/posts/the-tailwind-dilemma-utility-first-vs-semantic-css/</loc>
     <lastmod>2022-10-23</lastmod>
   </url>
@@ -33,81 +38,91 @@
   
   <url>
     <loc>https://mirzapandzo.com/</loc>
-    <lastmod>2022-11-01</lastmod>
+    <lastmod>2022-11-08</lastmod>
   </url>
   
   <url>
     <loc>https://mirzapandzo.com/page-list/</loc>
-    <lastmod>2022-11-01</lastmod>
+    <lastmod>2022-11-08</lastmod>
   </url>
   
   <url>
     <loc>https://mirzapandzo.com/posts/</loc>
-    <lastmod>2022-11-01</lastmod>
+    <lastmod>2022-11-08</lastmod>
   </url>
   
   <url>
     <loc>https://mirzapandzo.com/tags/</loc>
-    <lastmod>2022-11-01</lastmod>
+    <lastmod>2022-11-08</lastmod>
   </url>
   
   <url>
     <loc>https://mirzapandzo.com/tags/wordpress/</loc>
-    <lastmod>2022-11-01</lastmod>
+    <lastmod>2022-11-08</lastmod>
   </url>
   
   <url>
     <loc>https://mirzapandzo.com/tags/amazon-linux-2/</loc>
-    <lastmod>2022-11-01</lastmod>
+    <lastmod>2022-11-08</lastmod>
   </url>
   
   <url>
     <loc>https://mirzapandzo.com/tags/apache-httpd/</loc>
-    <lastmod>2022-11-01</lastmod>
+    <lastmod>2022-11-08</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mirzapandzo.com/tags/pocketbase/</loc>
+    <lastmod>2022-11-08</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mirzapandzo.com/tags/digital-ocean/</loc>
+    <lastmod>2022-11-08</lastmod>
   </url>
   
   <url>
     <loc>https://mirzapandzo.com/tags/docker-compose/</loc>
-    <lastmod>2022-11-01</lastmod>
+    <lastmod>2022-11-08</lastmod>
   </url>
   
   <url>
     <loc>https://mirzapandzo.com/tags/php/</loc>
-    <lastmod>2022-11-01</lastmod>
+    <lastmod>2022-11-08</lastmod>
   </url>
   
   <url>
     <loc>https://mirzapandzo.com/tags/pothos/</loc>
-    <lastmod>2022-11-01</lastmod>
+    <lastmod>2022-11-08</lastmod>
   </url>
   
   <url>
     <loc>https://mirzapandzo.com/tags/graphql/</loc>
-    <lastmod>2022-11-01</lastmod>
+    <lastmod>2022-11-08</lastmod>
   </url>
   
   <url>
     <loc>https://mirzapandzo.com/tags/sst.dev/</loc>
-    <lastmod>2022-11-01</lastmod>
+    <lastmod>2022-11-08</lastmod>
   </url>
   
   <url>
     <loc>https://mirzapandzo.com/tags/laziness/</loc>
-    <lastmod>2022-11-01</lastmod>
+    <lastmod>2022-11-08</lastmod>
   </url>
   
   <url>
     <loc>https://mirzapandzo.com/tags/automation/</loc>
-    <lastmod>2022-11-01</lastmod>
+    <lastmod>2022-11-08</lastmod>
   </url>
   
   <url>
     <loc>https://mirzapandzo.com/tags/tailwindcss/</loc>
-    <lastmod>2022-11-01</lastmod>
+    <lastmod>2022-11-08</lastmod>
   </url>
   
   <url>
     <loc>https://mirzapandzo.com/tags/css-frameworks/</loc>
-    <lastmod>2022-11-01</lastmod>
+    <lastmod>2022-11-08</lastmod>
   </url>
 </urlset>

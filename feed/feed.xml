@@ -60,8 +60,7 @@
 &lt;p&gt;Interestingly enough, I noticed the 404 errors were being thrown by Nginx:&lt;/p&gt;
 &lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;404 Not Found&lt;br /&gt;nginx/1.20.0&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;A bit of digging led me to the revelation that Amazon Linux 2 uses nginx as it&#39;s default proxy server [&lt;a href=&quot;https://mirzapandzo.com/posts/amazon-linux-2-elasticbeanstalk-and-apache-httpd/#link-1&quot;&gt;1&lt;/a&gt;]:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Elastic Beanstalk uses nginx as the default reverse proxy to map your application to your Elastic Load Balancing load balancer.
-&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&quot;language-markup&quot;&gt;&lt;code class=&quot;language-markup&quot;&gt;Elastic Beanstalk uses nginx as the default reverse proxy to map your application to your Elastic Load Balancing load balancer.&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;That was no good for me as I wanted to use the existing site&#39;s .htaccess file for url rewrite overrides and I didn&#39;t want to try and translate each .htaccess rule to an equivalent nginx.conf rule.&lt;/p&gt;
 &lt;p&gt;Luckily, AWS allows you to let Apache&#39;s HTTPD proxy server do your proxying. To do this, you have to create a config file inside your .ebextensions folder (e.g. .ebextensions/httpd-proxy.config) with the following content:&lt;/p&gt;
 &lt;pre class=&quot;language-yml&quot;&gt;&lt;code class=&quot;language-yml&quot;&gt;&lt;span class=&quot;token key atrule&quot;&gt;option_settings&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;br /&gt;  &lt;span class=&quot;token key atrule&quot;&gt;aws:elasticbeanstalk:environment:proxy&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token key atrule&quot;&gt;ProxyServer&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; apache&lt;/code&gt;&lt;/pre&gt;
@@ -150,6 +149,56 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;I interpret his &amp;quot;doesn&#39;t care&amp;quot; as &amp;quot;wants to not expend effort on&amp;quot; - TailwindCSS takes away your need to expend effort on the inner workings of CSS without reducing your power to use it to full capacity.&lt;/p&gt;
 &lt;p&gt;I strongly encourage you to try using TailwindCSS on one of your projects. I understand you may be reluctant. Coming from a semantic CSS development background myself it was very hard to make a conscious decision to switch to utility-first instead. Having done development with TailwindCSS for the past 2 years I can say I cannot imagine doing CSS any other way.&lt;/p&gt;
+</content>
+	</entry>
+	
+	<entry>
+		<title>Deploying PocketBase to a Digital Ocean droplet</title>
+		<link href="https://mirzapandzo.com/posts/deploying-pocketbase-to-a-digital-ocean-droplet/"/>
+		<updated>2022-08-11T00:00:00Z</updated>
+		<id>https://mirzapandzo.com/posts/deploying-pocketbase-to-a-digital-ocean-droplet/</id>
+		<content type="html">&lt;p&gt;PocketBase is a beautiful single-file backend featuring a realtime database (SQLite), built-in user management, nice dashboard UI, configurable S3 storage and a simple REST API.&lt;/p&gt;
+&lt;p&gt;To deploy PocketBase to Digital Ocean you have to create a new droplet first &lt;a href=&quot;https://mirzapandzo.com/posts/deploying-pocketbase-to-a-digital-ocean-droplet/#link-1&quot;&gt;[1]&lt;/a&gt;. When you complete the form to create your server use the Ubuntu distribution and make sure you specify your SSH keys so that you can use ssh later &lt;a href=&quot;https://mirzapandzo.com/posts/deploying-pocketbase-to-a-digital-ocean-droplet/#link-2&quot;&gt;[2]&lt;/a&gt;. When the create process completes, note down the droplet&#39;s assigned IP address as you will use it later.&lt;/p&gt;
+&lt;p&gt;Once the droplet is created, create an A record mapping the aforementioned assigned IP address to your domain name. You can do this at your domain name registrar if your DNS is managed there. Alternatively, you can point your domain name&#39;s nameservers to Digital Ocean and manage your DNS - and create your A record - there &lt;a href=&quot;https://mirzapandzo.com/posts/deploying-pocketbase-to-a-digital-ocean-droplet/#link-3&quot;&gt;[3]&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Once your droplet is ready to go, ssh to it as the root user &lt;code&gt;ssh root@youripaddress&lt;/code&gt;. Replace youripaddress with the IP address assigned to your droplet.&lt;/p&gt;
+&lt;p&gt;Once connected, run apt update and apt upgrade to make sure your server is up to date.&lt;/p&gt;
+&lt;pre class=&quot;language-markup&quot;&gt;&lt;code class=&quot;language-markup&quot;&gt;apt update&lt;br /&gt;apt upgrade&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;While at it, install unzip as you&#39;ll need it to unzip the PocketBase archive.&lt;/p&gt;
+&lt;pre class=&quot;language-markup&quot;&gt;&lt;code class=&quot;language-markup&quot;&gt;apt install unzip&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Configure the firewall to allow connections to ports 80 &amp;amp; 443. Don&#39;t forget port 22 tcp access as you&#39;ll no longer be able to ssh to your droplet otherwise.&lt;/p&gt;
+&lt;pre class=&quot;language-markup&quot;&gt;&lt;code class=&quot;language-markup&quot;&gt;sudo ufw allow 22/tcp&lt;br /&gt;sudo ufw allow 80&lt;br /&gt;sudo ufw allow 443&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Enable the ufw firewall.&lt;/p&gt;
+&lt;pre class=&quot;language-markup&quot;&gt;&lt;code class=&quot;language-markup&quot;&gt;sudo ufw enable&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You should see the following prompt and message:&lt;/p&gt;
+&lt;pre class=&quot;language-markup&quot;&gt;&lt;code class=&quot;language-markup&quot;&gt;Command may disrupt existing ssh connections. Proceed with operation (y|n)? y&lt;br /&gt;Firewall is active and enabled on system startup&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now check that firewall is enabled and that the aforementioned ports are open:&lt;/p&gt;
+&lt;pre class=&quot;language-markup&quot;&gt;&lt;code class=&quot;language-markup&quot;&gt;ufw status&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You should see the following:&lt;/p&gt;
+&lt;pre class=&quot;language-markup&quot;&gt;&lt;code class=&quot;language-markup&quot;&gt;Status: active&lt;br /&gt;&lt;br /&gt;To                         Action      From&lt;br /&gt;--                         ------      ----&lt;br /&gt;80                         ALLOW       Anywhere&lt;br /&gt;443                        ALLOW       Anywhere&lt;br /&gt;22/tcp                     ALLOW       Anywhere&lt;br /&gt;80 (v6)                    ALLOW       Anywhere (v6)&lt;br /&gt;443 (v6)                   ALLOW       Anywhere (v6)&lt;br /&gt;22/tcp (v6)                ALLOW       Anywhere (v6)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now that the basics are configured, you can cd into the /opt folder and install PocketBase &lt;a href=&quot;https://mirzapandzo.com/posts/deploying-pocketbase-to-a-digital-ocean-droplet/#link-4&quot;&gt;[4]&lt;/a&gt;. Please note the latest version of PocketBase is 0.7.10 at the time of writing. The example below targets the Linux amd64 OS and architecture.&lt;/p&gt;
+&lt;pre class=&quot;language-markup&quot;&gt;&lt;code class=&quot;language-markup&quot;&gt;cd /opt&lt;br /&gt;wget https://github.com/pocketbase/pocketbase/releases/download/v0.7.10/pocketbase_0.7.10_linux_amd64.zip&lt;br /&gt;mkdir pocketbase_0.7.10_linux_amd64&lt;br /&gt;mv pocketbase_0.7.10_linux_amd64.zip pocketbase_0.7.10_linux_amd64&lt;br /&gt;cd pocketbase_0.7.10_linux_amd64&lt;br /&gt;unzip pocketbase_0.7.10_linux_amd64.zip&lt;br /&gt;chmod +x pocketbase&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You will note that I made a pocketbase_0.7.10_linux_amd64 directory where I stored all related files. This is done so that once an upgrade of PocketBase is released, I can unzip it in a different folder in /opt and run PocketBase from there instead.&lt;/p&gt;
+&lt;p&gt;You can now run your server with the following command:&lt;/p&gt;
+&lt;pre class=&quot;language-markup&quot;&gt;&lt;code class=&quot;language-markup&quot;&gt;./pocketbase serve --http=&quot;yourdomain.com:80&quot; --https=&quot;yourdomain.com:443&quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;However, you may wish to allow your application to start on its own or restart in case the process get killed. To do this, create a Systemd service.&lt;/p&gt;
+&lt;p&gt;The following lines will create an empty pocketbase.service file in /lib/systemd/system and then open it in Nano.&lt;/p&gt;
+&lt;pre class=&quot;language-markup&quot;&gt;&lt;code class=&quot;language-markup&quot;&gt;touch /lib/systemd/system/pocketbase.service&lt;br /&gt;nano /lib/systemd/system/pocketbase.service&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now, paste the following code and ctrl-X to exist and save. Make sure to change relevant information like &lt;a href=&quot;http://yourdomain.com/&quot;&gt;yourdomain.com&lt;/a&gt; and the installation directory if different.&lt;/p&gt;
+&lt;pre class=&quot;language-markup&quot;&gt;&lt;code class=&quot;language-markup&quot;&gt;[Unit]&lt;br /&gt;Description = pocketbase&lt;br /&gt;&lt;br /&gt;[Service]&lt;br /&gt;Type           = simple&lt;br /&gt;User           = root&lt;br /&gt;Group          = root&lt;br /&gt;LimitNOFILE    = 4096&lt;br /&gt;Restart        = always&lt;br /&gt;RestartSec     = 5s&lt;br /&gt;StandardOutput = append:/opt/pocketbase_0.7.10_linux_amd64/logs/access.log&lt;br /&gt;StandardError  = append:/opt/pocketbase_0.7.10_linux_amd64/logs/errors.log&lt;br /&gt;ExecStart      = /opt/pocketbase_0.7.10_linux_amd64/pocketbase serve --http=&quot;yourdomain.com:80&quot; --https=&quot;yourdomain.com:443&quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You should now be able to enable and start the pocketbase service by running the following commands:&lt;/p&gt;
+&lt;pre class=&quot;language-markup&quot;&gt;&lt;code class=&quot;language-markup&quot;&gt;systemctl enable pocketbase.service&lt;br /&gt;systemctl start pocketbase&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This should result in the following:&lt;/p&gt;
+&lt;pre class=&quot;language-markup&quot;&gt;&lt;code class=&quot;language-markup&quot;&gt;root@my-ubuntu:/opt/pocketbase_0.7.10_linux_amd64/logs# service pocketbase status&lt;br /&gt;● pocketbase.service - pocketbase&lt;br /&gt;     Loaded: loaded (/lib/systemd/system/pocketbase.service; disabled; preset: enabled)&lt;br /&gt;     Active: active (running) since Tue 2022-11-08 04:40:57 UTC; 2s ago&lt;br /&gt;   Main PID: 1942 (pocketbase)&lt;br /&gt;      Tasks: 6 (limit: 511)&lt;br /&gt;     Memory: 8.0M&lt;br /&gt;        CPU: 31ms&lt;br /&gt;     CGroup: /system.slice/pocketbase.service&lt;br /&gt;             └─1942 /opt/pocketbase_0.7.10_linux_amd64/pocketbase serve --http=yourdomain.com:80 --https=yourdomain.com:443&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you have done the above, you should be able to to access your PocketBase instance via the following urls:&lt;/p&gt;
+&lt;pre class=&quot;language-markup&quot;&gt;&lt;code class=&quot;language-markup&quot;&gt;https://yourdomain.com/_/ - Admin dashboard UI&lt;br /&gt;https://yourdomain.com/api - REST API&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note: if both the --http and --https flags are specified in the serve command defined above, PocketBase will provision an SSL certificate for your website using letsencrypt thus the website will be served from a https address.&lt;/p&gt;
+&lt;p&gt;Links:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;[1] &lt;a id=&quot;link-1&quot; href=&quot;https://docs.digitalocean.com/products/droplets/how-to/create/&quot;&gt;How to Create a Droplet from the DigitalOcean Control Panel&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[2] &lt;a id=&quot;link-2&quot; href=&quot;https://docs.digitalocean.com/products/droplets/how-to/add-ssh-keys/&quot;&gt;How-to Add SSH Keys to New or Existing Droplets&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[3] &lt;a id=&quot;link-3&quot; href=&quot;https://docs.digitalocean.com/products/networking/dns/quickstart/&quot;&gt;Dns Quickstart&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[4] &lt;a id=&quot;link-4&quot; href=&quot;https://pocketbase.io/&quot;&gt;PocketBase&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </content>
 	</entry>
 	
