@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serverless Architecture - Real world examples</title>
+    <meta name="description" content="Serverless architecture and real world examples of usecases where it proces invaluable">
+    <meta name="generator" content="Eleventy v1.0.1">
+
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/prism-base16-monokai.dark.css">
+    <link rel="stylesheet" href="/css/prism-diff.css">
+    <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Mirza Pandzo">
+    <link rel="alternate" href="/feed/feed.json" type="application/json" title="Mirza Pandzo">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ0KLGD1CV"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NZ0KLGD1CV');
+    </script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="home"><a href="/">Mirza Pandzo</a></div>
+        <ul class="nav">
+          <li class="nav-item"><a href="/posts/">Posts</a></li>
+          <li class="nav-item"><a href="/tags/">Tags</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <main class="tmpl-post container">
+      <h1>Serverless Architecture - Real world examples</h1>
+
+<div class="meta">
+  <div class="published">
+    Published on
+    <time datetime="2023-01-15">15 Jan 2023</time>
+  </div>
+  <span class="separator">-</span>
+  <div class="tags"><a href="/tags/serverless/" class="post-tag">Serverless</a><a href="/tags/event-driven/" class="post-tag">Event-driven</a><a href="/tags/lambda/" class="post-tag">Lambda</a><a href="/tags/serverless-functions/" class="post-tag">Serverless functions</a>
+  </div>
+</div>
+
+<p>The term serverless has been around for the past 7 or 8 years. It's one of a set of words people equate with cutting edge and modern stacks (I am talking about you jamstack, headless, cloudnative, eventdrivenarchitecture etc).</p>
+<p>It's often defined as the concept of &quot;enabling users to write and deploy code without the worry of the underlying infrastructure&quot;.</p>
+<p>In layman's terms, serverless works as follows:</p>
+<ul>
+<li>you configure an environment with a few clicks</li>
+<li>you deploy your code (git push usually) and publish your application (button click usually)</li>
+<li>you pay only for the resources your application uses</li>
+<li>you don't worry about configuring and managing servers</li>
+<li>if your traffic spikes, your infrastructure scales to handle the surge</li>
+<li>if a function instance fails, it's replaced by another instance</li>
+</ul>
+<p>You may have seen the above written many times over. It's very much common knowledge - in dev circles at least.</p>
+<p>You'll also see many different approaches to doing serverless.</p>
+<p>Vercel, Netlify, Render and other PaaS (Platform as a Service) providers all have their flavor of serverless functions available for use. SST.dev and Serverless Framework are just two frameworks built on top of this technology. Of course, you can also use AWS Lambda, Google Cloud Functions and Microsoft Azure Functions directly to the same effect.</p>
+<p>But, many times, real world examples are omitted from the discussion. When does serverless shine?</p>
+<h2 id="image-resizing-on-the-fly" tabindex="-1">Image resizing on the fly <a class="direct-link" href="#image-resizing-on-the-fly" aria-hidden="true">#</a></h2>
+<p>We were asked to refactor a very large website (100 million+ page views per month). The refactor aimed to optimize performance and architect the codebase for scalability.</p>
+<p>Amongst a number of things we identified during a site audit that could potentially be improved was the way images stored in an S3 bucket were being handled.</p>
+<p>The legacy system optimized and resized images during image upload. This meant that any subsequent design changes that included image dimension changes required running a crob job to mass re-resize original images to match the newly defined dimensions. With potentially hundreds of thousands of image to resize, this was a huge drain on resources.</p>
+<p>We replaced this process with an AWS Lambda function that fires off of a failed S3 bucket endpoint request on demand.</p>
+<p>When an image that is requested from S3 is not found, the bucket routing sends the request to the API Gateway which in turn fires a Lambda function to server the request. The Lambda function resizes the images, stores it in S3 and serves the resized image. Any subsequent requests for the same image will simply hit the S3 bucket-stored image without further Lambda calls.</p>
+<p>Because of the scalable nature of AWS Lambda, this revised protocol is able to handle millions of requests without blinking an eye which is very different to running a cronjob for hundreds of thousands of entries.</p>
+<p>Though AWS has more recently improved their offering with the Serverless Image Handler <a href="https://aws.amazon.com/answers/web-applications/serverless-image-handler/">[1]</a> you can still see the more pedestrian solution we used in the serverless-image-resizing archived repo <a href="#link-2">[2]</a>.</p>
+<h2 id="handling-push-notifications-at-scale" tabindex="-1">Handling push notifications at scale <a class="direct-link" href="#handling-push-notifications-at-scale" aria-hidden="true">#</a></h2>
+<p>An admin flow we implemented included the processing of gamified data for thousands of customers and the subsequent sending of push notifications (sms &amp; in-app) to each.</p>
+<p>We implemented a Lambda function to do the data processing. The Lambda function then deferred to AWS SNS (simple notification service) to handle the pushes.</p>
+<p>Once the Lambda completed it's processing it would mark the entry as completed.</p>
+<p>We had a simple progressbar display in the dashboard with a periodic check of the database to display progress.</p>
+<h2 id="event-tracking" tabindex="-1">Event tracking <a class="direct-link" href="#event-tracking" aria-hidden="true">#</a></h2>
+<p>A client was using a bespoke event tracking script for tracking various user initiated events. This script turned out to be a bottleneck when handling thousands of requests.</p>
+<p>We rewrote the functionality by using AWS Lambda. Similar to the original script, the Lambda function gets triggered on specific events, such as a user clicking a button or submitting a form. However, because of the nature of Lambda functions, scaling is not an issue, and the bottleneck is removed.</p>
+<p>I hope examples from our own development journey help you get a better understanding of the benefits of utilizing serverless technology for more optimized performance.</p>
+<p>Links:</p>
+<ul>
+<li>[1] <a id="link-1" href="https://aws.amazon.com/answers/web-applications/serverless-image-handler/">Serverless Image Handler</a></li>
+<li>[2] <a id="link-2" href="https://github.com/amazon-archives/serverless-image-resizing">serverless-image-resizing</a></li>
+</ul>
+
+<div class="post-nav">
+  <ul><li><strong>Previous:</strong> <a href="/posts/elasticbeanstalk-php-settings-and-the-frustratingly-confusing-guide-to-eb-deploy/">ElasticBeanstalk, PHP settings and the frustratingly confusing guide to eb deploy</a></li>
+  </ul>
+</div>
+
+    </main>
+
+    <footer role="contentinfo">
+      <div class="container">
+        <div class="left">&copy 2023 mirzapandzo.com</div>
+        <div class="right">Built with <a href="https://github.com/11ty/eleventy-base-blog">11ty</a>
+      </div>
+    </footer>
+
+    <!-- Current page: /posts/serverless-architecture-real-world-examples/ -->
+  </body>
+</html>
