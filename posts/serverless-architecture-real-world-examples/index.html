@@ -51,15 +51,15 @@
 <p>It's often defined as the concept of &quot;enabling users to write and deploy code without the worry of managing the underlying infrastructure&quot;.</p>
 <p>In layman's terms, serverless works as follows:</p>
 <ul>
-<li>you configure an environment with a few clicks</li>
-<li>you deploy your code (git push usually) and publish your application (button click usually)</li>
+<li>an environment is provisioned via script or ui</li>
+<li>code is deployed automatically via CI/CD</li>
 <li>you pay only for the resources your application uses</li>
-<li>you don't worry about configuring and managing servers</li>
-<li>if your traffic spikes, your infrastructure scales to handle the surge</li>
-<li>if a function instance fails, it's replaced by another instance</li>
+<li>you don't worry about managing servers, load balancers, reverse proxies etc</li>
+<li>your infrastructure scales to handle traffic surges and spikes</li>
+<li>a failed function instance is simply replaced by another instance</li>
 </ul>
 <p>You may have seen the above written many times over. It's very much common knowledge - in dev circles at least.</p>
-<p>You'll also see many different approaches to doing serverless. Vercel, Netlify, Render and other PaaS (Platform as a Service) providers all have their flavor of serverless functions available for use. SST.dev and Serverless Framework are just two frameworks built on top of this technology. Of course, you can also use AWS Lambda, Google Cloud Functions and Microsoft Azure Functions directly to the same effect.</p>
+<p>There are many different approaches to doing serverless. Vercel, Netlify, Render and other PaaS (Platform as a Service) providers all have their flavor of serverless functions available for use. SST.dev and Serverless Framework are just two frameworks built on top of serverless technology. Of course, you can also use AWS Lambda, Google Cloud Functions and Microsoft Azure Functions directly to the same effect.</p>
 <p>But, many times, real world examples are omitted from the discussion.</p>
 <p>When does serverless really shine?</p>
 <h2 id="image-resizing-on-the-fly" tabindex="-1">Image resizing on the fly <a class="direct-link" href="#image-resizing-on-the-fly" aria-hidden="true">#</a></h2>
