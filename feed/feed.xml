@@ -17,7 +17,7 @@
 		<link href="https://mirzapandzo.com/posts/serverless-architecture-real-world-examples/"/>
 		<updated>2023-01-15T00:00:00Z</updated>
 		<id>https://mirzapandzo.com/posts/serverless-architecture-real-world-examples/</id>
-		<content type="html">&lt;p&gt;The term serverless has been around for the past 7 or 8 years. It&#39;s one of a set of words people equate with cutting edge and modern stacks (I am talking about you jamstack, headless, cloud-native, event-driven architecture etc).&lt;/p&gt;
+		<content type="html">&lt;p&gt;The term serverless has been around for the past 7 or 8 years. It&#39;s one of a set of words people associate with cutting edge and modern stacks (I am talking about you jamstack, headless, cloud-native, event-driven architecture etc).&lt;/p&gt;
 &lt;p&gt;It&#39;s often defined as the concept of &amp;quot;enabling users to write and deploy code without the worry of the underlying infrastructure&amp;quot;.&lt;/p&gt;
 &lt;p&gt;In layman&#39;s terms, serverless works as follows:&lt;/p&gt;
 &lt;ul&gt;
