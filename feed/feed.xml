@@ -17,7 +17,7 @@
 		<link href="https://mirzapandzo.com/posts/serverless-architecture-real-world-examples/"/>
 		<updated>2023-01-15T00:00:00Z</updated>
 		<id>https://mirzapandzo.com/posts/serverless-architecture-real-world-examples/</id>
-		<content type="html">&lt;p&gt;The term serverless has been around for the past 7 or 8 years. It&#39;s one of a set of words people equate with cutting edge and modern stacks (I am talking about you jamstack, headless, cloudnative, eventdrivenarchitecture etc).&lt;/p&gt;
+		<content type="html">&lt;p&gt;The term serverless has been around for the past 7 or 8 years. It&#39;s one of a set of words people equate with cutting edge and modern stacks (I am talking about you jamstack, headless, cloud-native, event-driven architecture etc).&lt;/p&gt;
 &lt;p&gt;It&#39;s often defined as the concept of &amp;quot;enabling users to write and deploy code without the worry of the underlying infrastructure&amp;quot;.&lt;/p&gt;
 &lt;p&gt;In layman&#39;s terms, serverless works as follows:&lt;/p&gt;
 &lt;ul&gt;
@@ -29,26 +29,26 @@
 &lt;li&gt;if a function instance fails, it&#39;s replaced by another instance&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;You may have seen the above written many times over. It&#39;s very much common knowledge - in dev circles at least.&lt;/p&gt;
-&lt;p&gt;You&#39;ll also see many different approaches to doing serverless.&lt;/p&gt;
-&lt;p&gt;Vercel, Netlify, Render and other PaaS (Platform as a Service) providers all have their flavor of serverless functions available for use. SST.dev and Serverless Framework are just two frameworks built on top of this technology. Of course, you can also use AWS Lambda, Google Cloud Functions and Microsoft Azure Functions directly to the same effect.&lt;/p&gt;
-&lt;p&gt;But, many times, real world examples are omitted from the discussion. When does serverless shine?&lt;/p&gt;
+&lt;p&gt;You&#39;ll also see many different approaches to doing serverless. Vercel, Netlify, Render and other PaaS (Platform as a Service) providers all have their flavor of serverless functions available for use. SST.dev and Serverless Framework are just two frameworks built on top of this technology. Of course, you can also use AWS Lambda, Google Cloud Functions and Microsoft Azure Functions directly to the same effect.&lt;/p&gt;
+&lt;p&gt;But, many times, real world examples are omitted from the discussion.&lt;/p&gt;
+&lt;p&gt;When does serverless really shine?&lt;/p&gt;
 &lt;h2 id=&quot;image-resizing-on-the-fly&quot; tabindex=&quot;-1&quot;&gt;Image resizing on the fly &lt;a class=&quot;direct-link&quot; href=&quot;https://mirzapandzo.com/posts/serverless-architecture-real-world-examples/#image-resizing-on-the-fly&quot; aria-hidden=&quot;true&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;We were asked to refactor a very large website (100 million+ page views per month). The refactor aimed to optimize performance and architect the codebase for scalability.&lt;/p&gt;
-&lt;p&gt;Amongst a number of things we identified during a site audit that could potentially be improved was the way images stored in an S3 bucket were being handled.&lt;/p&gt;
-&lt;p&gt;The legacy system optimized and resized images during image upload. This meant that any subsequent design changes that included image dimension changes required running a crob job to mass re-resize original images to match the newly defined dimensions. With potentially hundreds of thousands of image to resize, this was a huge drain on resources.&lt;/p&gt;
-&lt;p&gt;We replaced this process with an AWS Lambda function that fires off of a failed S3 bucket endpoint request on demand.&lt;/p&gt;
-&lt;p&gt;When an image that is requested from S3 is not found, the bucket routing sends the request to the API Gateway which in turn fires a Lambda function to server the request. The Lambda function resizes the images, stores it in S3 and serves the resized image. Any subsequent requests for the same image will simply hit the S3 bucket-stored image without further Lambda calls.&lt;/p&gt;
-&lt;p&gt;Because of the scalable nature of AWS Lambda, this revised protocol is able to handle millions of requests without blinking an eye which is very different to running a cronjob for hundreds of thousands of entries.&lt;/p&gt;
+&lt;p&gt;During the obligatory site audit we identified a number of potential candidates for improvement. Amongst them was the way images stored in an S3 bucket were being handled.&lt;/p&gt;
+&lt;p&gt;The legacy system optimized and resized images during image upload. This meant that any subsequent design changes that included image dimension changes required running a crob job to mass resize the original images to match the newly specified dimensions. With potentially hundreds of thousands of image to resize, this was a huge drain on resources.&lt;/p&gt;
+&lt;p&gt;We replaced this process with an AWS Lambda function that fires on-demand off of a failed S3 bucket endpoint request.&lt;/p&gt;
+&lt;p&gt;When an image that is requested from S3 is not found, the bucket routing sends the request to the API Gateway which in turn fires a Lambda function to serve the request. The Lambda function resizes the image, store the generated variations in S3 and serves the resized image. Any subsequent requests for the same variation will simply hit the appropriate S3 bucket-stored image without further Lambda calls.&lt;/p&gt;
+&lt;p&gt;Because of the scalable nature of AWS Lambda, this revised mechanism is able to handle millions of requests without blinking an eye which is very different to the server strain caused by running a cronjob to resize hundreds of thousands of entries.&lt;/p&gt;
 &lt;p&gt;Though AWS has more recently improved their offering with the Serverless Image Handler &lt;a href=&quot;https://aws.amazon.com/answers/web-applications/serverless-image-handler/&quot;&gt;[1]&lt;/a&gt; you can still see the more pedestrian solution we used in the serverless-image-resizing archived repo &lt;a href=&quot;https://mirzapandzo.com/posts/serverless-architecture-real-world-examples/#link-2&quot;&gt;[2]&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&quot;handling-push-notifications-at-scale&quot; tabindex=&quot;-1&quot;&gt;Handling push notifications at scale &lt;a class=&quot;direct-link&quot; href=&quot;https://mirzapandzo.com/posts/serverless-architecture-real-world-examples/#handling-push-notifications-at-scale&quot; aria-hidden=&quot;true&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;An admin flow we implemented included the processing of gamified data for thousands of customers and the subsequent sending of push notifications (sms &amp;amp; in-app) to each.&lt;/p&gt;
 &lt;p&gt;We implemented a Lambda function to do the data processing. The Lambda function then deferred to AWS SNS (simple notification service) to handle the pushes.&lt;/p&gt;
-&lt;p&gt;Once the Lambda completed it&#39;s processing it would mark the entry as completed.&lt;/p&gt;
+&lt;p&gt;Once the function completed it&#39;s processing it marked the entry as completed.&lt;/p&gt;
 &lt;p&gt;We had a simple progressbar display in the dashboard with a periodic check of the database to display progress.&lt;/p&gt;
 &lt;h2 id=&quot;event-tracking&quot; tabindex=&quot;-1&quot;&gt;Event tracking &lt;a class=&quot;direct-link&quot; href=&quot;https://mirzapandzo.com/posts/serverless-architecture-real-world-examples/#event-tracking&quot; aria-hidden=&quot;true&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;A client was using a bespoke event tracking script for tracking various user initiated events. This script turned out to be a bottleneck when handling thousands of requests.&lt;/p&gt;
 &lt;p&gt;We rewrote the functionality by using AWS Lambda. Similar to the original script, the Lambda function gets triggered on specific events, such as a user clicking a button or submitting a form. However, because of the nature of Lambda functions, scaling is not an issue, and the bottleneck is removed.&lt;/p&gt;
-&lt;p&gt;I hope examples from our own development journey help you get a better understanding of the benefits of utilizing serverless technology for more optimized performance.&lt;/p&gt;
+&lt;p&gt;I hope examples from our own development journey help you get a better understanding of the benefits of utilizing serverless infrastructure for more optimized performance and reduced cost.&lt;/p&gt;
 &lt;p&gt;Links:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;[1] &lt;a id=&quot;link-1&quot; href=&quot;https://aws.amazon.com/answers/web-applications/serverless-image-handler/&quot;&gt;Serverless Image Handler&lt;/a&gt;&lt;/li&gt;

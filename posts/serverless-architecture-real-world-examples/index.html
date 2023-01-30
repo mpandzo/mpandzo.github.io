@@ -47,7 +47,7 @@
   </div>
 </div>
 
-<p>The term serverless has been around for the past 7 or 8 years. It's one of a set of words people equate with cutting edge and modern stacks (I am talking about you jamstack, headless, cloudnative, eventdrivenarchitecture etc).</p>
+<p>The term serverless has been around for the past 7 or 8 years. It's one of a set of words people equate with cutting edge and modern stacks (I am talking about you jamstack, headless, cloud-native, event-driven architecture etc).</p>
 <p>It's often defined as the concept of &quot;enabling users to write and deploy code without the worry of the underlying infrastructure&quot;.</p>
 <p>In layman's terms, serverless works as follows:</p>
 <ul>
@@ -59,26 +59,26 @@
 <li>if a function instance fails, it's replaced by another instance</li>
 </ul>
 <p>You may have seen the above written many times over. It's very much common knowledge - in dev circles at least.</p>
-<p>You'll also see many different approaches to doing serverless.</p>
-<p>Vercel, Netlify, Render and other PaaS (Platform as a Service) providers all have their flavor of serverless functions available for use. SST.dev and Serverless Framework are just two frameworks built on top of this technology. Of course, you can also use AWS Lambda, Google Cloud Functions and Microsoft Azure Functions directly to the same effect.</p>
-<p>But, many times, real world examples are omitted from the discussion. When does serverless shine?</p>
+<p>You'll also see many different approaches to doing serverless. Vercel, Netlify, Render and other PaaS (Platform as a Service) providers all have their flavor of serverless functions available for use. SST.dev and Serverless Framework are just two frameworks built on top of this technology. Of course, you can also use AWS Lambda, Google Cloud Functions and Microsoft Azure Functions directly to the same effect.</p>
+<p>But, many times, real world examples are omitted from the discussion.</p>
+<p>When does serverless really shine?</p>
 <h2 id="image-resizing-on-the-fly" tabindex="-1">Image resizing on the fly <a class="direct-link" href="#image-resizing-on-the-fly" aria-hidden="true">#</a></h2>
 <p>We were asked to refactor a very large website (100 million+ page views per month). The refactor aimed to optimize performance and architect the codebase for scalability.</p>
-<p>Amongst a number of things we identified during a site audit that could potentially be improved was the way images stored in an S3 bucket were being handled.</p>
-<p>The legacy system optimized and resized images during image upload. This meant that any subsequent design changes that included image dimension changes required running a crob job to mass re-resize original images to match the newly defined dimensions. With potentially hundreds of thousands of image to resize, this was a huge drain on resources.</p>
-<p>We replaced this process with an AWS Lambda function that fires off of a failed S3 bucket endpoint request on demand.</p>
-<p>When an image that is requested from S3 is not found, the bucket routing sends the request to the API Gateway which in turn fires a Lambda function to server the request. The Lambda function resizes the images, stores it in S3 and serves the resized image. Any subsequent requests for the same image will simply hit the S3 bucket-stored image without further Lambda calls.</p>
-<p>Because of the scalable nature of AWS Lambda, this revised protocol is able to handle millions of requests without blinking an eye which is very different to running a cronjob for hundreds of thousands of entries.</p>
+<p>During the obligatory site audit we identified a number of potential candidates for improvement. Amongst them was the way images stored in an S3 bucket were being handled.</p>
+<p>The legacy system optimized and resized images during image upload. This meant that any subsequent design changes that included image dimension changes required running a crob job to mass resize the original images to match the newly specified dimensions. With potentially hundreds of thousands of image to resize, this was a huge drain on resources.</p>
+<p>We replaced this process with an AWS Lambda function that fires on-demand off of a failed S3 bucket endpoint request.</p>
+<p>When an image that is requested from S3 is not found, the bucket routing sends the request to the API Gateway which in turn fires a Lambda function to serve the request. The Lambda function resizes the image, store the generated variations in S3 and serves the resized image. Any subsequent requests for the same variation will simply hit the appropriate S3 bucket-stored image without further Lambda calls.</p>
+<p>Because of the scalable nature of AWS Lambda, this revised mechanism is able to handle millions of requests without blinking an eye which is very different to the server strain caused by running a cronjob to resize hundreds of thousands of entries.</p>
 <p>Though AWS has more recently improved their offering with the Serverless Image Handler <a href="https://aws.amazon.com/answers/web-applications/serverless-image-handler/">[1]</a> you can still see the more pedestrian solution we used in the serverless-image-resizing archived repo <a href="#link-2">[2]</a>.</p>
 <h2 id="handling-push-notifications-at-scale" tabindex="-1">Handling push notifications at scale <a class="direct-link" href="#handling-push-notifications-at-scale" aria-hidden="true">#</a></h2>
 <p>An admin flow we implemented included the processing of gamified data for thousands of customers and the subsequent sending of push notifications (sms &amp; in-app) to each.</p>
 <p>We implemented a Lambda function to do the data processing. The Lambda function then deferred to AWS SNS (simple notification service) to handle the pushes.</p>
-<p>Once the Lambda completed it's processing it would mark the entry as completed.</p>
+<p>Once the function completed it's processing it marked the entry as completed.</p>
 <p>We had a simple progressbar display in the dashboard with a periodic check of the database to display progress.</p>
 <h2 id="event-tracking" tabindex="-1">Event tracking <a class="direct-link" href="#event-tracking" aria-hidden="true">#</a></h2>
 <p>A client was using a bespoke event tracking script for tracking various user initiated events. This script turned out to be a bottleneck when handling thousands of requests.</p>
 <p>We rewrote the functionality by using AWS Lambda. Similar to the original script, the Lambda function gets triggered on specific events, such as a user clicking a button or submitting a form. However, because of the nature of Lambda functions, scaling is not an issue, and the bottleneck is removed.</p>
-<p>I hope examples from our own development journey help you get a better understanding of the benefits of utilizing serverless technology for more optimized performance.</p>
+<p>I hope examples from our own development journey help you get a better understanding of the benefits of utilizing serverless infrastructure for more optimized performance and reduced cost.</p>
 <p>Links:</p>
 <ul>
 <li>[1] <a id="link-1" href="https://aws.amazon.com/answers/web-applications/serverless-image-handler/">Serverless Image Handler</a></li>
