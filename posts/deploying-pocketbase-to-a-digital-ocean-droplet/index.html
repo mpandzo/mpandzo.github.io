@@ -49,8 +49,8 @@
 </div>
 
 <p>PocketBase is a beautiful single-file backend featuring a realtime database (SQLite), built-in user management, nice dashboard UI, configurable S3 storage and a simple REST API.</p>
-<p>To deploy PocketBase to Digital Ocean you have to create a new droplet first <a href="#link-1">[1]</a>. When you fill in the form to create your server use the Ubuntu distribution and make sure you specify your SSH keys for ssh access <a href="#link-2">[2]</a>. When the create process completes, note down the droplet's assigned IP address as you will use it later.</p>
-<p>Once the droplet is created, create an A record mapping the aforementioned assigned IP address to your domain name. You can do this at your domain name registrar if your DNS is managed there. Alternatively, you can point your domain name's nameservers to Digital Ocean and manage your DNS - and create your A record - there <a href="#link-3">[3]</a>.</p>
+<p>To deploy PocketBase to Digital Ocean you have to create a new droplet first <a href="https://docs.digitalocean.com/products/droplets/how-to/create/">[1]</a>. When you fill in the form to create your server use the Ubuntu distribution and make sure you specify your SSH keys for ssh access <a href="https://docs.digitalocean.com/products/droplets/how-to/add-ssh-keys/">[2]</a>. When the create process completes, note down the droplet's assigned IP address as you will use it later.</p>
+<p>Once the droplet is created, create an A record mapping the aforementioned assigned IP address to your domain name. You can do this at your domain name registrar if your DNS is managed there. Alternatively, you can point your domain name's nameservers to Digital Ocean and manage your DNS - and create your A record - there <a href="https://docs.digitalocean.com/products/networking/dns/quickstart/">[3]</a>.</p>
 <p>Once your droplet is ready to go, ssh to it as the root user <code>ssh root@youripaddress</code>. Replace youripaddress with the IP address assigned to your droplet.</p>
 <p>Once connected, run apt update and apt upgrade to make sure your server is up to date.</p>
 <pre class="language-shell"><code class="language-shell"><span class="token function">apt</span> update<br><span class="token function">apt</span> upgrade</code></pre>
@@ -66,7 +66,7 @@
 <pre class="language-shell"><code class="language-shell">ufw status</code></pre>
 <p>You should see the following:</p>
 <pre class="language-shell"><code class="language-shell">Status: active<br><br>To                         Action      From<br>--                         ------      ----<br><span class="token number">80</span>                         ALLOW       Anywhere<br><span class="token number">443</span>                        ALLOW       Anywhere<br><span class="token number">22</span>/tcp                     ALLOW       Anywhere<br><span class="token number">80</span> <span class="token punctuation">(</span>v6<span class="token punctuation">)</span>                    ALLOW       Anywhere <span class="token punctuation">(</span>v6<span class="token punctuation">)</span><br><span class="token number">443</span> <span class="token punctuation">(</span>v6<span class="token punctuation">)</span>                   ALLOW       Anywhere <span class="token punctuation">(</span>v6<span class="token punctuation">)</span><br><span class="token number">22</span>/tcp <span class="token punctuation">(</span>v6<span class="token punctuation">)</span>                ALLOW       Anywhere <span class="token punctuation">(</span>v6<span class="token punctuation">)</span></code></pre>
-<p>Now that the basics are configured, you can cd into the /opt folder and install PocketBase <a href="#link-4">[4]</a>. Please note the latest version of PocketBase is 0.7.10 at the time of writing. The example below targets the Linux amd64 OS and architecture.</p>
+<p>Now that the basics are configured, you can cd into the /opt folder and install PocketBase <a href="https://pocketbase.io/">[4]</a>. Please note the latest version of PocketBase is 0.7.10 at the time of writing. The example below targets the Linux amd64 OS and architecture.</p>
 <pre class="language-shell"><code class="language-shell"><span class="token builtin class-name">cd</span> /opt<br><span class="token function">wget</span> https://github.com/pocketbase/pocketbase/releases/download/v0.7.10/pocketbase_0.7.10_linux_amd64.zip<br><span class="token function">mkdir</span> pocketbase_0.7.10_linux_amd64<br><span class="token function">mv</span> pocketbase_0.7.10_linux_amd64.zip pocketbase_0.7.10_linux_amd64<br><span class="token builtin class-name">cd</span> pocketbase_0.7.10_linux_amd64<br><span class="token function">unzip</span> pocketbase_0.7.10_linux_amd64.zip<br><span class="token function">chmod</span> +x pocketbase</code></pre>
 <p>You will note that I made a pocketbase_0.7.10_linux_amd64 directory where I stored all related files. This is done so that once an upgrade of PocketBase is released, I can unzip it in a different folder in /opt and run PocketBase from there instead.</p>
 <p>You can now run your server with the following command:</p>
@@ -95,6 +95,17 @@
   <ul><li><strong>Previous:</strong> <a href="/posts/the-power-of-laziness-automating-some-text-entry-work/">The power of laziness - automating some text entry work</a></li><li><strong>Next:</strong> <a href="/posts/the-tailwind-dilemma-utility-first-vs-semantic-css/">The tailwind dilemma - utility first vs semantic CSS</a></li>
   </ul>
 </div>
+<h3>Recent posts</h3>
+<ul class="recentposts">
+<li><a href="/posts/sst-cannot-use-graphqlscalartype-boolean-from-another-module-or-realm/">SST - Cannot use GraphQLScalarType &quot;Boolean&quot; from another module or realm</a></li>
+<li><a href="/posts/the-power-of-laziness-automating-some-text-entry-work/">The power of laziness - automating some text entry work</a></li>
+<li><a href="/posts/deploying-pocketbase-to-a-digital-ocean-droplet/">Deploying PocketBase to a Digital Ocean droplet</a></li>
+<li><a href="/posts/the-tailwind-dilemma-utility-first-vs-semantic-css/">The tailwind dilemma - utility first vs semantic CSS</a></li>
+<li><a href="/posts/docker-compose-for-wordpress-permission-denied-and-uid-1000/">Docker compose for WordPress - Permission denied and uid 1000</a></li>
+<li><a href="/posts/amazon-linux-2-elasticbeanstalk-and-apache-httpd/">Amazon Linux 2 ElasticBeanstalk and Apache HTTPD</a></li>
+<li><a href="/posts/elasticbeanstalk-php-settings-and-the-frustratingly-confusing-guide-to-eb-deploy/">ElasticBeanstalk, PHP settings and the frustratingly confusing guide to eb deploy</a></li>
+<li><a href="/posts/serverless-architecture-real-world-examples/">Serverless Architecture - Real world examples</a></li>
+</ul>
 
     </main>
 

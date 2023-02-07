@@ -53,7 +53,7 @@
 <p>Things went along smoothly enough with pretty much all configuration settings being compatible and transferrable. However, once the new environment was created and once my deploy script was done, I got 404 errors everywhere.</p>
 <p>Interestingly enough, I noticed the 404 errors were being thrown by Nginx:</p>
 <pre class="language-html"><code class="language-html">404 Not Found<br>nginx/1.20.0</code></pre>
-<p>A bit of digging led me to the revelation that Amazon Linux 2 uses nginx as it's default proxy server [<a href="#link-1">1</a>]:</p>
+<p>A bit of digging led me to the revelation that Amazon Linux 2 uses nginx as it's default proxy server [<a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-linux-extend.html">1</a>]:</p>
 <pre class="language-markup"><code class="language-markup">Elastic Beanstalk uses nginx as the default reverse proxy to map your application to your Elastic Load Balancing load balancer.</code></pre>
 <p>That was no good for me as I wanted to use the existing site's .htaccess file for url rewrite overrides and I didn't want to try and translate each .htaccess rule to an equivalent nginx.conf rule.</p>
 <p>Luckily, AWS allows you to let Apache's HTTPD proxy server do your proxying. To do this, you have to create a config file inside your .ebextensions folder (e.g. .ebextensions/httpd-proxy.config) with the following content:</p>
@@ -67,6 +67,17 @@
   <ul><li><strong>Previous:</strong> <a href="/posts/docker-compose-for-wordpress-permission-denied-and-uid-1000/">Docker compose for WordPress - Permission denied and uid 1000</a></li><li><strong>Next:</strong> <a href="/posts/elasticbeanstalk-php-settings-and-the-frustratingly-confusing-guide-to-eb-deploy/">ElasticBeanstalk, PHP settings and the frustratingly confusing guide to eb deploy</a></li>
   </ul>
 </div>
+<h3>Recent posts</h3>
+<ul class="recentposts">
+<li><a href="/posts/sst-cannot-use-graphqlscalartype-boolean-from-another-module-or-realm/">SST - Cannot use GraphQLScalarType &quot;Boolean&quot; from another module or realm</a></li>
+<li><a href="/posts/the-power-of-laziness-automating-some-text-entry-work/">The power of laziness - automating some text entry work</a></li>
+<li><a href="/posts/deploying-pocketbase-to-a-digital-ocean-droplet/">Deploying PocketBase to a Digital Ocean droplet</a></li>
+<li><a href="/posts/the-tailwind-dilemma-utility-first-vs-semantic-css/">The tailwind dilemma - utility first vs semantic CSS</a></li>
+<li><a href="/posts/docker-compose-for-wordpress-permission-denied-and-uid-1000/">Docker compose for WordPress - Permission denied and uid 1000</a></li>
+<li><a href="/posts/amazon-linux-2-elasticbeanstalk-and-apache-httpd/">Amazon Linux 2 ElasticBeanstalk and Apache HTTPD</a></li>
+<li><a href="/posts/elasticbeanstalk-php-settings-and-the-frustratingly-confusing-guide-to-eb-deploy/">ElasticBeanstalk, PHP settings and the frustratingly confusing guide to eb deploy</a></li>
+<li><a href="/posts/serverless-architecture-real-world-examples/">Serverless Architecture - Real world examples</a></li>
+</ul>
 
     </main>
 

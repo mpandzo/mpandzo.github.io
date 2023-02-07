@@ -70,7 +70,7 @@
 <p>We replaced this process with an AWS Lambda function that fires on-demand when there is a failed S3 bucket endpoint request.</p>
 <p>When an image that is requested from S3 is not found, the bucket routing sends the request to the API Gateway which in turn fires a Lambda function to serve the request. The Lambda function resizes the image, stores the generated variations in S3 and serves the resized image. Any subsequent requests for the same variation will simply hit the appropriate S3 bucket-stored entry without further Lambda calls.</p>
 <p>Because of the scalable nature of AWS Lambda, this revised mechanism is able to handle millions of requests without blinking an eye which is very different to the server strain caused by running a cronjob to resize hundreds of thousands of entries.</p>
-<p>Though AWS has more recently improved their offering with the Serverless Image Handler <a href="https://aws.amazon.com/answers/web-applications/serverless-image-handler/">[1]</a> you can still see the more pedestrian solution we used in the serverless-image-resizing archived repo <a href="#link-2">[2]</a>.</p>
+<p>Though AWS has more recently improved their offering with the Serverless Image Handler <a href="https://aws.amazon.com/answers/web-applications/serverless-image-handler">[1]</a> you can still see the more pedestrian solution we used in the serverless-image-resizing archived repo <a href="https://github.com/amazon-archives/serverless-image-resizing">[2]</a>.</p>
 <h2 id="handling-push-notifications-at-scale" tabindex="-1">Handling push notifications at scale <a class="direct-link" href="#handling-push-notifications-at-scale" aria-hidden="true">#</a></h2>
 <p>An admin flow we implemented included the processing of gamified data for thousands of customers and the subsequent sending of push notifications (sms &amp; in-app) to each.</p>
 <p>We implemented a Lambda function to do the data processing. The Lambda function then deferred to AWS SNS (simple notification service) to handle the pushes.</p>
@@ -80,16 +80,22 @@
 <p>A client was using a bespoke event tracking script for tracking various user initiated events. This script turned out to be a bottleneck when handling thousands of requests.</p>
 <p>We rewrote the functionality by using AWS Lambda. Similar to the original script, the Lambda function gets triggered on specific events, such as a user clicking a button or submitting a form. However, because of the nature of Lambda functions, scaling is not an issue, and the bottleneck is removed.</p>
 <p>I hope examples from our own development journey help you get a better understanding of the benefits of utilizing serverless infrastructure for more optimized performance and reduced cost.</p>
-<p>Links:</p>
-<ul>
-<li>[1] <a id="link-1" href="https://aws.amazon.com/answers/web-applications/serverless-image-handler/">Serverless Image Handler</a></li>
-<li>[2] <a id="link-2" href="https://github.com/amazon-archives/serverless-image-resizing">serverless-image-resizing</a></li>
-</ul>
 
 <div class="post-nav">
   <ul><li><strong>Previous:</strong> <a href="/posts/elasticbeanstalk-php-settings-and-the-frustratingly-confusing-guide-to-eb-deploy/">ElasticBeanstalk, PHP settings and the frustratingly confusing guide to eb deploy</a></li>
   </ul>
 </div>
+<h3>Recent posts</h3>
+<ul class="recentposts">
+<li><a href="/posts/sst-cannot-use-graphqlscalartype-boolean-from-another-module-or-realm/">SST - Cannot use GraphQLScalarType &quot;Boolean&quot; from another module or realm</a></li>
+<li><a href="/posts/the-power-of-laziness-automating-some-text-entry-work/">The power of laziness - automating some text entry work</a></li>
+<li><a href="/posts/deploying-pocketbase-to-a-digital-ocean-droplet/">Deploying PocketBase to a Digital Ocean droplet</a></li>
+<li><a href="/posts/the-tailwind-dilemma-utility-first-vs-semantic-css/">The tailwind dilemma - utility first vs semantic CSS</a></li>
+<li><a href="/posts/docker-compose-for-wordpress-permission-denied-and-uid-1000/">Docker compose for WordPress - Permission denied and uid 1000</a></li>
+<li><a href="/posts/amazon-linux-2-elasticbeanstalk-and-apache-httpd/">Amazon Linux 2 ElasticBeanstalk and Apache HTTPD</a></li>
+<li><a href="/posts/elasticbeanstalk-php-settings-and-the-frustratingly-confusing-guide-to-eb-deploy/">ElasticBeanstalk, PHP settings and the frustratingly confusing guide to eb deploy</a></li>
+<li><a href="/posts/serverless-architecture-real-world-examples/">Serverless Architecture - Real world examples</a></li>
+</ul>
 
     </main>
 

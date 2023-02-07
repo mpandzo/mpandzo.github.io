@@ -287,3 +287,11 @@ p code {
   font-size: 90%;
   margin-right: 2px;
 }
+
+.recentposts {
+  margin: 1rem;
+  padding: 0;
+}
+.recentposts li {
+  margin: 0.5rem 0;
+}
