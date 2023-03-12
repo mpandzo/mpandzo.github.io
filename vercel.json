@@ -1,0 +1,10 @@
+{
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/posts/sst-cannot-use-graphqlscalartype-boolean-from-another-module-or-realm/",
+      "destination": "/sst-cannot-use-graphqlscalartype-boolean-from-another-module-or-realm",
+      "permanent": true
+    }
+  ]
+}
