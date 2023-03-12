@@ -1,0 +1,42 @@
+---
+export interface Props {
+	title: string;
+	description: string;
+	image?: string;
+}
+
+function removeTrailingSlash(str: string) {
+  return str.replace(/\/+$/, '');
+}
+
+const canonicalURL = removeTrailingSlash(new URL(Astro.url.pathname, Astro.site).toString());
+
+const { title, description, image = '/placeholder-social.jpg' } = Astro.props;
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalURL} />
+	
+<!-- RSS Feed Discovery -->
+<link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
+
+<!-- Primary Meta Tags -->
+<title>Mirza Pandzo - {title}</title>
+<meta name="title" content={"Mirza Pandzo - " + title} />
+<meta name="description" content={description} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={"Mirza Pandzo - " + title} />
+<meta property="og:description" content={description} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalURL} />
+<meta property="twitter:title" content={"Mirza Pandzo - " + title} />
+<meta property="twitter:description" content={description} />
