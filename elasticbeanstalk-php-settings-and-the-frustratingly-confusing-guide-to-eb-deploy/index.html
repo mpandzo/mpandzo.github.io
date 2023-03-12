@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Global Metadata --><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://mirzapandzo.com/elasticbeanstalk-php-settings-and-the-frustratingly-confusing-guide-to-eb-deploy">
+	
+<!-- RSS Feed Discovery -->
+<link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml">
+
+<!-- Primary Meta Tags -->
+<title>Mirza Pandzo - ElasticBeanstalk, PHP settings and the frustratingly confusing guide to eb deploy</title>
+<meta name="title" content="Mirza Pandzo - ElasticBeanstalk, PHP settings and the frustratingly confusing guide to eb deploy">
+<meta name="description" content="The random missing features of the eb deploy command">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mirzapandzo.com/elasticbeanstalk-php-settings-and-the-frustratingly-confusing-guide-to-eb-deploy">
+<meta property="og:title" content="Mirza Pandzo - ElasticBeanstalk, PHP settings and the frustratingly confusing guide to eb deploy">
+<meta property="og:description" content="The random missing features of the eb deploy command">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://mirzapandzo.com/elasticbeanstalk-php-settings-and-the-frustratingly-confusing-guide-to-eb-deploy">
+<meta property="twitter:title" content="Mirza Pandzo - ElasticBeanstalk, PHP settings and the frustratingly confusing guide to eb deploy">
+<meta property="twitter:description" content="The random missing features of the eb deploy command">
+	<link rel="stylesheet" href="/_astro/_...slug_.9f8b40fe.css" />
+<link rel="stylesheet" href="/_astro/_...slug_.fdefd593.css" /></head>
+
+	<body>
+		<header class="my-8 container">
+	<nav class="flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:justify-between px-4 lg:px-0 lg:items-center">
+		<a class="font-bold text-2xl" href="/">Mirza Pandzo</a>
+		<div class="flex space-x-4 text-sm">
+			<a class="hover:underline" href="https://www.linkedin.com/in/mirzapandzo">LinkedIn</a>
+			<a class="hover:underline" href="https://github.com/mpandzo">Github</a>
+			<a class="hover:underline" href="/rss.xml">Rss</a>			
+		</div>
+	</nav>
+</header>
+		<main class="my-8 container px-4 lg:px-0">
+			<article>
+				<header class="flex flex-col space-y-2">
+					<h1 class="text-3xl font-bold lg:text-4xl">ElasticBeanstalk, PHP settings and the frustratingly confusing guide to eb deploy</h1>
+					<time class="text-sm font-semibold text-neutral-500" datetime="2022-11-01T00:00:00.000Z">
+	Nov 1, 2022
+</time>
+					
+				</header>
+				<p>I’ll be honest. I love using AWS. <code>eb deploy</code> is my go to command. The ElasticBeanstalk cloud ecosystem is amazing and I would find it hard to do my day job without it.</p>
+<p>There is something to be said about the merry-go-round you are sent on when you need to change, upgrade, migrate (insert operative word here) a service your application relies on.</p>
+<p>I recently <a href="/posts/amazon-linux-2-elasticbeanstalk-and-apache-httpd">moved a website from an Amazon Linux AMI to an Amazon Linux 2 platform</a>. Along the way, I found out that Apache HTTPD was no longer the default proxy server [<a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-linux-extend.html">1</a>] used on ElasticBeanstalk instances.</p>
+<p>Additionally, and randomly, the following php.ini settings can be configured via the <code>aws:elasticbeanstalk:container:php:phpini</code> option settings config namespace [<a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_PHP.container.html">2</a>]:</p>
+<ul>
+<li>Proxy server – The proxy server to use on your environment instances. By default, nginx is used.</li>
+<li>Document root – The folder that contains your site’s default page. If your welcome page is not at the root of your source bundle, specify the folder that contains it relative to the root path. For example, /public if the welcome page is in a folder named public.</li>
+<li>Memory limit – The maximum amount of memory that a script is allowed to allocate. For example, 512M.</li>
+<li>Zlib output compression – Set to On to compress responses.</li>
+<li>Allow URL fopen – Set to Off to prevent scripts from downloading files from remote locations.</li>
+<li>Display errors – Set to On to show internal error messages for debugging.</li>
+<li>Max execution time – The maximum time in seconds that a script is allowed to run before the environment terminates it.</li>
+</ul>
+<p>E.g. you would set max_execution_time to 1000 by adding the following to your env.config file inside your .ebextensions folder:</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">option_settings:</span></span>
+<span class="line"><span style="color: #c9d1d9">  aws:elasticbeanstalk:container:php:phpini:</span></span>
+<span class="line"><span style="color: #c9d1d9">    max_execution_time: 1000</span></span></code></pre>
+<p>However, if you mistakenly assume you can also override <code>post_max_size</code>, you will be presented with a deploy error during <code>eb deploy</code>:</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">2022-11-01 01:05:31    ERROR   Invalid option specification (Namespace: 'aws:elasticbeanstalk:container:php:phpini', OptionName: 'post_max_size'): Unknown configuration setting.</span></span></code></pre>
+<p>Instead, to override other php.ini settings not included in the aforementioned list, you have to use the files block of a configuration file (e.g. .ebextensions/php-ini.config) to add a .ini file to /etc/php.d/:</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">files:</span></span>
+<span class="line"><span style="color: #c9d1d9">  "/etc/php.d/project.ini" :</span></span>
+<span class="line"><span style="color: #c9d1d9">    mode: "000644"</span></span>
+<span class="line"><span style="color: #c9d1d9">    owner: root</span></span>
+<span class="line"><span style="color: #c9d1d9">    group: root</span></span>
+<span class="line"><span style="color: #c9d1d9">    content: |</span></span>
+<span class="line"><span style="color: #c9d1d9">      upload_max_filesize = 64M</span></span>
+<span class="line"><span style="color: #c9d1d9">      post_max_size = 64M</span></span>
+<span class="line"><span style="color: #c9d1d9">      max_input_time = 1000</span></span>
+<span class="line"><span style="color: #c9d1d9">      html_errors = "On"</span></span>
+<span class="line"><span style="color: #c9d1d9">      display_startup_errors = "On"</span></span></code></pre>
+<p>Similarly, you would use the same approach to enable a PHP extension like Mongo [<a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/php-configuration-phpini.html">3</a>]:</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">files:</span></span>
+<span class="line"><span style="color: #c9d1d9">  "/etc/php.d/99mongo.ini":</span></span>
+<span class="line"><span style="color: #c9d1d9">    mode: "000644"</span></span>
+<span class="line"><span style="color: #c9d1d9">    owner: root</span></span>
+<span class="line"><span style="color: #c9d1d9">    group: root</span></span>
+<span class="line"><span style="color: #c9d1d9">    content: |</span></span>
+<span class="line"><span style="color: #c9d1d9">      extension=mongo.so</span></span></code></pre>
+<p>Am I the only one frustrated with having to bore through multiple AWS docs articles to get to the bottom of the above while articles like <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/php-hawordpress-tutorial.html">Deploying a high-availability WordPress website with an external Amazon RDS database to Elastic Beanstalk</a> don’t touch on the <code>eb deploy</code> aspect at all?</p>
+			</article>
+		</main>
+		<footer class="container my-8 text-sm text-neutral-400 pt-8 text-center">
+	&copy; 2023 mirzapandzo.com - All rights reserved.
+</footer>
+	</body></html>

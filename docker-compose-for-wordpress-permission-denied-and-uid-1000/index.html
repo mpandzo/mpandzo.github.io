@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Global Metadata --><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://mirzapandzo.com/docker-compose-for-wordpress-permission-denied-and-uid-1000">
+	
+<!-- RSS Feed Discovery -->
+<link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml">
+
+<!-- Primary Meta Tags -->
+<title>Mirza Pandzo - Docker compose for WordPress - Permission denied and uid 1000</title>
+<meta name="title" content="Mirza Pandzo - Docker compose for WordPress - Permission denied and uid 1000">
+<meta name="description" content="Unable to upgrade WordPress due to - \&#34;failed to open stream - Permission denied error\&#34;">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mirzapandzo.com/docker-compose-for-wordpress-permission-denied-and-uid-1000">
+<meta property="og:title" content="Mirza Pandzo - Docker compose for WordPress - Permission denied and uid 1000">
+<meta property="og:description" content="Unable to upgrade WordPress due to - \&#34;failed to open stream - Permission denied error\&#34;">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://mirzapandzo.com/docker-compose-for-wordpress-permission-denied-and-uid-1000">
+<meta property="twitter:title" content="Mirza Pandzo - Docker compose for WordPress - Permission denied and uid 1000">
+<meta property="twitter:description" content="Unable to upgrade WordPress due to - \&#34;failed to open stream - Permission denied error\&#34;">
+	<link rel="stylesheet" href="/_astro/_...slug_.9f8b40fe.css" />
+<link rel="stylesheet" href="/_astro/_...slug_.fdefd593.css" /></head>
+
+	<body>
+		<header class="my-8 container">
+	<nav class="flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:justify-between px-4 lg:px-0 lg:items-center">
+		<a class="font-bold text-2xl" href="/">Mirza Pandzo</a>
+		<div class="flex space-x-4 text-sm">
+			<a class="hover:underline" href="https://www.linkedin.com/in/mirzapandzo">LinkedIn</a>
+			<a class="hover:underline" href="https://github.com/mpandzo">Github</a>
+			<a class="hover:underline" href="/rss.xml">Rss</a>			
+		</div>
+	</nav>
+</header>
+		<main class="my-8 container px-4 lg:px-0">
+			<article>
+				<header class="flex flex-col space-y-2">
+					<h1 class="text-3xl font-bold lg:text-4xl">Docker compose for WordPress - Permission denied and uid 1000</h1>
+					<time class="text-sm font-semibold text-neutral-500" datetime="2022-10-26T00:00:00.000Z">
+	Oct 26, 2022
+</time>
+					
+				</header>
+				<p>I’ve got a simple docker-compose.yml file for working on WordPress projects locally.</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">version: "3.5"</span></span>
+<span class="line"><span style="color: #c9d1d9"></span></span>
+<span class="line"><span style="color: #c9d1d9">services:</span></span>
+<span class="line"><span style="color: #c9d1d9"></span></span>
+<span class="line"><span style="color: #c9d1d9">  mysql:</span></span>
+<span class="line"><span style="color: #c9d1d9">    container_name: wp-mysql</span></span>
+<span class="line"><span style="color: #c9d1d9">    privileged: true</span></span>
+<span class="line"><span style="color: #c9d1d9">    image: mysql:5.7</span></span>
+<span class="line"><span style="color: #c9d1d9">    restart: always</span></span>
+<span class="line"><span style="color: #c9d1d9">    environment:</span></span>
+<span class="line"><span style="color: #c9d1d9">      MYSQL_ROOT_PASSWORD: root</span></span>
+<span class="line"><span style="color: #c9d1d9">      MYSQL_DATABASE: wordpress</span></span>
+<span class="line"><span style="color: #c9d1d9">      MYSQL_USER: wordpress</span></span>
+<span class="line"><span style="color: #c9d1d9">      MYSQL_PASSWORD: wordpress</span></span>
+<span class="line"><span style="color: #c9d1d9"></span></span>
+<span class="line"><span style="color: #c9d1d9">  wordpress:</span></span>
+<span class="line"><span style="color: #c9d1d9">    container_name: wp-wordpress</span></span>
+<span class="line"><span style="color: #c9d1d9">    privileged: true</span></span>
+<span class="line"><span style="color: #c9d1d9">    depends_on:</span></span>
+<span class="line"><span style="color: #c9d1d9">      - mysql</span></span>
+<span class="line"><span style="color: #c9d1d9">    image: wordpress:latest</span></span>
+<span class="line"><span style="color: #c9d1d9">    volumes:</span></span>
+<span class="line"><span style="color: #c9d1d9">      - ./:/var/www/html</span></span>
+<span class="line"><span style="color: #c9d1d9">    ports:</span></span>
+<span class="line"><span style="color: #c9d1d9">      - "8080:80"</span></span>
+<span class="line"><span style="color: #c9d1d9">    restart: always</span></span>
+<span class="line"><span style="color: #c9d1d9"></span></span>
+<span class="line"><span style="color: #c9d1d9">  phpmyadmin:</span></span>
+<span class="line"><span style="color: #c9d1d9">    container_name: wp-phpmyadmin</span></span>
+<span class="line"><span style="color: #c9d1d9">    privileged: true</span></span>
+<span class="line"><span style="color: #c9d1d9">    image: phpmyadmin/phpmyadmin</span></span>
+<span class="line"><span style="color: #c9d1d9">    depends_on:</span></span>
+<span class="line"><span style="color: #c9d1d9">      - mysql</span></span>
+<span class="line"><span style="color: #c9d1d9">    ports:</span></span>
+<span class="line"><span style="color: #c9d1d9">      - 8181:80</span></span>
+<span class="line"><span style="color: #c9d1d9">    environment:</span></span>
+<span class="line"><span style="color: #c9d1d9">      MYSQL_USERNAME: root</span></span>
+<span class="line"><span style="color: #c9d1d9">      MYSQL_ROOT_PASSWORD: root</span></span>
+<span class="line"><span style="color: #c9d1d9">      MYSQL_PORT_3306_TCP_ADDR: mysql</span></span>
+<span class="line"><span style="color: #c9d1d9">      PMA_HOST: mysql</span></span></code></pre>
+<p>I’ve used this without any issues on my MacBook Air by running <code>docker-compose up</code>.</p>
+<p>When I recently tried to do the same on a windows machine running WSL (Windows Subsystem for Linux) and I tried to upgrade to the latest version of WordPress, I faced the following error in WordPress dashboard:</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">Update WordPress</span></span>
+<span class="line"><span style="color: #c9d1d9">Downloading update from https://downloads.wordpress.org/release/wordpress-6.0.3-new-bundled.zip…</span></span>
+<span class="line"><span style="color: #c9d1d9"></span></span>
+<span class="line"><span style="color: #c9d1d9">The authenticity of wordpress-6.0.3-new-bundled.zip could not be verified as no signature was found.</span></span>
+<span class="line"><span style="color: #c9d1d9"></span></span>
+<span class="line"><span style="color: #c9d1d9">Unpacking the update…</span></span>
+<span class="line"><span style="color: #c9d1d9"></span></span>
+<span class="line"><span style="color: #c9d1d9">Warning: copy(/var/www/html/wp-admin/includes/update-core.php): failed to open stream: Permission denied in /var/www/html/wp-admin/includes/class-wp-filesystem-direct.php on line 309</span></span>
+<span class="line"><span style="color: #c9d1d9">The update cannot be installed because we will be unable to copy some files. This is usually due to inconsistent file permissions.: wp-admin/includes/update-core.php</span></span>
+<span class="line"><span style="color: #c9d1d9"></span></span>
+<span class="line"><span style="color: #c9d1d9">Installation failed.</span></span></code></pre>
+<p>In order to see what permissions are set up inside the /var/www/html that may be causing this, I bashed into the container with the following command:</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #C9D1D9">docker </span><span style="color: #79C0FF">exec</span><span style="color: #C9D1D9"> -ti wp-wordpress bash</span></span></code></pre>
+<p>The result and subsequent <code>ls -la</code> listing looks like this:</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #C9D1D9">root@6eaac5e083f5:/var/www/html# ls -la</span></span>
+<span class="line"><span style="color: #C9D1D9">drwxr-xr-x  8 1000 1000   4096 Oct 26 01:39 </span><span style="color: #79C0FF">.</span></span>
+<span class="line"><span style="color: #C9D1D9">drwxr-xr-x  1 root root   4096 Oct  5 07:09 ..</span></span>
+<span class="line"><span style="color: #C9D1D9">-rw-r--r--  1 1000 1000   1051 Aug 25  2021 .htaccess</span></span>
+<span class="line"><span style="color: #C9D1D9">-rw-r--r--  1 1000 1000   1812 Oct 26 01:39 docker-compose.yml</span></span>
+<span class="line"><span style="color: #C9D1D9">-rw-r--r--  1 1000 1000    405 Apr 30  2021 index.php</span></span>
+<span class="line"><span style="color: #C9D1D9">-rw-r--r--  1 1000 1000  19915 Aug 25  2021 license.txt</span></span>
+<span class="line"><span style="color: #C9D1D9">-rw-r--r--  1 1000 1000   7346 Oct 20  2021 readme.html</span></span>
+<span class="line"><span style="color: #C9D1D9">-rw-r--r--  1 1000 1000   5626 Apr 30  2021 readme.md</span></span>
+<span class="line"><span style="color: #C9D1D9">-rw-r--r--  1 1000 1000   7165 Apr 30  2021 wp-activate.php</span></span>
+<span class="line"><span style="color: #C9D1D9">drwxr-xr-x  9 1000 1000   4096 Aug 25  2021 wp-admin</span></span>
+<span class="line"><span style="color: #C9D1D9">-rw-r--r--  1 1000 1000    351 Apr 30  2021 wp-blog-header.php</span></span>
+<span class="line"><span style="color: #C9D1D9">-rw-r--r--  1 1000 1000   2328 Apr 30  2021 wp-comments-post.php</span></span>
+<span class="line"><span style="color: #C9D1D9">-rw-r--r--  1 1000 1000   3004 Aug 25  2021 wp-config-sample.php</span></span>
+<span class="line"><span style="color: #C9D1D9">-rw-r--r--  1 1000 1000   5907 Jun 30  2021 wp-config.php</span></span>
+<span class="line"><span style="color: #C9D1D9">drwxrwxrwx  6 1000 1000   4096 Jun 30  2021 wp-content</span></span>
+<span class="line"><span style="color: #C9D1D9">-rw-r--r--  1 1000 1000   3939 Apr 30  2021 wp-cron.php</span></span>
+<span class="line"><span style="color: #C9D1D9">drwxr-xr-x 25 1000 1000  12288 Aug 25  2021 wp-includes</span></span>
+<span class="line"><span style="color: #C9D1D9">-rw-r--r--  1 1000 1000   2496 Apr 30  2021 wp-links-opml.php</span></span>
+<span class="line"><span style="color: #C9D1D9">-rw-r--r--  1 1000 1000   3900 Aug 25  2021 wp-load.php</span></span>
+<span class="line"><span style="color: #C9D1D9">-rw-r--r--  1 1000 1000  45463 Aug 25  2021 wp-login.php</span></span>
+<span class="line"><span style="color: #C9D1D9">-rw-r--r--  1 1000 1000   8509 Apr 30  2021 wp-mail.php</span></span>
+<span class="line"><span style="color: #C9D1D9">-rw-r--r--  1 1000 1000  22297 Aug 25  2021 wp-settings.php</span></span>
+<span class="line"><span style="color: #C9D1D9">-rw-r--r--  1 1000 1000  31693 Aug 25  2021 wp-signup.php</span></span>
+<span class="line"><span style="color: #C9D1D9">-rw-r--r--  1 1000 1000   4747 Apr 30  2021 wp-trackback.php</span></span>
+<span class="line"><span style="color: #C9D1D9">-rw-r--r--  1 1000 1000   3236 Apr 30  2021 xmlrpc.php</span></span>
+<span class="line"><span style="color: #C9D1D9">root@6eaac5e083f5:/var/www/html#</span></span></code></pre>
+<p>From the above, I gathered that the files and folders were owned by user:group 1000:1000. Further reading lead to the finding that on most Linux systems UID:GUID of 1000:1000 is used for the first non-system account created. In addition, when volumes are mounted docker sets UID:GUID for volume mounted files and folders to the same. <a href="https://github.com/moby/moby/issues/22114">[1]</a>, <a href="https://github.com/davidalger/warden/issues/155">[2]</a>.</p>
+<p>As a result, when the apache’s www-data user tries to modify files or folders owned by 1000:1000 we face the issue described at the beginning of this post.</p>
+<p>To get around this I switched to building my WordPress image with the help of a Dockerfile where I change ownership of the files and folders to www-data:www-data.</p>
+<p>My modified docker-compose.yml file:</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">version: "3.5"</span></span>
+<span class="line"><span style="color: #c9d1d9"></span></span>
+<span class="line"><span style="color: #c9d1d9">services:</span></span>
+<span class="line"><span style="color: #c9d1d9"></span></span>
+<span class="line"><span style="color: #c9d1d9">  mysql:</span></span>
+<span class="line"><span style="color: #c9d1d9">    container_name: wp-mysql</span></span>
+<span class="line"><span style="color: #c9d1d9">    privileged: true</span></span>
+<span class="line"><span style="color: #c9d1d9">    image: mysql:5.7</span></span>
+<span class="line"><span style="color: #c9d1d9">    restart: always</span></span>
+<span class="line"><span style="color: #c9d1d9">    environment:</span></span>
+<span class="line"><span style="color: #c9d1d9">      MYSQL_ROOT_PASSWORD: root</span></span>
+<span class="line"><span style="color: #c9d1d9">      MYSQL_DATABASE: wordpress</span></span>
+<span class="line"><span style="color: #c9d1d9">      MYSQL_USER: wordpress</span></span>
+<span class="line"><span style="color: #c9d1d9">      MYSQL_PASSWORD: wordpress</span></span>
+<span class="line"><span style="color: #c9d1d9"></span></span>
+<span class="line"><span style="color: #c9d1d9">  wordpress:</span></span>
+<span class="line"><span style="color: #c9d1d9">    container_name: wp-wordpress</span></span>
+<span class="line"><span style="color: #c9d1d9">    privileged: true</span></span>
+<span class="line"><span style="color: #c9d1d9">    depends_on:</span></span>
+<span class="line"><span style="color: #c9d1d9">      - mysql</span></span>
+<span class="line"><span style="color: #c9d1d9">    image: local-wordpress:latest</span></span>
+<span class="line"><span style="color: #c9d1d9">    build:</span></span>
+<span class="line"><span style="color: #c9d1d9">      context: .</span></span>
+<span class="line"><span style="color: #c9d1d9">      dockerfile: Dockerfile.WordPress</span></span>
+<span class="line"><span style="color: #c9d1d9">    volumes:</span></span>
+<span class="line"><span style="color: #c9d1d9">      - ./:/var/www/html</span></span>
+<span class="line"><span style="color: #c9d1d9">    ports:</span></span>
+<span class="line"><span style="color: #c9d1d9">      - "8080:80"</span></span>
+<span class="line"><span style="color: #c9d1d9">    restart: always</span></span>
+<span class="line"><span style="color: #c9d1d9"></span></span>
+<span class="line"><span style="color: #c9d1d9">  phpmyadmin:</span></span>
+<span class="line"><span style="color: #c9d1d9">    container_name: wp-phpmyadmin</span></span>
+<span class="line"><span style="color: #c9d1d9">    privileged: true</span></span>
+<span class="line"><span style="color: #c9d1d9">    image: phpmyadmin/phpmyadmin</span></span>
+<span class="line"><span style="color: #c9d1d9">    depends_on:</span></span>
+<span class="line"><span style="color: #c9d1d9">      - mysql</span></span>
+<span class="line"><span style="color: #c9d1d9">    ports:</span></span>
+<span class="line"><span style="color: #c9d1d9">      - 8181:80</span></span>
+<span class="line"><span style="color: #c9d1d9">    environment:</span></span>
+<span class="line"><span style="color: #c9d1d9">      MYSQL_USERNAME: root</span></span>
+<span class="line"><span style="color: #c9d1d9">      MYSQL_ROOT_PASSWORD: root</span></span>
+<span class="line"><span style="color: #c9d1d9">      MYSQL_PORT_3306_TCP_ADDR: mysql</span></span>
+<span class="line"><span style="color: #c9d1d9">      PMA_HOST: mysql</span></span></code></pre>
+<p>Dockerfile (Dockerfile.WordPress) thanks to <a href="https://stackoverflow.com/questions/55620273/docker-php-fpm-running-as-www-data">[3]</a>:</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">FROM wordpress:latest</span></span>
+<span class="line"><span style="color: #c9d1d9"></span></span>
+<span class="line"><span style="color: #c9d1d9">ARG UNAME=www-data</span></span>
+<span class="line"><span style="color: #c9d1d9">ARG UGROUP=www-data</span></span>
+<span class="line"><span style="color: #c9d1d9">ARG UID=1000</span></span>
+<span class="line"><span style="color: #c9d1d9">ARG GID=1000</span></span>
+<span class="line"><span style="color: #c9d1d9">RUN usermod  --uid $UID $UNAME</span></span>
+<span class="line"><span style="color: #c9d1d9">RUN groupmod --gid $GID $UGROUP</span></span></code></pre>
+			</article>
+		</main>
+		<footer class="container my-8 text-sm text-neutral-400 pt-8 text-center">
+	&copy; 2023 mirzapandzo.com - All rights reserved.
+</footer>
+	</body></html>

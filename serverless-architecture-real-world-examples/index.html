@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Global Metadata --><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://mirzapandzo.com/serverless-architecture-real-world-examples">
+	
+<!-- RSS Feed Discovery -->
+<link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml">
+
+<!-- Primary Meta Tags -->
+<title>Mirza Pandzo - Serverless Architecture - Real world examples</title>
+<meta name="title" content="Mirza Pandzo - Serverless Architecture - Real world examples">
+<meta name="description" content="Serverless architecture and real world examples of usecases where it proves invaluable">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mirzapandzo.com/serverless-architecture-real-world-examples">
+<meta property="og:title" content="Mirza Pandzo - Serverless Architecture - Real world examples">
+<meta property="og:description" content="Serverless architecture and real world examples of usecases where it proves invaluable">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://mirzapandzo.com/serverless-architecture-real-world-examples">
+<meta property="twitter:title" content="Mirza Pandzo - Serverless Architecture - Real world examples">
+<meta property="twitter:description" content="Serverless architecture and real world examples of usecases where it proves invaluable">
+	<link rel="stylesheet" href="/_astro/_...slug_.9f8b40fe.css" />
+<link rel="stylesheet" href="/_astro/_...slug_.fdefd593.css" /></head>
+
+	<body>
+		<header class="my-8 container">
+	<nav class="flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:justify-between px-4 lg:px-0 lg:items-center">
+		<a class="font-bold text-2xl" href="/">Mirza Pandzo</a>
+		<div class="flex space-x-4 text-sm">
+			<a class="hover:underline" href="https://www.linkedin.com/in/mirzapandzo">LinkedIn</a>
+			<a class="hover:underline" href="https://github.com/mpandzo">Github</a>
+			<a class="hover:underline" href="/rss.xml">Rss</a>			
+		</div>
+	</nav>
+</header>
+		<main class="my-8 container px-4 lg:px-0">
+			<article>
+				<header class="flex flex-col space-y-2">
+					<h1 class="text-3xl font-bold lg:text-4xl">Serverless Architecture - Real world examples</h1>
+					<time class="text-sm font-semibold text-neutral-500" datetime="2023-01-15T00:00:00.000Z">
+	Jan 15, 2023
+</time>
+					
+				</header>
+				<p>The term serverless has been around for the past 7 or 8 years. It’s one of a set of words people associate with cutting edge and modern stacks (I am talking about you jamstack, headless, cloud-native, event-driven architecture etc).</p>
+<p>It’s often defined as the concept of “enabling users to write and deploy code without the worry of managing the underlying infrastructure”.</p>
+<p>In layman’s terms, serverless works as follows:</p>
+<ul>
+<li>an environment is provisioned via script or ui</li>
+<li>code is deployed automatically via CI/CD</li>
+<li>you pay only for the resources your application uses</li>
+<li>you don’t worry about managing servers, load balancers, reverse proxies etc</li>
+<li>your infrastructure scales to handle traffic surges and spikes</li>
+<li>a failed function instance is simply replaced by another instance</li>
+</ul>
+<p>You may have seen the above written many times over. It’s very much common knowledge - in dev circles at least.</p>
+<p>There are many different approaches to doing serverless. Vercel, Netlify, Render and other PaaS (Platform as a Service) providers all have their flavor of serverless functions available for use. SST.dev and Serverless Framework are just two frameworks built on top of serverless technology. Of course, you can also use AWS Lambda, Google Cloud Functions and Microsoft Azure Functions directly to the same effect.</p>
+<p>But, many times, real world examples are omitted from the discussion.</p>
+<p>When does serverless really shine?</p>
+<h2 id="image-resizing-on-the-fly">Image resizing on the fly</h2>
+<p>We were asked to refactor a very large website (100 million+ page views per month). The refactor aimed to optimize performance and architect the codebase for scalability.</p>
+<p>During the obligatory site audit, we identified a number of potential candidates for improvement. Amongst them was the way images stored in an S3 bucket were being handled.</p>
+<p>The legacy system optimized and resized images during image upload. This meant that any subsequent design changes that included image dimension changes required running a crob job to mass resize the original images to match the newly specified dimensions. With potentially hundreds of thousands of images to resize, this was a huge drain on resources.</p>
+<p>We replaced this process with an AWS Lambda function that fires on-demand when there is a failed S3 bucket endpoint request.</p>
+<p>When an image that is requested from S3 is not found, the bucket routing sends the request to the API Gateway which in turn fires a Lambda function to serve the request. The Lambda function resizes the image, stores the generated variations in S3 and serves the resized image. Any subsequent requests for the same variation will simply hit the appropriate S3 bucket-stored entry without further Lambda calls.</p>
+<p>Because of the scalable nature of AWS Lambda, this revised mechanism is able to handle millions of requests without blinking an eye which is very different to the server strain caused by running a cronjob to resize hundreds of thousands of entries.</p>
+<p>Though AWS has more recently improved their offering with the Serverless Image Handler <a href="https://aws.amazon.com/answers/web-applications/serverless-image-handler">[1]</a> you can still see the more pedestrian solution we used in the serverless-image-resizing archived repo <a href="https://github.com/amazon-archives/serverless-image-resizing">[2]</a>.</p>
+<h2 id="handling-push-notifications-at-scale">Handling push notifications at scale</h2>
+<p>An admin flow we implemented included the processing of gamified data for thousands of customers and the subsequent sending of push notifications (sms &#x26; in-app) to each.</p>
+<p>We implemented a Lambda function to do the data processing. The Lambda function then deferred to AWS SNS (simple notification service) to handle the pushes.</p>
+<p>Once the function completed it’s processing it marked the entry as completed.</p>
+<p>We had a simple progressbar display in the dashboard with a periodic check of the database to display progress.</p>
+<h2 id="event-tracking">Event tracking</h2>
+<p>A client was using a bespoke event tracking script for tracking various user initiated events. This script turned out to be a bottleneck when handling thousands of requests.</p>
+<p>We rewrote the functionality by using AWS Lambda. Similar to the original script, the Lambda function gets triggered on specific events, such as a user clicking a button or submitting a form. However, because of the nature of Lambda functions, scaling is not an issue, and the bottleneck is removed.</p>
+<p>I hope examples from our own development journey help you get a better understanding of the benefits of utilizing serverless infrastructure for more optimized performance and reduced cost.</p>
+			</article>
+		</main>
+		<footer class="container my-8 text-sm text-neutral-400 pt-8 text-center">
+	&copy; 2023 mirzapandzo.com - All rights reserved.
+</footer>
+	</body></html>

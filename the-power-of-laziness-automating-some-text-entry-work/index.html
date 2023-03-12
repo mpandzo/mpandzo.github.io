@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Global Metadata --><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://mirzapandzo.com/the-power-of-laziness-automating-some-text-entry-work">
+	
+<!-- RSS Feed Discovery -->
+<link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml">
+
+<!-- Primary Meta Tags -->
+<title>Mirza Pandzo - The power of laziness - automating some text entry work</title>
+<meta name="title" content="Mirza Pandzo - The power of laziness - automating some text entry work">
+<meta name="description" content="Laziness is what makes us software developers offload the grunt work to the computer">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mirzapandzo.com/the-power-of-laziness-automating-some-text-entry-work">
+<meta property="og:title" content="Mirza Pandzo - The power of laziness - automating some text entry work">
+<meta property="og:description" content="Laziness is what makes us software developers offload the grunt work to the computer">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://mirzapandzo.com/the-power-of-laziness-automating-some-text-entry-work">
+<meta property="twitter:title" content="Mirza Pandzo - The power of laziness - automating some text entry work">
+<meta property="twitter:description" content="Laziness is what makes us software developers offload the grunt work to the computer">
+	<link rel="stylesheet" href="/_astro/_...slug_.9f8b40fe.css" />
+<link rel="stylesheet" href="/_astro/_...slug_.fdefd593.css" /></head>
+
+	<body>
+		<header class="my-8 container">
+	<nav class="flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:justify-between px-4 lg:px-0 lg:items-center">
+		<a class="font-bold text-2xl" href="/">Mirza Pandzo</a>
+		<div class="flex space-x-4 text-sm">
+			<a class="hover:underline" href="https://www.linkedin.com/in/mirzapandzo">LinkedIn</a>
+			<a class="hover:underline" href="https://github.com/mpandzo">Github</a>
+			<a class="hover:underline" href="/rss.xml">Rss</a>			
+		</div>
+	</nav>
+</header>
+		<main class="my-8 container px-4 lg:px-0">
+			<article>
+				<header class="flex flex-col space-y-2">
+					<h1 class="text-3xl font-bold lg:text-4xl">The power of laziness - automating some text entry work</h1>
+					<time class="text-sm font-semibold text-neutral-500" datetime="2022-07-26T00:00:00.000Z">
+	Jul 26, 2022
+</time>
+					
+				</header>
+				<p>I hate repetitive work. Read, copy, paste, edit, repeat. It’s horribly monotonous and I always make a mistake that I have to go back and fix.</p>
+<p>As a friend of mine quipped once, perhaps humans invent stuff out of laziness? Some lazy bastard didn’t want to walk so they invented the wheel. What’s the remote control if not the quintessence of laziness - it’s there because someone couldn’t be bothered to get up and change the channel. The same goes for escalators, cars, telephones etc.</p>
+<p>All jesting aside, laziness of this kind is not for a lack of energy or care, it’s about wanting to find easier, more efficient ways to accomplish something. And the art of programming is all about this exact practice. Finding solutions that will make the computer do the grunt work for you.</p>
+<p>I recently needed to convert an array of strings into an array of JSON objects. Along the way, I also needed to slugify the string and get rid of accents/diacritics - you know, convert letters like í,á,ü into i,a,u.</p>
+<p>My original array looked like this:</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #C9D1D9">const teamsLaLiga = [</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #A5D6FF">"Almería"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #A5D6FF">"Athletic Bilbao"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #A5D6FF">"Atlético Madrid"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #A5D6FF">"Barcelona"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #A5D6FF">"Cádiz"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #A5D6FF">"Celta Vigo"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #A5D6FF">"Elche"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #A5D6FF">"Espanyol"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #A5D6FF">"Getafe"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #A5D6FF">"Girona"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #A5D6FF">"Mallorca"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #A5D6FF">"Osasuna"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #A5D6FF">"Rayo Vallecano"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #A5D6FF">"Real Betis"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #A5D6FF">"Real Madrid"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #A5D6FF">"Real Sociedad"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #A5D6FF">"Sevilla"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #A5D6FF">"Valencia"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #A5D6FF">"Valladolid"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #A5D6FF">"Villarreal"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">];</span></span></code></pre>
+<p>Notice the <code>á</code> and <code>é</code> in Cádiz and Atlético Madrid.</p>
+<p>I wanted to achieve JSON in the form of:</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #FF7B72">const</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">jsonTeams</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> [</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">...</span></span>
+<span class="line"><span style="color: #C9D1D9">  {</span></span>
+<span class="line"><span style="color: #C9D1D9">    name: </span><span style="color: #A5D6FF">'Atletico Madrid'</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">    displayName: </span><span style="color: #A5D6FF">'Atlético Madrid'</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">    slug: </span><span style="color: #A5D6FF">'atletico-madrid'</span></span>
+<span class="line"><span style="color: #C9D1D9">    league: </span><span style="color: #A5D6FF">'la-liga'</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  },</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">...</span></span>
+<span class="line"><span style="color: #C9D1D9">]</span></span></code></pre>
+<p>Now, sure, this was a fairly small array, and I could have done the work manually, however, I wanted to do the same with Turkish Süper Lig team names like “Fatih Karagümrük” and “İstanbul Başakşehir”, and Portuguese Primeira liga team names like “Marítimo” and “Paços de Ferreira”. There’d be a lot of manual work involved.</p>
+<p>So, instead of manually copying, pasting and editing things for an hour, I quickly wrote a script to do the work for me. To get rid of accents/diacritics I used the lodash library’s <a rel="bookmark nofollow" href="https://docs-lodash.com/v4/deburr/">deburr</a> method. To slugify titles I used the <a rel="bookmark nofollow" href="https://www.npmjs.com/package/slugify">slugify</a> library. Both were added to my simple script as script references via <a rel="bookmark nofollow" href="https://cdn.jsdelivr.net">cdn.jsdelivr.net</a>.</p>
+<p>The html to achieve this looks like this:</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #C9D1D9">&#x3C;</span><span style="color: #7EE787">html</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">&#x3C;</span><span style="color: #7EE787">head</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">  &#x3C;</span><span style="color: #7EE787">script</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">src</span><span style="color: #C9D1D9">=</span><span style="color: #A5D6FF">"https://cdn.jsdelivr.net/npm/slugify@1.6.5/slugify.js"</span><span style="color: #C9D1D9">>&#x3C;/</span><span style="color: #7EE787">script</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">  &#x3C;</span><span style="color: #7EE787">script</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">src</span><span style="color: #C9D1D9">=</span><span style="color: #A5D6FF">"https://cdn.jsdelivr.net/npm/lodash.deburr@4.1.0/index.js"</span><span style="color: #C9D1D9">>&#x3C;/</span><span style="color: #7EE787">script</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">  &#x3C;</span><span style="color: #7EE787">script</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">  (() </span><span style="color: #FF7B72">=></span><span style="color: #C9D1D9"> {</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">const</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">teamsLaLiga</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> [</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #A5D6FF">"Almería"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #A5D6FF">"Athletic Bilbao"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #A5D6FF">"Atlético Madrid"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #A5D6FF">"Barcelona"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #A5D6FF">"Cádiz"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #A5D6FF">"Celta Vigo"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #A5D6FF">"Elche"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #A5D6FF">"Espanyol"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #A5D6FF">"Getafe"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #A5D6FF">"Girona"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #A5D6FF">"Mallorca"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #A5D6FF">"Osasuna"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #A5D6FF">"Rayo Vallecano"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #A5D6FF">"Real Betis"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #A5D6FF">"Real Madrid"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #A5D6FF">"Real Sociedad"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #A5D6FF">"Sevilla"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #A5D6FF">"Valencia"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #A5D6FF">"Valladolid"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #A5D6FF">"Villarreal"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">    ];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">const</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">jsonTeams</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> [];</span></span>
+<span class="line"><span style="color: #C9D1D9">    teamsLaLiga.</span><span style="color: #D2A8FF">forEach</span><span style="color: #C9D1D9">((</span><span style="color: #FFA657">teamName</span><span style="color: #C9D1D9">) </span><span style="color: #FF7B72">=></span><span style="color: #C9D1D9"> {</span></span>
+<span class="line"><span style="color: #C9D1D9">      jsonTeams.</span><span style="color: #D2A8FF">push</span><span style="color: #C9D1D9">({</span></span>
+<span class="line"><span style="color: #C9D1D9">        name: </span><span style="color: #D2A8FF">deburr</span><span style="color: #C9D1D9">(teamName),</span></span>
+<span class="line"><span style="color: #C9D1D9">        slug: </span><span style="color: #D2A8FF">slugify</span><span style="color: #C9D1D9">(teamName, { lower: </span><span style="color: #79C0FF">true</span><span style="color: #C9D1D9">, remove:</span><span style="color: #A5D6FF"> /</span><span style="color: #79C0FF">[*+~.()'"!:@]</span><span style="color: #A5D6FF">/</span><span style="color: #FF7B72">g</span><span style="color: #C9D1D9"> }),</span></span>
+<span class="line"><span style="color: #C9D1D9">        displayName: teamName,</span></span>
+<span class="line"><span style="color: #C9D1D9">        league: </span><span style="color: #A5D6FF">"la-liga"</span></span>
+<span class="line"><span style="color: #C9D1D9">      });</span></span>
+<span class="line"><span style="color: #C9D1D9">    });</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    console.</span><span style="color: #D2A8FF">log</span><span style="color: #C9D1D9">(jsonTeams);</span></span>
+<span class="line"><span style="color: #C9D1D9">  })();</span></span>
+<span class="line"><span style="color: #C9D1D9">  &#x3C;/</span><span style="color: #7EE787">script</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">&#x3C;/</span><span style="color: #7EE787">head</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">&#x3C;</span><span style="color: #7EE787">body</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">&#x3C;/</span><span style="color: #7EE787">body</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">&#x3C;/</span><span style="color: #7EE787">html</span><span style="color: #C9D1D9">></span></span></code></pre>
+<p>Note: the call to <code>slugify(teamName, { lower: true, remove: /[*+~.()'"!:@]/g })</code> includes the remove option that takes a Regex expression to get rid of characters ’*+~.()’“!:@’ when creating the slugs.</p>
+<p>The script above resulted in a JSON array formatted exactly as I wanted it:</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #C9D1D9">[{</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">displayName</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Almería"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">league</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"la-liga"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">name</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Almeria"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">slug</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"almeria"</span></span>
+<span class="line"><span style="color: #C9D1D9">}, {</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">displayName</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Athletic Bilbao"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">league</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"la-liga"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">name</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Athletic Bilbao"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">slug</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"athletic-bilbao"</span></span>
+<span class="line"><span style="color: #C9D1D9">}, {</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">displayName</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Atlético Madrid"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">league</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"la-liga"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">name</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Atletico Madrid"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">slug</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"atletico-madrid"</span></span>
+<span class="line"><span style="color: #C9D1D9">}, {</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">displayName</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Barcelona"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">league</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"la-liga"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">name</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Barcelona"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">slug</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"barcelona"</span></span>
+<span class="line"><span style="color: #C9D1D9">}, {</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">displayName</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Cádiz"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">league</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"la-liga"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">name</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Cadiz"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">slug</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"cadiz"</span></span>
+<span class="line"><span style="color: #C9D1D9">}, {</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">displayName</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Celta Vigo"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">league</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"la-liga"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">name</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Celta Vigo"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">slug</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"celta-vigo"</span></span>
+<span class="line"><span style="color: #C9D1D9">}, {</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">displayName</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Elche"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">league</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"la-liga"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">name</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Elche"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">slug</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"elche"</span></span>
+<span class="line"><span style="color: #C9D1D9">}, {</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">displayName</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Espanyol"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">league</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"la-liga"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">name</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Espanyol"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">slug</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"espanyol"</span></span>
+<span class="line"><span style="color: #C9D1D9">}, {</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">displayName</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Getafe"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">league</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"la-liga"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">name</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Getafe"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">slug</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"getafe"</span></span>
+<span class="line"><span style="color: #C9D1D9">}, {</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">displayName</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Girona"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">league</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"la-liga"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">name</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Girona"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">slug</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"girona"</span></span>
+<span class="line"><span style="color: #C9D1D9">}, {</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">displayName</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Mallorca"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">league</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"la-liga"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">name</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Mallorca"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">slug</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"mallorca"</span></span>
+<span class="line"><span style="color: #C9D1D9">}, {</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">displayName</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Osasuna"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">league</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"la-liga"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">name</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Osasuna"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">slug</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"osasuna"</span></span>
+<span class="line"><span style="color: #C9D1D9">}, {</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">displayName</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Rayo Vallecano"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">league</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"la-liga"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">name</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Rayo Vallecano"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">slug</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"rayo-vallecano"</span></span>
+<span class="line"><span style="color: #C9D1D9">}, {</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">displayName</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Real Betis"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">league</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"la-liga"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">name</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Real Betis"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">slug</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"real-betis"</span></span>
+<span class="line"><span style="color: #C9D1D9">}, {</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">displayName</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Real Madrid"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">league</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"la-liga"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">name</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Real Madrid"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">slug</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"real-madrid"</span></span>
+<span class="line"><span style="color: #C9D1D9">}, {</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">displayName</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Real Sociedad"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">league</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"la-liga"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">name</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Real Sociedad"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">slug</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"real-sociedad"</span></span>
+<span class="line"><span style="color: #C9D1D9">}, {</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">displayName</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Sevilla"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">league</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"la-liga"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">name</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Sevilla"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">slug</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"sevilla"</span></span>
+<span class="line"><span style="color: #C9D1D9">}, {</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">displayName</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Valencia"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">league</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"la-liga"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">name</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Valencia"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">slug</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"valencia"</span></span>
+<span class="line"><span style="color: #C9D1D9">}, {</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">displayName</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Valladolid"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">league</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"la-liga"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">name</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Valladolid"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">slug</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"valladolid"</span></span>
+<span class="line"><span style="color: #C9D1D9">}, {</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">displayName</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Villarreal"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">league</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"la-liga"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">name</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"Villarreal"</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FFA198">slug</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">"villarreal"</span></span>
+<span class="line"><span style="color: #C9D1D9">}]</span></span></code></pre>
+			</article>
+		</main>
+		<footer class="container my-8 text-sm text-neutral-400 pt-8 text-center">
+	&copy; 2023 mirzapandzo.com - All rights reserved.
+</footer>
+	</body></html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Global Metadata --><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://mirzapandzo.com/the-tailwind-dilemma-utility-first-vs-semantic-css">
+	
+<!-- RSS Feed Discovery -->
+<link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml">
+
+<!-- Primary Meta Tags -->
+<title>Mirza Pandzo - The tailwind dilemma - utility first vs semantic CSS</title>
+<meta name="title" content="Mirza Pandzo - The tailwind dilemma - utility first vs semantic CSS">
+<meta name="description" content="The dillemma of whether to use tailwind CSS or not">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mirzapandzo.com/the-tailwind-dilemma-utility-first-vs-semantic-css">
+<meta property="og:title" content="Mirza Pandzo - The tailwind dilemma - utility first vs semantic CSS">
+<meta property="og:description" content="The dillemma of whether to use tailwind CSS or not">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://mirzapandzo.com/the-tailwind-dilemma-utility-first-vs-semantic-css">
+<meta property="twitter:title" content="Mirza Pandzo - The tailwind dilemma - utility first vs semantic CSS">
+<meta property="twitter:description" content="The dillemma of whether to use tailwind CSS or not">
+	<link rel="stylesheet" href="/_astro/_...slug_.9f8b40fe.css" />
+<link rel="stylesheet" href="/_astro/_...slug_.fdefd593.css" /></head>
+
+	<body>
+		<header class="my-8 container">
+	<nav class="flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:justify-between px-4 lg:px-0 lg:items-center">
+		<a class="font-bold text-2xl" href="/">Mirza Pandzo</a>
+		<div class="flex space-x-4 text-sm">
+			<a class="hover:underline" href="https://www.linkedin.com/in/mirzapandzo">LinkedIn</a>
+			<a class="hover:underline" href="https://github.com/mpandzo">Github</a>
+			<a class="hover:underline" href="/rss.xml">Rss</a>			
+		</div>
+	</nav>
+</header>
+		<main class="my-8 container px-4 lg:px-0">
+			<article>
+				<header class="flex flex-col space-y-2">
+					<h1 class="text-3xl font-bold lg:text-4xl">The tailwind dilemma - utility first vs semantic CSS</h1>
+					<time class="text-sm font-semibold text-neutral-500" datetime="2022-10-23T00:00:00.000Z">
+	Oct 23, 2022
+</time>
+					
+				</header>
+				<p>TailwindCSS is an interesting piece of software. It seems to mainly elicit two types of reaction. People either love it and use it every day or they really hate it. There is no sitting on the fence.</p>
+<h2 id="why-is-that">Why is that?</h2>
+<p>If you Google “I hate TailwindCSS” or “I love TailwindCSS” you’ll find a myraid of lists of cons and pros, rants and eulogies - you’ll read for hours. I won’t bother trying to summarise the results, and even if I tried, I wouldn’t do them justice.</p>
+<p>I will say this however, I believe the answer to the question above is in the framework’s description found on the landing page above the fold:</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">A utility-first CSS framework packed with classes like flex, pt-4, text-center sand rotate-90 that can be composed to build any design, directly in your markup.</span></span></code></pre>
+<p>“Utility-first… in your markup”.</p>
+<p>TailwindCSS provides an idea of abstraction over CSS that some people love passionately and others really hate.</p>
+<p>But hang on a second, you’ll say, that’s what CSS classes do - abstract CSS rules - TailwindCSS did not invent CSS classes!</p>
+<p>And you would be right. TailwindCSS didn’t invent CSS classes. What it does is champion the idea of abstracting away CSS rules without enforcing opinionated design decisions the way other “real” CSS frameworks do. It also does not enforce compartmentalisation the way <a href="https://maintainablecss.com/chapters/semantics/">semantic CSS</a> does.</p>
+<p>Think about it, it’s quite revolutionary!</p>
+<p>With the above in mind, I’d still like to touch on a few points.</p>
+<h2 id="when-to-use-it">When to use it?</h2>
+<p>Prototypes are a given.</p>
+<p>You can ‘npm install’, set some rules in tailwind config and start working (on something meaningful) or you can use the CDN version:</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #C9D1D9">&#x3C;!</span><span style="color: #7EE787">doctype</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">html</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">&#x3C;</span><span style="color: #7EE787">html</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">&#x3C;</span><span style="color: #7EE787">head</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">  &#x3C;</span><span style="color: #7EE787">meta</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">charset</span><span style="color: #C9D1D9">=</span><span style="color: #A5D6FF">"UTF-8"</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">  &#x3C;</span><span style="color: #7EE787">meta</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">name</span><span style="color: #C9D1D9">=</span><span style="color: #A5D6FF">"viewport"</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">content</span><span style="color: #C9D1D9">=</span><span style="color: #A5D6FF">"width=device-width, initial-scale=1.0"</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">  &#x3C;</span><span style="color: #7EE787">script</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">src</span><span style="color: #C9D1D9">=</span><span style="color: #A5D6FF">"https://cdn.tailwindcss.com"</span><span style="color: #C9D1D9">>&#x3C;/</span><span style="color: #7EE787">script</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">  &#x3C;</span><span style="color: #7EE787">script</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">    tailwind.config </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> {</span></span>
+<span class="line"><span style="color: #C9D1D9">      theme: {</span></span>
+<span class="line"><span style="color: #C9D1D9">        extend: {</span></span>
+<span class="line"><span style="color: #C9D1D9">          colors: {</span></span>
+<span class="line"><span style="color: #C9D1D9">            clifford: </span><span style="color: #A5D6FF">'#da373d'</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">          }</span></span>
+<span class="line"><span style="color: #C9D1D9">        }</span></span>
+<span class="line"><span style="color: #C9D1D9">      }</span></span>
+<span class="line"><span style="color: #C9D1D9">    }</span></span>
+<span class="line"><span style="color: #C9D1D9">  &#x3C;/</span><span style="color: #7EE787">script</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">&#x3C;/</span><span style="color: #7EE787">head</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">&#x3C;</span><span style="color: #7EE787">body</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">  &#x3C;</span><span style="color: #7EE787">h1</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">class</span><span style="color: #C9D1D9">=</span><span style="color: #A5D6FF">"text-3xl font-bold underline"</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">    Hello world!</span></span>
+<span class="line"><span style="color: #C9D1D9">  &#x3C;/</span><span style="color: #7EE787">h1</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">&#x3C;/</span><span style="color: #7EE787">body</span><span style="color: #C9D1D9">></span></span>
+<span class="line"><span style="color: #C9D1D9">&#x3C;/</span><span style="color: #7EE787">html</span><span style="color: #C9D1D9">></span></span></code></pre>
+<p>Either approach gets you there so quickly it’s simply not up for debate. Tailwind beats everything hands down!</p>
+<p>It is in complex projects however where TailwindCSS really shines.</p>
+<h3 id="skip-the-boring-stuff">Skip the boring stuff</h3>
+<p>With TailwindCSS there is no need to ever write custom CSS to convert the most complex designs into HTML. Being able to skip writing raw CSS speeds up the development process tremendously! Think about it. The CSS part of your stack is 90% taken care of.</p>
+<p>In addition, there is something to say about not having to constantly weigh up the best or most in fashion naming convention (BEM, ABEM, SMACSS etc) - this is a God-send in itself.</p>
+<h3 id="but-what-about-maintenance">But what about maintenance?</h3>
+<p>Any developer worth their salt writing code in 2022 will use some form of component design (atomic, modular, whatever) to compose their application. As such, changing an element’s CSS rules sitewide requires changing the CSS classes of only that one element.</p>
+<p>Now, think about a large application with hundreds of components written over a long period of time. The code will most likely have been written by different developers of different skill level each administering their own flavour of BEM or SMACSS. With TailwindCSS there is no such problem.</p>
+<h3 id="there-is-code-bloat">There is code bloat</h3>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #C9D1D9">&#x3C;</span><span style="color: #7EE787">a</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">class</span><span style="color: #C9D1D9">=</span><span style="color: #A5D6FF">"inline-block px-4 py-3</span></span>
+<span class="line"><span style="color: #A5D6FF">    text-sm font-semibold text-center</span></span>
+<span class="line"><span style="color: #A5D6FF">    text-white uppercase transition</span></span>
+<span class="line"><span style="color: #A5D6FF">    duration-200 ease-in-out bg-indigo-600</span></span>
+<span class="line"><span style="color: #A5D6FF">    rounded-md cursor-pointer</span></span>
+<span class="line"><span style="color: #A5D6FF">    hover:bg-indigo-700"</span><span style="color: #C9D1D9">>Button&#x3C;/</span><span style="color: #7EE787">a</span><span style="color: #C9D1D9">></span></span></code></pre>
+<p>vs</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #C9D1D9">&#x3C;</span><span style="color: #7EE787">a</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">class</span><span style="color: #C9D1D9">=</span><span style="color: #A5D6FF">"btn btn-primary"</span><span style="color: #C9D1D9">>Button&#x3C;/</span><span style="color: #7EE787">a</span><span style="color: #C9D1D9">></span></span></code></pre>
+<p>Yes, the latter is easier on the eyes than the former.</p>
+<p>However, firstly, when abstracted in a component, the code bloat does not make much difference to every day development.</p>
+<p>And secondly, if you really, really want to, you can use Tailwind’s <a href="https://tailwindcss.com/docs/reusing-styles#extracting-classes-with-apply">@apply</a> feature to group sets of classes together to achieve the latter - though it’s philosophically discouraged.</p>
+<p>Thirdly, with the former approach you can immediately see what the component display intent is, without having to look in the CSS file.</p>
+<p>And lastly, with the advent of http2 and faster, broadly adopted web speeds, inlining a bunch of CSS classes will not affect website performance. Tailwind’s performance-focused setup leads to notoriously small CSS files, even for <a href="https://tailwindcss.com/docs/optimizing-for-production">large websites</a> (>10kb).</p>
+<h2 id="competion-does-it-better">Competion does it better?</h2>
+<p>I disagree strongly. Bootstrap, Foundation and Bulma (to name a few) are not TailwindCSS’s competition. They are opinionated CSS frameworks on par with <a href="https://daisyui.com/">daisyUI</a> (an opinionated CSS framework built on top of TailwindCSS).</p>
+<p>I was unable to find anything equivalent in Bulma. Foundation <a href="https://get.foundation/sites/docs-v5/utility-classes.html">lacks</a> a complete set of utility classes. Bootstrap provides <a href="https://getbootstrap.com/docs/4.0/utilities/borders/">utility classes</a> which you could probably use on their own for a utility-first development experience, however, their classes are more bloated than Tailwind’s (.d-flex vs Tailwind’s .flex etc) and as a result do not have the ‘native’ feel that Tailwind does. It almost feels like Bootstrap’s utility classes are an afterthought to Tailwind’s success.</p>
+<p>You will simply not find a better utility-first CSS framework than TailwindCSS.</p>
+<h2 id="wrapping-things-up">Wrapping things up</h2>
+<p>In his review of <a href="https://mitjafelicijan.com/state-of-web-technologies-and-web-development-in-year-2022.html">mach and jam stacks</a>, Mitja Felicijan writes</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">Tailwind is good for two types of developers. Tailwind is good for a complete noob or a senior developer. A complete noob doesn’t really care about inner workings of CSS, and a senior developer also doesn’t care about CSS.</span></span></code></pre>
+<p>I interpret his “doesn’t care” as “wants to not expend effort on” - TailwindCSS takes away your need to expend effort on the inner workings of CSS without reducing your power to use it to full capacity.</p>
+<p>I strongly encourage you to try using TailwindCSS on one of your projects. I understand you may be reluctant. Coming from a semantic CSS development background myself it was very hard to make a conscious decision to switch to utility-first instead. Having done development with TailwindCSS for the past 2 years I can say I cannot imagine doing CSS any other way.</p>
+			</article>
+		</main>
+		<footer class="container my-8 text-sm text-neutral-400 pt-8 text-center">
+	&copy; 2023 mirzapandzo.com - All rights reserved.
+</footer>
+	</body></html>

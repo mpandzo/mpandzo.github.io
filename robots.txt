@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mirzapandzo.com/sitemap-index.xml

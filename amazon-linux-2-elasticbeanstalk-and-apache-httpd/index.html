@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Global Metadata --><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://mirzapandzo.com/amazon-linux-2-elasticbeanstalk-and-apache-httpd">
+	
+<!-- RSS Feed Discovery -->
+<link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml">
+
+<!-- Primary Meta Tags -->
+<title>Mirza Pandzo - Amazon Linux 2 ElasticBeanstalk and Apache HTTPD</title>
+<meta name="title" content="Mirza Pandzo - Amazon Linux 2 ElasticBeanstalk and Apache HTTPD">
+<meta name="description" content="Setting Apache HTTPD proxy server as the default proxy server on EB instances">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mirzapandzo.com/amazon-linux-2-elasticbeanstalk-and-apache-httpd">
+<meta property="og:title" content="Mirza Pandzo - Amazon Linux 2 ElasticBeanstalk and Apache HTTPD">
+<meta property="og:description" content="Setting Apache HTTPD proxy server as the default proxy server on EB instances">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://mirzapandzo.com/amazon-linux-2-elasticbeanstalk-and-apache-httpd">
+<meta property="twitter:title" content="Mirza Pandzo - Amazon Linux 2 ElasticBeanstalk and Apache HTTPD">
+<meta property="twitter:description" content="Setting Apache HTTPD proxy server as the default proxy server on EB instances">
+	<link rel="stylesheet" href="/_astro/_...slug_.9f8b40fe.css" />
+<link rel="stylesheet" href="/_astro/_...slug_.fdefd593.css" /></head>
+
+	<body>
+		<header class="my-8 container">
+	<nav class="flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:justify-between px-4 lg:px-0 lg:items-center">
+		<a class="font-bold text-2xl" href="/">Mirza Pandzo</a>
+		<div class="flex space-x-4 text-sm">
+			<a class="hover:underline" href="https://www.linkedin.com/in/mirzapandzo">LinkedIn</a>
+			<a class="hover:underline" href="https://github.com/mpandzo">Github</a>
+			<a class="hover:underline" href="/rss.xml">Rss</a>			
+		</div>
+	</nav>
+</header>
+		<main class="my-8 container px-4 lg:px-0">
+			<article>
+				<header class="flex flex-col space-y-2">
+					<h1 class="text-3xl font-bold lg:text-4xl">Amazon Linux 2 ElasticBeanstalk and Apache HTTPD</h1>
+					<time class="text-sm font-semibold text-neutral-500" datetime="2022-10-31T00:00:00.000Z">
+	Oct 31, 2022
+</time>
+					
+				</header>
+				<p>I recently had to migrate a legacy website from Amazon Linux AMI to the Amazon Linux 2 platform as the former is deprecated and no longer supports managed updates on AWS.</p>
+<p>There is no automated way to do the migration so I created a new environment and deployed the application there, then CNAMEd the domain name to the new load balancer address.</p>
+<p>Things went along smoothly enough with pretty much all configuration settings being compatible and transferrable. However, once the new environment was created and once my deploy script was done, I got 404 errors everywhere.</p>
+<p>Interestingly enough, I noticed the 404 errors were being thrown by Nginx:</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #C9D1D9">404 Not Found</span></span>
+<span class="line"><span style="color: #C9D1D9">nginx/1.20.0</span></span></code></pre>
+<p>A bit of digging led me to the revelation that Amazon Linux 2 uses nginx as it’s default proxy server [<a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-linux-extend.html">1</a>]:</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">Elastic Beanstalk uses nginx as the default reverse proxy to map your application to your Elastic Load Balancing load balancer.</span></span></code></pre>
+<p>That was no good for me as I wanted to use the existing site’s .htaccess file for url rewrite overrides and I didn’t want to try and translate each .htaccess rule to an equivalent nginx.conf rule.</p>
+<p>Luckily, AWS allows you to let Apache’s HTTPD proxy server do your proxying. To do this, you have to create a config file inside your .ebextensions folder (e.g. .ebextensions/httpd-proxy.config) with the following content:</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">option_settings:</span></span>
+<span class="line"><span style="color: #c9d1d9">  aws:elasticbeanstalk:environment:proxy:</span></span>
+<span class="line"><span style="color: #c9d1d9">    ProxyServer: apache</span></span></code></pre>
+<p>Links:</p>
+<ul>
+<li>[1] <a id="link-1" href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-linux-extend.html">Extending Elastic Beanstalk Linux platforms</a></li>
+</ul>
+			</article>
+		</main>
+		<footer class="container my-8 text-sm text-neutral-400 pt-8 text-center">
+	&copy; 2023 mirzapandzo.com - All rights reserved.
+</footer>
+	</body></html>
