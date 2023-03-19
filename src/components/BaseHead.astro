@@ -20,7 +20,7 @@ const { title, description, image = '/placeholder-social.jpg' } = Astro.props;
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
-	
+
 <!-- RSS Feed Discovery -->
 <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
 
@@ -40,3 +40,13 @@ const { title, description, image = '/placeholder-social.jpg' } = Astro.props;
 <meta property="twitter:url" content={canonicalURL} />
 <meta property="twitter:title" content={"Mirza Pandzo - " + title} />
 <meta property="twitter:description" content={description} />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZ0KLGD1CV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NZ0KLGD1CV');
+</script>
