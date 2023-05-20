@@ -1,6 +1,6 @@
 ---
-title: The tailwind dilemma - utility first vs semantic CSS
-description: The dillemma of whether to use tailwind CSS or not
+title: The Tailwind dilemma - utility first vs semantic CSS
+description: The dillemma of whether to use Tailwind CSS or not
 pubDate: 2022-10-23
 tags:
   - TailwindCSS
@@ -35,7 +35,7 @@ With the above in mind, I'd still like to touch on a few points.
 
 Prototypes are a given.
 
-You can 'npm install', set some rules in tailwind config and start working (on something meaningful) or you can use the CDN version:
+You can 'npm install', set some rules in Tailwind config and start working (on something meaningful) or you can use the CDN version:
 
 ```html
 <!doctype html>
