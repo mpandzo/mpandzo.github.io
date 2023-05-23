@@ -19,4 +19,4 @@ If you are running a project in a Hobby account, and you require a serverless fu
 
 When you upgrade your account to Pro, you may find that you are still experiencing 10 second execution timeouts! I certainly did. This is because upgrading your account to Pro is an administrative upgrade. In order for your application to "consume" resources and settings available in Pro you have to redeploy it.
 
-So, to experience 60 second execution timeouts once you've upgraded from Hobby to Pro make sure you redeploy your application!
+So, to experience 60 second execution timeouts <strong>once you've upgraded from Hobby to Pro make sure you redeploy your application</strong>!
