@@ -9,6 +9,10 @@ import FormattedDate from '../components/FormattedDate.astro';
 const posts = (await getCollection('posts')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
+// Astro will bundle and optimize this CSS for you automatically
+// This also works for preprocessor files like .scss, .styl, etc.
+import '../styles/base.css';
 ---
 
 <!DOCTYPE html>
@@ -16,17 +20,20 @@ const posts = (await getCollection('posts')).sort(
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
-	<body class="min-h-screen flex flex-col">
-		<Header title={SITE_TITLE} />
-		<main class="grow container px-4 lg:px-0">
-			{
-				posts.map((post) => (
-					<div class="my-2">
-						<FormattedDate date={post.data.pubDate} /> - <a href={`/${post.slug}`}>{post.data.title}</a>
-					</div>
-				))
-			}
-		</main>
-		<Footer />
+	<body class="xl:w-1/2 min-h-screen flex flex-col bg-stone-100">
+    <Header title={SITE_TITLE} />
+    <main class="bg-white grow p-8">
+      <h1 class="font-semibold">Posts I've written:</h1>
+      <ul>
+      {
+        posts.map((post) => (
+          <li class="mb-4">
+            <a class="hover:underline" href={`/${post.slug}`}>{post.data.title}</a>
+          </li>
+        ))
+      }
+      </ul>
+    </main>
+    <Footer />
 	</body>
 </html>

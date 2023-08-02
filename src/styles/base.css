@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+p {
+  margin: 1rem 0;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+ul, ol {
+  margin: 1rem 0;
+}
+
+ul li {
+  margin-left: 1.2rem;
+  padding-left: 0;
+  margin-bottom: 0.5rem;
+  list-style-type: disc;
+}
+
+pre {
+  padding: 1rem;
+}

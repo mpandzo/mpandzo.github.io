@@ -10,8 +10,7 @@ module.exports = {
 				center: true,
 			},
 			screens: {
-				'xl': '1024px', 
-				'2xl': '1024px', 
+
 			},
 		}
 	},

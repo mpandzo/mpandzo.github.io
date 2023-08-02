@@ -2,13 +2,42 @@
 import { SITE_TITLE } from '../consts';
 ---
 
-<header class="my-8 container">
-	<nav class="flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:justify-between px-4 lg:px-0 lg:items-center">
-		<a class="font-bold text-2xl" href="/">Mirza Pandzo</a>
-		<div class="flex space-x-4 text-sm">
-			<a class="hover:underline" href="https://www.linkedin.com/in/mirzapandzo">LinkedIn</a>
-			<a class="hover:underline" href="https://github.com/mpandzo">Github</a>
-			<a class="hover:underline" href="/rss.xml">Rss</a>			
-		</div>
+<header class="flex flex-col lg:flex-row lg:items-center text-lg">
+	<nav class=" text-sm lg:text-base flex flex-row space-x-4 lg:space-x-0 items-center lg:items-start pt-4 px-8 lg:p-8 lg:flex-col lg:justify-center lg:space-y-1 lg:bg-stone-200">
+    <a class="flex items-center space-x-2" href="/">
+      <div class="w-5 flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+        </svg>
+      </div>
+      <span class="hover:underline">Home</span>
+    </a>
+    <a class="flex items-center space-x-2" href="https://www.linkedin.com/in/mirzapandzo">
+      <div class="w-5 flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" class="w-3 h-3">
+          <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+        </svg>
+      </div>
+      <span class="hover:underline">LinkedIn</span>
+    </a>
+    <a class="flex items-center space-x-2" href="https://github.com/mpandzo">
+      <div class="w-5 flex items-center justify-center">
+        <svg  fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4">
+            <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33c.85 0 1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/>
+        </svg>
+      </div>
+      <span class="hover:underline">GitHub</span>
+    </a>
+    <a class="lg:hidden flex items-center space-x-2" href="/rss.xml">
+      <div class="w-5 flex items-center justify-center">
+        <svg fill="currentColor" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4">
+            <path d="M101.74 154.26A75.53 75.53 0 0 1 124 208a12 12 0 0 1-24 0a52 52 0 0 0-52-52a12 12 0 0 1 0-24a75.51 75.51 0 0 1 53.74 22.26ZM48 84a12 12 0 0 0 0 24a100 100 0 0 1 100 100a12 12 0 0 0 24 0A124 124 0 0 0 48 84Zm121.62 2.38A170.85 170.85 0 0 0 48 36a12 12 0 0 0 0 24a147 147 0 0 1 104.65 43.35A147 147 0 0 1 196 208a12 12 0 0 0 24 0a170.85 170.85 0 0 0-50.38-121.62ZM52 188a16 16 0 1 0 16 16a16 16 0 0 0-16-16Z"/>
+        </svg>
+      </div>
+      <span class="hover:underline">RSS</span>
+    </a>
 	</nav>
+  <div class="flex p-4 px-8 text-sm lg:text-base lg:p-8 flex-col space-y-4">
+    <div>This blog is where I share interesting stories, challenges and breakthroughs from my journey in the realm of software development. It is powered by <a href="https://vercel.com" rel="nofollow bookmark" target="_blank">Vercel</a>, <a href="https://astro.build" rel="nofollow bookmark" target="_blank">Astro</a> &amp; <a href="https://tailwindcss.com" rel="nofollow bookmark" target="_blank">Tailwind</a>.</div>
+  </div>
 </header>

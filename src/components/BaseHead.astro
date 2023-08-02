@@ -11,7 +11,12 @@ function removeTrailingSlash(str: string) {
 
 const canonicalURL = removeTrailingSlash(new URL(Astro.url.pathname, Astro.site).toString());
 
-const { title, description, image = '/placeholder-social.jpg' } = Astro.props;
+const { title, description, image = '' } = Astro.props;
+
+// Astro will bundle and optimize this CSS for you automatically
+// This also works for preprocessor files like .scss, .styl, etc.
+import '../styles/base.css';
+
 ---
 
 <!-- Global Metadata -->
@@ -25,20 +30,20 @@ const { title, description, image = '/placeholder-social.jpg' } = Astro.props;
 <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
 
 <!-- Primary Meta Tags -->
-<title>Mirza Pandzo - {title}</title>
-<meta name="title" content={"Mirza Pandzo - " + title} />
+<title>{title}</title>
+<meta name="title" content={title} />
 <meta name="description" content={description} />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content={canonicalURL} />
-<meta property="og:title" content={"Mirza Pandzo - " + title} />
+<meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={canonicalURL} />
-<meta property="twitter:title" content={"Mirza Pandzo - " + title} />
+<meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 
 <!-- Google tag (gtag.js) -->
@@ -50,3 +55,4 @@ const { title, description, image = '/placeholder-social.jpg' } = Astro.props;
 
   gtag('config', 'G-NZ0KLGD1CV');
 </script>
+

@@ -14,13 +14,12 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 	<head>
 		<BaseHead title={title} description={description} />
 	</head>
-
-	<body>
+	<body class="xl:w-1/2 min-h-screen flex flex-col bg-stone-100">
 		<Header />
-		<main class="my-8 container px-4 lg:px-0">
+		<main class="grow p-8 bg-white">
 			<article>
-				<header class="flex flex-col space-y-2">
-					<h1 class="text-3xl font-bold lg:text-4xl">{title}</h1>
+				<header class="flex flex-col space-y-4">
+					<h1 class="text-xl font-bold">{title}</h1>
 					<FormattedDate date={pubDate} />
 					{
 						updatedDate && (
