@@ -6,12 +6,13 @@ body {
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-p {
+
+article p, article h2 {
   margin: 1rem 0;
 }
 
-h2 {
-  font-size: 1.5rem;
+article h2 {
+  font-size: 1.2rem;
   font-weight: bold;
 }
 
@@ -28,4 +29,16 @@ ul li {
 
 pre {
   padding: 1rem;
+}
+
+code,kbd,samp,pre {
+  font-size: 0.9em;
+}
+
+code {
+  color:chocolate;
+}
+
+article a {
+  color:blue !important;
 }

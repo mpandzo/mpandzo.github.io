@@ -65,7 +65,7 @@ spurious results.
 
 I tried to revert code, Command+Z etc, but no luck. I was commenting things left, right and center but the error would not go away.
 
-Dax from the [SST discord] (https://discord.com/channels/983865673656705025/985224097342582865/997233904698277898) mentioned this might be a node_modules conflict when asked about the issue a few days ago, however, I was intrigued why this problem was suddenly occurring for me when I was able to run GraphQL without issue only a few moments ago.
+Dax from the [SST discord](https://discord.com/channels/983865673656705025/985224097342582865/997233904698277898) mentioned this might be a node_modules conflict when asked about the issue a few days ago, however, I was intrigued why this problem was suddenly occurring for me when I was able to run GraphQL without issue only a few moments ago.
 
 Then it struck me! SST is configured with workspaces to hoist modules into the root node_modules folder. I had used yarn to install sst initially, but, while playing around with the Cron construct I went and used npm to install rss-parser (force of habit). As a result, this mixing of yarn and npm commands caused a conflict within my node_modules resulting in the above errors
 
