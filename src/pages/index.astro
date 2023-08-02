@@ -20,20 +20,28 @@ import '../styles/base.css';
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
-	<body class="xl:w-1/2 min-h-screen flex flex-col bg-stone-100">
-    <Header title={SITE_TITLE} />
-    <main class="bg-white grow p-8">
-      <h1 class="font-semibold">Posts I've written:</h1>
-      <ul>
-      {
-        posts.map((post) => (
-          <li class="mb-4">
-            <a class="hover:underline" href={`/${post.slug}`}>{post.data.title}</a>
-          </li>
-        ))
-      }
-      </ul>
-    </main>
-    <Footer />
+	<body class="xl:w-1/2 flex flex-col bg-stone-100">
+    <section class="flex flex-col lg:flex-row">
+      <Header title={SITE_TITLE} />
+      <main class="bg-white grow flex flex-col px-8 lg:p-8 min-h-screen">
+        <div class="lg:col-span-4 lg:text-base bg-white pb-4 italic text-neutral-500">
+          <div>Welcome to my blog. This is where I share interesting stories, challenges and breakthroughs from my journey in the realm of software development.</div>
+        </div>
+
+        <section class="grow block">
+          <h1 class="font-semibold">Posts I've written:</h1>
+          <ul>
+          {
+            posts.map((post) => (
+              <li class="mb-4">
+                <a class="hover:underline" href={`/${post.slug}`}>{post.data.title}</a>
+              </li>
+            ))
+          }
+          </ul>
+        </section>
+        <Footer />
+      </main>
+    </section>
 	</body>
 </html>

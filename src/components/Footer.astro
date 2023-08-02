@@ -2,14 +2,6 @@
 const today = new Date();
 ---
 
-<footer class="px-8 py-4 flex space-x-2 items-center justify-between text-sm">
-  <span>&copy; {today.getFullYear()} mirzapandzo.com - All rights reserved.</span>
-  <a class="hidden lg:flex items-center space-x-2" href="/rss.xml">
-    <div class="w-5 flex items-center justify-center">
-      <svg fill="currentColor" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4">
-          <path d="M101.74 154.26A75.53 75.53 0 0 1 124 208a12 12 0 0 1-24 0a52 52 0 0 0-52-52a12 12 0 0 1 0-24a75.51 75.51 0 0 1 53.74 22.26ZM48 84a12 12 0 0 0 0 24a100 100 0 0 1 100 100a12 12 0 0 0 24 0A124 124 0 0 0 48 84Zm121.62 2.38A170.85 170.85 0 0 0 48 36a12 12 0 0 0 0 24a147 147 0 0 1 104.65 43.35A147 147 0 0 1 196 208a12 12 0 0 0 24 0a170.85 170.85 0 0 0-50.38-121.62ZM52 188a16 16 0 1 0 16 16a16 16 0 0 0-16-16Z"/>
-      </svg>
-    </div>
-    <span class="hover:underline">RSS</span>
-  </a>
+<footer class="pt-8 text-center lg:text-left text-stone-300 bg-white">
+  <span>&copy; {today.getFullYear()} Mirza Pandzo - powered by <a href="https://astro.build" rel="nofollow bookmark" target="_blank">Astro</a> &amp; <a href="https://tailwindcss.com" rel="nofollow bookmark" target="_blank">Tailwind</a> on <a href="https://vercel.com" rel="nofollow bookmark" target="_blank">Vercel</a></span>
 </footer>

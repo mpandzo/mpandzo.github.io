@@ -2,42 +2,21 @@
 import { SITE_TITLE } from '../consts';
 ---
 
-<header class="flex flex-col lg:flex-row lg:items-center text-lg">
-	<nav class=" text-sm lg:text-base flex flex-row space-x-4 lg:space-x-0 items-center lg:items-start pt-4 px-8 lg:p-8 lg:flex-col lg:justify-center lg:space-y-1 lg:bg-stone-200">
-    <a class="flex items-center space-x-2" href="/">
-      <div class="w-5 flex items-center justify-center">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-        </svg>
-      </div>
-      <span class="hover:underline">Home</span>
+<header class="text-lg bg-white lg:border-r lg:border-stone-100">
+	<nav class="text-sm lg:text-base flex flex-row space-x-4 lg:space-x-0 items-center lg:items-start px-8 pb-6 pt-8 lg:px-4 lg:py-8 lg:flex-col lg:justify-center lg:space-y-4">
+    <a class="flex w-5 items-center" href="/">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146ZM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5Z"/>
+      </svg>
     </a>
-    <a class="flex items-center space-x-2" href="https://www.linkedin.com/in/mirzapandzo">
-      <div class="w-5 flex items-center justify-center">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" class="w-3 h-3">
-          <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
-        </svg>
-      </div>
-      <span class="hover:underline">LinkedIn</span>
+    <a class="flex w-5 items-center" href="https://github.com/mpandzo">
+      <svg fill="currentColor" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
     </a>
-    <a class="flex items-center space-x-2" href="https://github.com/mpandzo">
-      <div class="w-5 flex items-center justify-center">
-        <svg  fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4">
-            <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33c.85 0 1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/>
-        </svg>
-      </div>
-      <span class="hover:underline">GitHub</span>
+    <a class="flex w-5 items-center" href="/rss.xml">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 333333 333333" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd"><title>RSS</title><path d="M166667 0c92048 0 166667 74619 166667 166667s-74619 166667-166667 166667S0 258715 0 166667 74619 0 166667 0zm-57698 203357c-11551 0-20938 9418-20938 20897 0 11537 9386 20857 20938 20857 11587 0 20967-9320 20967-20857 0-11479-9378-20897-20967-20897zm-20918-61899v30148c19632 0 38081 7677 51977 21585 13883 13868 21548 32406 21548 52114h30276c0-57254-46585-103838-103801-103838v-9zm38-53431v30154c70007 0 126979 57031 126979 127116l30235 3c0-86697-70539-157270-157212-157270l-2-3z" fill="currentColor"/></svg>
     </a>
-    <a class="lg:hidden flex items-center space-x-2" href="/rss.xml">
-      <div class="w-5 flex items-center justify-center">
-        <svg fill="currentColor" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4">
-            <path d="M101.74 154.26A75.53 75.53 0 0 1 124 208a12 12 0 0 1-24 0a52 52 0 0 0-52-52a12 12 0 0 1 0-24a75.51 75.51 0 0 1 53.74 22.26ZM48 84a12 12 0 0 0 0 24a100 100 0 0 1 100 100a12 12 0 0 0 24 0A124 124 0 0 0 48 84Zm121.62 2.38A170.85 170.85 0 0 0 48 36a12 12 0 0 0 0 24a147 147 0 0 1 104.65 43.35A147 147 0 0 1 196 208a12 12 0 0 0 24 0a170.85 170.85 0 0 0-50.38-121.62ZM52 188a16 16 0 1 0 16 16a16 16 0 0 0-16-16Z"/>
-        </svg>
-      </div>
-      <span class="hover:underline">RSS</span>
+    <a class="flex w-5 items-center justify-center" href="https://www.linkedin.com/in/mirzapandzo">
+      <svg fill="currentColor" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
     </a>
 	</nav>
-  <div class="flex p-4 px-8 text-sm lg:text-base lg:p-8 flex-col space-y-4">
-    <div>This blog is where I share interesting stories, challenges and breakthroughs from my journey in the realm of software development. It is powered by <a href="https://vercel.com" rel="nofollow bookmark" target="_blank">Vercel</a>, <a href="https://astro.build" rel="nofollow bookmark" target="_blank">Astro</a> &amp; <a href="https://tailwindcss.com" rel="nofollow bookmark" target="_blank">Tailwind</a>.</div>
-  </div>
 </header>
