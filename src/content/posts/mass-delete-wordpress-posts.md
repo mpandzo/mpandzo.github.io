@@ -1,5 +1,5 @@
 ---
-title: How to Mass Delete thousands of WordPress Posts
+title: How to mass delete thousands of WordPress posts
 description: How to safely delete thousands of WordPress posts
 pubDate: 2023-5-20
 tags:
