@@ -159,7 +159,7 @@ I've plotted the comparison of connect, waiting, processing and total median tim
   </div>
 </div>
 
-From observing the graphs one can deduce that while both the __connect__ and __waiting__ graphs do show some entries that do not follow the general pattern, on average the green line (NLB) is consistenly lower than the blue line (ALB) indicating faster performance.
+From observing the graphs one can deduce that while both the __connect__ and __waiting__ graphs do show some entries that do not follow the general pattern, on average the red line (NLB) is consistenly lower than the blue line (ALB) indicating faster performance.
 
 The __processing__ graph shows an interestingly chaotic initial 20 tests where ALB beats NLB before the NLB line evens out and appears to show steadily better performance overall.
 

@@ -232,7 +232,7 @@ L500.544 358.56
 L505.008 358.992
 L509.472 360.288
 L513.936 298.944
-L518.4 272.16" style="fill:none;stroke:#008000;stroke-linecap:square;"/>
+L518.4 272.16" style="fill:none;stroke:#ff0000;stroke-linecap:square;"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
@@ -999,7 +999,7 @@ L518.4 43.2" style="fill:none;stroke:#000000;stroke-dasharray:1.000000,3.000000;
      </g>
     </g>
     <g id="text_17">
-     <!-- Waiting (s) -->
+     <!-- Waiting (ms) -->
      <defs>
       <path id="BitstreamVeraSans-Roman-20"/>
       <path d="
@@ -1140,7 +1140,7 @@ Q24.2188 56 28.6094 56
 Q40.4844 56 46.3438 49.8438
 Q52.2031 43.7031 52.2031 31.2031" id="BitstreamVeraSans-Roman-61"/>
      </defs>
-     <g transform="translate(46.618125 247.723125)rotate(-90.0)scale(0.12 -0.12)">
+     <g transform="translate(46.618125 253.5675)rotate(-90.0)scale(0.12 -0.12)">
       <use xlink:href="#BitstreamVeraSans-Roman-57"/>
       <use x="92.501953125" xlink:href="#BitstreamVeraSans-Roman-61"/>
       <use x="153.78125" xlink:href="#BitstreamVeraSans-Roman-69"/>
@@ -1150,8 +1150,9 @@ Q52.2031 43.7031 52.2031 31.2031" id="BitstreamVeraSans-Roman-61"/>
       <use x="311.935546875" xlink:href="#BitstreamVeraSans-Roman-67"/>
       <use x="375.412109375" xlink:href="#BitstreamVeraSans-Roman-20"/>
       <use x="407.19921875" xlink:href="#BitstreamVeraSans-Roman-28"/>
-      <use x="446.212890625" xlink:href="#BitstreamVeraSans-Roman-73"/>
-      <use x="498.3125" xlink:href="#BitstreamVeraSans-Roman-29"/>
+      <use x="446.212890625" xlink:href="#BitstreamVeraSans-Roman-6d"/>
+      <use x="543.625" xlink:href="#BitstreamVeraSans-Roman-73"/>
+      <use x="595.724609375" xlink:href="#BitstreamVeraSans-Roman-29"/>
      </g>
     </g>
    </g>
@@ -1246,7 +1247,7 @@ z
     <g id="line2d_50">
      <path d="
 M442.818 83.1982
-L462.978 83.1982" style="fill:none;stroke:#008000;stroke-linecap:square;"/>
+L462.978 83.1982" style="fill:none;stroke:#ff0000;stroke-linecap:square;"/>
     </g>
     <g id="line2d_51"/>
     <g id="text_19">
