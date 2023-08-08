@@ -140,21 +140,17 @@ The results obtained (in csv format) can be downloaded here: <a href="/assets/al
 
 I've plotted the comparison of connect, waiting, processing and total median times of ALB vs NLB in separate graphs with the x-axis always representing attempts.
 
-<div class="grid grid-cols-1 gap-4 mt-2">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-8 my-8">
   <div>
-    <h3>Connect</h3>
     <img src="/assets/alb-vs-nlb/connect.svg" alt="Connect time" class="w-full" />
   </div>
   <div>
-    <h3>Waiting</h3>
     <img src="/assets/alb-vs-nlb/waiting.svg" alt="Waiting time" class="w-full" />
   </div>
   <div>
-    <h3>Processing</h3>
     <img src="/assets/alb-vs-nlb/processing.svg" alt="Processing time" class="w-full" />
   </div>
   <div>
-    <h3>Total</h3>
     <img src="/assets/alb-vs-nlb/total.svg" alt="Total time" class="w-full" />
   </div>
 </div>
