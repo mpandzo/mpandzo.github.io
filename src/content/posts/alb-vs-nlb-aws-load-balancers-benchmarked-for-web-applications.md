@@ -136,7 +136,7 @@ Before executing a shell script file, you have to give it executable permissions
 
 ## Results and observations
 
-The results obtained (in csv format) can be downloaded here: <a href="/public/alb-vs-nlb/5-5-100-alb.csv">alb</a>, <a href="/public/alb-vs-nlb/5-5-100-nlb.csv">nlb</a>, <a href="/public/alb-vs-nlb/5-5-100-alb-vs-nlb.csv">combined</a>.
+The results obtained (in csv format) can be downloaded here: <a href="/assets/alb-vs-nlb/alb-vs-nlb/5-5-100-alb.csv">alb</a>, <a href="/assets/alb-vs-nlb/alb-vs-nlb/5-5-100-nlb.csv">nlb</a>, <a href="/assets/alb-vs-nlb/alb-vs-nlb/5-5-100-alb-vs-nlb.csv">combined</a>.
 
 I've plotted the comparison of connect, waiting, processing and total median times of ALB vs NLB in separate graphs with the x-axis always representing attempts.
 
