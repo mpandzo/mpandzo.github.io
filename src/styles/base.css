@@ -16,8 +16,13 @@ article h2 {
   font-weight: bold;
 }
 
+article h3 {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
 ul, ol {
-  margin: 1rem 0;
+  margin: 1rem;
 }
 
 ul li {
