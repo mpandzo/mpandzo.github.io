@@ -143,19 +143,19 @@ I've plotted the comparison of connect, waiting, processing and total median tim
 <div class="grid grid-cols-1 gap-4 mt-2">
   <div>
     <h3>Connect</h3>
-    <img src="/public/alb-vs-nlb/connect.svg" alt="Connect time" />
+    <img src="/assets/alb-vs-nlb/connect.svg" alt="Connect time" />
   </div>
   <div>
     <h3>Waiting</h3>
-    <img src="/public/alb-vs-nlb/waiting.svg" alt="Waiting time" />
+    <img src="/assets/alb-vs-nlb/waiting.svg" alt="Waiting time" />
   </div>
   <div>
     <h3>Processing</h3>
-    <img src="/public/alb-vs-nlb/processing.svg" alt="Processing time" />
+    <img src="/assets/alb-vs-nlb/processing.svg" alt="Processing time" />
   </div>
   <div>
     <h3>Total</h3>
-    <img src="/public/alb-vs-nlb/total.svg" alt="Total time" />
+    <img src="/assets/alb-vs-nlb/total.svg" alt="Total time" />
   </div>
 </div>
 
