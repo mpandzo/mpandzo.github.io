@@ -41,7 +41,7 @@ User-agent: ChatGPT-User
 Disallow: /
 ```
 
-If you are concerned about other research bots crawling your website content, you can also disallow access for <a title="Common Crawler bot" rel="nofollow" target="_blank" href="https://commoncrawl.org/big-picture/frequently-asked-questions/">CCBot<a/>, the Common Crawler bot that "provides a copy of the internet to internet researchers, companies and individuals at no cost for the purpose of research and analysis". It is identified by the following user agent and string:
+If you are concerned about other research bots crawling your website content, you can also disallow access for <a title="Common Crawler bot" rel="nofollow" target="_blank" href="https://commoncrawl.org/big-picture/frequently-asked-questions/">CCBot</a>, the Common Crawler bot that "provides a copy of the internet to internet researchers, companies and individuals at no cost for the purpose of research and analysis". It is identified by the following user agent and string:
 
 ```yml
 User agent token: CCBot
