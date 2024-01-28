@@ -19,6 +19,8 @@ From reading <a href="https://vercel.com/guides/domain-not-generating-ssl-certif
 
 ```Since we use Let's Encrypt for our automatic SSL certificates, you must add a CAA record with the value 0 issue "letsencrypt.org" if other CAA records already exist on your domain.```
 
-So, I needed to set the right CAA (Certificate Authority Authorization) DNS record for my domain. I added a CAA record with the value `0 issue "letsencrypt.org"`. Note: Subdomains inherit the CAA record so there is no need to add a record for www if you have already added it for the root domain name.
+So, I needed to set the right CAA (Certificate Authority Authorization) DNS record for my domain. I added a CAA record with the value `0 issue "letsencrypt.org"`.
 
 Once I made this DNS change and the change propagated, I still had to remove the domain name and www subdomain from Vercel's Settings -> Domains dashboard then readd them in order to re-trigger the certificate generation.
+
+<strong>Note</strong>: Subdomains inherit the CAA record so there is no need to add a record for www if you have already added it for the root domain name.
